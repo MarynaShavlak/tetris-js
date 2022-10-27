@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>TetrisUA</title>
+    <link rel='stylesheet' href='css/style.css'>
+    <script src="https://kit.fontawesome.com/719ad72ce7.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class='game' id="game-window">
+        <div class='player'>
+            <div class='player-info'>
+                <div class='section-name'>PLAYER:</div>
+                <div class='player-name'><output id='player-name' value=''></output></div>
+            </div>
+            <div class='player-results'>
+
+
+
+                <div class='player-level'>
+                    <div class='section-name'>LEVEL</div>
+                    <div class='result'><output id='player-level' value='1'>0</output></div>
+                </div>
+
+
+                <div class='player-score'>
+                    <div class='section-name'>SCORE</div>
+                    <div class='result'><output id='player-score' value='0'>0</output></div>
+                </div>
+
+                <div class='player-points-left-for-next-level'>
+                    <div class='section-name'>POINTS LEFT</div>
+                    <div class='result'><output id='player-points-left-for-next-level' value='0'>0</output></div>
+                </div>
+
+
+                <div class='player-goal'>
+                    <div class='section-name'>GOAL</div>
+                    <div class='result'><output id='player-goal' value='0'>0</output></div>
+                </div>
+
+
+
+                <div class='player-lines'>
+                    <div class='section-name'>LINES</div>
+                    <div class='result'><output id='player-filled-lines' value='0'>0</output></div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class='tetris'>
+            <div class='tetris-field' id='tetris-field'></div>
+        </div>
+
+        <div class='next'>
+            <div class='section-name'>NEXT</div>
+            <div class='next-tetro' id='next-tetro'>
+            </div>
+        </div>
+
+        <div class='btns-section'>
+            <button class='btn enabled-from-start-btn' id='start-btn' value="start">Start</button>
+            <button class='btn' id='pause-btn' value="pause" disabled>Pause</button>
+            <button class='btn enabled-from-start-btn' id='instruction-btn'>Instructions</button>
+            <button class='btn enabled-from-start-btn' id='exit-btn'>Exit</button>
+        </div>
+
+
+    </div>
+
+    <div class='instructions' id='instructions'>
+        <div class='controls'>
+            <div class='control'>Press <i class="fa-solid fa-arrow-left"></i> key to move tetromino <b>Left</b>.</div>
+            <div class='control'>Press <i class="fa-solid fa-arrow-right"></i> key to move tetromino <b>Right</b>.</div>
+            <div class='control'>Press <i class="fa-solid fa-arrow-down"></i> key to move tetromino <b>Down</b>.</div>
+            <div class='control'>Press <i class="fa-solid fa-arrow-up"></i> key to <b>Rotate</b> the tetromino.</div>
+            <div class='control'>GAME TIP: Hold Down key to move tetromino fall fast.</div>
+        </div>
+        <div class="instructions-exit-btn" id="instructions-exit-btn"><i class="fa-solid fa-xmark"></i></div>
+
+    </div>
+
+    <div class="user-name-window" id="user-name-window">
+        <div>Hi! Let's play Tetris.</div>
+        <div class="user-name-block">
+            <div class="name-request">What is your name?</div>
+            <div><input type="text" class='user-entered-name' id="user-entered-name"></div>
+            <div><button class="user-btn" id='submit-user-name'>OK</button></div>
+
+        </div>
+
+    </div>
+
+    <div class="confirm-new-game-window" id="confirm-new-game-window">
+        <div class="user-communication">
+            <div>Starting a new game will delete all your previous progress.</div>
+            <div>Are you sure you wish to proceed?</div>
+        </div>
+        <div class='user-btns'>
+            <div><button class="user-btn" id='confirm-start-new-game'>Yes</button></div>
+            <div><button class="user-btn" id='cancel-start-new-game'>No</button></div>
+        </div>
+    </div>
+
+    <div class='exit-message' id='without-game-exit-message'></div>
+    <div class='exit-message' id='after-started-game-exit-message'></div>
+
+    <script src='js/index.js'></script>
+
+</body>
+
+</html>

@@ -1,0 +1,367 @@
+* {
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+
+}
+
+body {
+    margin: 0;
+    background: rgb(0, 208, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+
+}
+
+.game {
+    margin: 80px 0px;
+    width: 1400px;
+    height: 860px;
+    display: grid;
+    justify-self: center;
+    grid-template-columns: 600px 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 20px;
+    background-color: blanchedalmond;
+    border-radius: 20px;
+}
+
+
+.player,
+.tetris {
+    grid-row: span 3;
+    margin: 20px 0px;
+}
+
+.player {
+    margin-left: 20px;
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    gap: 20px;
+}
+
+.player-info {
+    border: 1px solid black;
+    border-radius: 20px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-content: center;
+    gap: 10px;
+    padding: 10px;
+    text-align: center;
+
+}
+
+.section-name {
+    padding: 0px 10px;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center; 
+    justify-self: center;
+    align-self: center;
+    color: red;
+
+
+}
+
+
+.player-name {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+#player-name {
+    font-size: 40px;
+    font-weight: bold;
+
+}
+
+
+.player-results {
+    border: 1px solid black;
+    border-radius: 20px;
+    grid-row: span 6;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 20px;
+    padding: 10px;
+    text-align: center;
+
+}
+
+.player-level,
+.player-goal,
+.player-score,
+.player-lines,
+.player-points-left-for-next-level  {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-content: center; 
+    text-align: center;
+    justify-content: center;
+
+}
+
+.result {
+    font-size: 40px;
+    font-weight: bold;
+
+}
+
+.tetris {
+    align-content: center;
+    justify-self: center;
+}
+
+
+.tetris-field {
+    width: 420px;
+    height: 820px;
+    border: 10px solid black;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+    gap: 0px;
+    font-size: 0px;
+    align-content: center;
+
+
+}
+
+.next {
+    border-radius: 20px;
+    display: grid;
+    gap: 30px;
+    margin: 20px 20px 0px 0px;
+    align-content: center;
+    text-align: center;
+
+}
+
+.next-tetro {
+    width: 160px;
+    height: 160px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0px;
+    font-size: 0px;
+    align-content: center;
+    justify-self: center;
+
+}
+
+.empty-cell {
+    width: 40px;
+    height: 40px;
+    display: inline-block
+}
+
+.btns-section {
+    grid-row: span 2;
+    display: grid;
+    gap: 10px;
+    margin: 20px 20px 20px 0px;
+    text-align: center;
+
+}
+
+.btn {
+    font-size: 40px;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: black;
+    color: white;
+}
+
+.enabled-from-start-btn:hover,
+.user-btn:hover {
+    background-color: red;
+}
+
+.btn:disabled {
+    background-color: grey;
+    color: black;
+}
+
+
+.moving-cell {
+    width: 40px;
+    height: 40px;
+    /* background: red; */
+    border: 1px solid black;
+    display: inline-block
+}
+
+.fixed-cell {
+    background: green;
+    border: 1px solid black;
+    display: inline-block
+}
+
+
+.user-name-window {
+    background-color: rgb(0, 208, 255);
+    width: 560px;
+    height: 400px;
+    font-size: 40px;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 20px;
+    display: none;
+    gap: 30px;
+    align-content: center;
+    grid-template-rows: 1fr 3fr;
+
+    position: absolute;
+    top: 350px;
+    left: 700px;
+    text-align: center;
+    padding: 30px 50px;
+
+}
+
+
+.confirm-new-game-window {
+    background-color: rgb(0, 208, 255);
+    width: 600px;
+    height: 350px;
+    font-size: 30px;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 20px;
+    display: none;
+
+    align-content: center;
+    grid-template-rows: 200px 150px;
+    position: absolute;
+    top: 350px;
+    left: 700px;
+    text-align: center;
+
+}
+
+.user-communication {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    margin-top: 50px;
+
+}
+
+.user-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0px 60px 30px 60px;
+
+
+}
+
+
+.user-name-block {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 20px;
+}
+
+.name-request {
+    grid-column: span 2;
+}
+
+.user-entered-name {
+    height: 100%;
+    width: 100%;
+    font-size: 40px;
+    font-weight: bold;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+
+.user-btn {
+    font-size: 40px;
+    font-weight: bold;
+    width: 120px;
+    border: 2px solid black;
+    border-radius: 20px;
+    height: 100%;
+    padding: 30px;
+    text-align: center;
+}
+
+
+
+
+.instructions {
+    background-color: rgb(0, 208, 255);
+    width: 860px;
+    height: 400px;
+    font-size: 30px;
+    border: 1px solid black;
+    border-radius: 20px;
+    display: none;
+    grid-template-columns: 20fr 1fr;
+    position: absolute;
+    top: 350px;
+    left: 700px;
+
+}
+
+.controls {
+    display: grid;
+    gap: 20px;
+    grid-template-rows: repeat(5, 1fr);
+    margin: 20px 0;
+}
+
+.instructions-exit-btn {
+    text-align: end;
+    font-size: 40px;
+    margin-right: 10px;
+}
+
+.instructions-exit-btn:hover {
+    color: red;
+}
+
+.control {
+    margin: 0px 40px;
+
+
+}
+
+/* #game-over {
+    font-size: 100px;
+    color: red;
+    text-align: center;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}  */
+
+
+
+.exit-message {
+    display: none;
+    font-size: 100px;
+    text-align: center;
+    margin: 100px;
+    position: absolute;
+    /* background-color: blue; */
+
+}
+
+.exit-message div:first-child {
+    font-size: 150px;
+}
+
+.back-to-tetris {
+    height: 100px;
+    padding: 0px 60px;
+    text-align: center;
+}
