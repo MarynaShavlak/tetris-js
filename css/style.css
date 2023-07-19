@@ -40,7 +40,7 @@ body {
     gap: 20px;
 }
 
-.player-info {
+.player__info {
     border: 1px solid black;
     border-radius: 20px;
     display: grid;
@@ -52,7 +52,7 @@ body {
 
 }
 
-.section-name {
+.player__section-name {
     padding: 0px 10px;
     font-size: 40px;
     font-weight: bold;
@@ -65,20 +65,16 @@ body {
 }
 
 
-.player-name {
+.player__name {
     display: grid;
     justify-content: center;
     align-content: center;
-}
-
-#player-name {
     font-size: 40px;
-    font-weight: bold;
-
+        font-weight: bold;
 }
 
 
-.player-results {
+.player__results {
     border: 1px solid black;
     border-radius: 20px;
     grid-row: span 6;
@@ -90,11 +86,11 @@ body {
 
 }
 
-.player-level,
-.player-goal,
-.player-score,
-.player-lines,
-.player-points-left-for-next-level  {
+.player__level,
+.player__goal,
+.player__score,
+.player__lines,
+.player__points-left-for-next-level  {
     display: grid;
     grid-template-columns: 2fr 1fr;
     align-content: center; 
@@ -103,7 +99,7 @@ body {
 
 }
 
-.result {
+.player__result {
     font-size: 40px;
     font-weight: bold;
 
@@ -115,7 +111,7 @@ body {
 }
 
 
-.tetris-field {
+.tetris__field {
     width: 420px;
     height: 820px;
     border: 10px solid black;
@@ -139,7 +135,7 @@ body {
 
 }
 
-.next-tetro {
+.next__tetro {
     width: 160px;
     height: 160px;
     display: grid;
@@ -176,7 +172,7 @@ body {
     color: white;
 }
 
-.enabled-from-start-btn:hover,
+.btn--enabled-from-start-btn:hover,
 .user-btn:hover {
     background-color: red;
 }
@@ -243,14 +239,14 @@ body {
 
 }
 
-.user-communication {
+.confirm-new-game-window__message {
     display: grid;
     grid-template-rows: 1fr 1fr;
     margin-top: 50px;
 
 }
 
-.user-btns {
+.confirm-new-game-window__user-btns {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 0px 60px 30px 60px;
@@ -265,11 +261,11 @@ body {
     gap: 20px;
 }
 
-.name-request {
+.user-name-block__name-request {
     grid-column: span 2;
 }
 
-.user-entered-name {
+.user-name-block__user-entered-name {
     height: 100%;
     width: 100%;
     font-size: 40px;
@@ -280,7 +276,7 @@ body {
 }
 
 
-.user-btn {
+.action-btn {
     font-size: 40px;
     font-weight: bold;
     width: 120px;
@@ -309,24 +305,24 @@ body {
 
 }
 
-.controls {
+.rules-block {
     display: grid;
     gap: 20px;
     grid-template-rows: repeat(5, 1fr);
     margin: 20px 0;
 }
 
-.instructions-exit-btn {
+.instructions__exit-btn {
     text-align: end;
     font-size: 40px;
     margin-right: 10px;
 }
 
-.instructions-exit-btn:hover {
+.instructions__exit-btn:hover {
     color: red;
 }
 
-.control {
+.rules-block__rule {
     margin: 0px 40px;
 
 
