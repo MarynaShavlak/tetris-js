@@ -421,6 +421,15 @@ opacity:0;
 
     cursor: pointer;
     z-index: 0;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.settings__item.hidden {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+settings__item--rules {
+    order: 2; /* Initial order to be moved to the top */
 }
 
 .settings__item::before {

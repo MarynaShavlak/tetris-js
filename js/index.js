@@ -1,3 +1,16 @@
+import {handleShowRules} from "./eventHandlers/rules.js";
+
+
+const showRulesBtn = document.getElementById('rules-btn');
+export const usernameEl = document.querySelector('.settings__item--username');
+export const startEl = document.querySelector('.settings__item--start');
+export const rulesEl = document.querySelector('.settings__item--rules');
+showRulesBtn.addEventListener('click', handleShowRules);
+
+
+
+
+
 const gameWindow = document.getElementById('game-window');
 const tetrisField = document.getElementById('tetris-field');
 const nextTetroDisplay = document.getElementById('next-tetro');
@@ -13,11 +26,11 @@ const linesElement = document.getElementById('player-filled-lines');
 //______________________BUTTONS______________________//
 const startBtn = document.getElementById('start-btn');
 const pauseBtn = document.getElementById('pause-btn');
-const instructionsBtn = document.getElementById('instruction-btn');
+
 const exitBtn = document.getElementById('exit-btn');
 
-const allControlBtns = [startBtn, pauseBtn, instructionsBtn, exitBtn];
-const enabledFromStartControlBtns = [startBtn, instructionsBtn, exitBtn];
+// const allControlBtns = [startBtn, pauseBtn, instructionsBtn, exitBtn];
+// const enabledFromStartControlBtns = [startBtn, instructionsBtn, exitBtn];
 
 const submitNameBtn = document.getElementById('submit-user-name');
 const confirmNewGameBtn = document.getElementById('confirm-start-new-game');
@@ -174,7 +187,7 @@ let tetroColors = [
 
 // startBtn.addEventListener('click', onStartBtnClick);
 // pauseBtn.addEventListener('click', onPauseBtnClick);
-// instructionsBtn.addEventListener('click', onInstructionBtnClick);
+
 // instructionsExitBtn.addEventListener('click', onInstructionsExitBtnClick);
 // exitBtn.addEventListener('click', onExitBtnClick);
 
