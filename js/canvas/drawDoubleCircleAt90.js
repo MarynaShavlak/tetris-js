@@ -1,7 +1,7 @@
 import {canvas, canvas2, ctx, ctx2} from "./config.js";
 import {centerX, centerY, radius,
 
-} from "./drawCirlce.js";
+} from "./drawCircle.js";
 
 export function drawDoubleCircleAt90() {
     const circleX = centerX + radius;

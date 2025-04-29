@@ -1,6 +1,6 @@
 import {canvas5, ctx5} from "./config.js";
 
-import {centerX, centerY,  radius} from "./drawCirlce.js";
+import {centerX, centerY,  radius} from "./drawCircle.js";
 
 
 let startAngle5 =  -(Math.PI - Math.PI / 11.5);

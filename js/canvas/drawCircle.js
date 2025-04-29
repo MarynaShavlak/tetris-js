@@ -79,6 +79,7 @@
 import { canvas, ctx } from "./config.js";
 import {drawDoubleCircleAt90} from "./drawDoubleCircleAt90.js";
 import {drawSecondCirclePart} from "./drawSecondCirclePart.js";
+import {drawDottedCircle} from "./drawDottedCircle.js";
 
 export const centerX = canvas.width / 2;
 export const centerY = canvas.height / 2 + 3;
@@ -87,10 +88,7 @@ let startAngle = -Math.PI / 2;   // 12 o'clock
 let endAngle = startAngle ;       // animation begins from -90°
 const targetAngle = 0;
 
-const dottedRadius = radius + 15;
-let dotAngle = -Math.PI / 2;
-const dotStep = 0.05;
-const dotRadius = 1;
+
 
 let animationDirection = 1;
 
@@ -115,10 +113,14 @@ export function drawCircle() {
         if (endAngle < targetAngle) {
             endAngle += 0.02;
             requestAnimationFrame(drawCircle);
+
         } else {
             requestAnimationFrame(drawDoubleCircleAt90);
             animationDirection = -1;
             requestAnimationFrame(drawCircle);
+
+
+
 
         }
     } else if (animationDirection === -1) {
@@ -126,34 +128,23 @@ export function drawCircle() {
 
         if (endAngle > startAngle / 6) {
             endAngle -= 0.02;
-            dotAngle += dotStep;
+            // dotAngle = startAngle + dotStep;
 
            requestAnimationFrame(drawCircle);
 
 
+
+
         } else {
             requestAnimationFrame(drawSecondCirclePart)
+
         }
     }
 }
 
 
 
-    export function drawDottedCircle() {
-        // Draw one dot at the current angle
-        const x = centerX + dottedRadius * Math.cos(dotAngle);
-        const y = centerY + dottedRadius * Math.sin(dotAngle);
 
-        ctx.beginPath();
-        ctx.arc(x, y, dotRadius, 0, 2 * Math.PI);
-        ctx.fillStyle = "black";
-        ctx.fill();
-
-        if (dotAngle < 1.5 * Math.PI) {
-            dotAngle += dotStep;
-            requestAnimationFrame(drawDottedCircle);
-        }
-  }
 
 
 // if (endAngle < 0.01 * Math.PI) {
