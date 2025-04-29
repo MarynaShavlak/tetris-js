@@ -1,8 +1,9 @@
 import {canvas, ctx} from "./config.js";
+import {drawDoubleCircleAt90} from "./drawDoubleCircleAt90.js";
 
-const centerX = canvas.width / 2;
-const centerY = canvas.height / 2 + 3 ;
-const radius = canvas.width / 2 - 20; // Circle radius = half of canvas width
+export const centerX = canvas.width / 2;
+export const centerY = canvas.height / 2 + 3 ;
+export const radius = canvas.height / 2 - 20; // Circle radius = half of canvas width
 let endAngle = -Math.PI / 2;
 let animationStage = 1; // Start at top (-90 degrees)
 
@@ -45,5 +46,7 @@ export function drawDottedCircle() {
     if (dotAngle < 1.5 * Math.PI) {
         dotAngle += dotStep;
         requestAnimationFrame(drawDottedCircle);
+    } else {
+        drawDoubleCircleAt90(); // 👈 Call it here
     }
 }
