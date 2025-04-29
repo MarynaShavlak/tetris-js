@@ -78,6 +78,7 @@
 
 import { canvas, ctx } from "./config.js";
 import {drawDoubleCircleAt90} from "./drawDoubleCircleAt90.js";
+import {drawSecondCirclePart} from "./drawSecondCirclePart.js";
 
 export const centerX = canvas.width / 2;
 export const centerY = canvas.height / 2 + 3;
@@ -118,6 +119,7 @@ export function drawCircle() {
             requestAnimationFrame(drawDoubleCircleAt90);
             animationDirection = -1;
             requestAnimationFrame(drawCircle);
+
         }
     } else if (animationDirection === -1) {
 
@@ -125,8 +127,12 @@ export function drawCircle() {
         if (endAngle > startAngle / 6) {
             endAngle -= 0.02;
             dotAngle += dotStep;
+
            requestAnimationFrame(drawCircle);
 
+
+        } else {
+            requestAnimationFrame(drawSecondCirclePart)
         }
     }
 }
