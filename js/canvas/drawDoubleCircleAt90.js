@@ -1,8 +1,8 @@
 import { canvas, ctx } from "./config.js";
-import { centerX, centerY } from "./drawCirlce.js";
+import {centerX, centerY, radius, redrawAllPrevious} from "./drawCirlce.js";
 
 export function drawDoubleCircleAt90() {
-    const circleX = centerX;
+    const circleX = centerX + radius;
     const circleY = centerY;
 
     const innerTargetRadius = 110;
@@ -14,25 +14,25 @@ export function drawDoubleCircleAt90() {
 
     function animateInner() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+        redrawAllPrevious();
         // Draw inner circle (filled for visibility)
         ctx.beginPath();
-        ctx.arc(circleX, circleY, currentInnerRadius, 0, 2 * Math.PI);
-        ctx.strokeStyle = "black";
-        ctx.stroke();
+                ctx.arc(circleX, circleY, currentInnerRadius, 0, 2 * Math.PI);
+                ctx.strokeStyle = "black";
+                ctx.stroke();
 
-        currentInnerRadius += radiusIncrement;
+                currentInnerRadius += radiusIncrement;
 
-        if (currentInnerRadius <= innerTargetRadius) {
-            requestAnimationFrame(animateInner);
-        } else {
-            requestAnimationFrame(animateOuter);
-        }
+                if (currentInnerRadius <= innerTargetRadius) {
+                    requestAnimationFrame(animateInner);
+                } else {
+                    requestAnimationFrame(animateOuter);
+                }
     }
 
     function animateOuter() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+        redrawAllPrevious();
         // Keep the inner circle visible
         ctx.beginPath();
         ctx.arc(circleX, circleY, innerTargetRadius, 0, 2 * Math.PI);
@@ -55,3 +55,5 @@ export function drawDoubleCircleAt90() {
 
     animateInner();
 }
+
+
