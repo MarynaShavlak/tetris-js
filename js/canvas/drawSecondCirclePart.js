@@ -23,7 +23,7 @@ export function drawSecondCirclePart() {
 
     ctx3.fillStyle = "blue";
     ctx3.fill();
-    const reverseLimit = Math.PI - Math.PI / 6;
+    const reverseLimit = Math.PI - Math.PI / 11.5;
 
     if (animationDirection3 === 1) {
         if (endAngle3 < Math.PI) {

@@ -56,4 +56,3 @@ export function drawDoubleCircleAt270() {
     animateInner();
 }
 
-

@@ -170,3 +170,43 @@ export function drawCircle() {
 //         // animationStage = 3;
 //         requestAnimationFrame(drawDottedCircle);
 //     }
+
+
+//
+// import { ctx, canvas } from "./config.js";
+//
+// export const centerX = canvas.width / 2;
+// export const centerY = canvas.height / 2 + 3;
+// export const radius = canvas.height / 2 - 20;
+//
+// export const drawCircleState = {
+//     startAngle: -Math.PI / 2,
+//     endAngle: -Math.PI / 2,
+//     targetAngle: 0,
+//     direction: 1,
+//     done: false
+// };
+//
+// export function drawCircle() {
+//     const s = drawCircleState;
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+//     ctx.beginPath();
+//     ctx.arc(centerX, centerY, radius, s.startAngle, s.endAngle);
+//     ctx.strokeStyle = "black";
+//     ctx.lineWidth = 1;
+//     ctx.stroke();
+//
+//     if (s.direction === 1) {
+//         if (s.endAngle < s.targetAngle) {
+//             s.endAngle += 0.02;
+//         } else {
+//             s.direction = -1;
+//         }
+//     } else {
+//         if (s.endAngle > s.startAngle / 6) {
+//             s.endAngle -= 0.02;
+//         } else {
+//             s.done = true; // mark this animation complete
+//         }
+//     }
+// }
