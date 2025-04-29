@@ -418,14 +418,8 @@ opacity:0;
 .settings__item {
     position: relative;
     display: inline-block;
-    padding: 10px 20px;
-    font-size: 50px;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-align: center;
-    color: #F3F3F3;
-    cursor: pointer;
 
+    cursor: pointer;
     z-index: 0;
 }
 
@@ -445,3 +439,18 @@ opacity:0;
 .settings__item:hover::before {
     transform: scaleX(1.2); /* Or tweak to desired effect */
 }
+.settings__btn {
+    width:100%;
+    font-size: 50px;
+    color: #F3F3F3;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    background: transparent;
+    margin:0;
+    border:none;
+    cursor:pointer;
+    padding: 10px 20px;
+
+}
+
