@@ -91,7 +91,7 @@ let dotAngle = -Math.PI / 2;
 const dotStep = 0.05;
 const dotRadius = 1;
 
-let animationDirection = 1; // 1 for forward, -1 for reverse
+let animationDirection = 1;
 
 export function drawCircle() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -101,29 +101,37 @@ export function drawCircle() {
     ctx.lineWidth = 1;
     ctx.stroke();
 
+
+    // Draw the dot
+    const dotX = centerX + radius;
+    const dotY = centerY ;
+    ctx.beginPath();
+
+    ctx.fillStyle = "blue";
+    ctx.fill();
+
     if (animationDirection === 1) {
         if (endAngle < targetAngle) {
-            endAngle += 0.02; // increase for smoother or faster animation
+            endAngle += 0.02;
             requestAnimationFrame(drawCircle);
         } else {
             requestAnimationFrame(drawDoubleCircleAt90);
-            animationDirection = -1; // Change animation direction to reverse
-            requestAnimationFrame(drawCircle); // Continue animation for reverse cleanup
+            animationDirection = -1;
+            requestAnimationFrame(drawCircle);
         }
     } else if (animationDirection === -1) {
 
 
         if (endAngle > startAngle / 6) {
             endAngle -= 0.02;
-            // decrease to clean up the third part of the line
-            requestAnimationFrame(drawCircle);
+            dotAngle += dotStep;
+           requestAnimationFrame(drawCircle);
 
-        } else {
-            // Reverse animation completed, trigger next animation or action
-            // requestAnimationFrame(drawDoubleCircleAt90);
         }
     }
 }
+
+
 
     export function drawDottedCircle() {
         // Draw one dot at the current angle
