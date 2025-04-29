@@ -1,25 +1,25 @@
-import { canvas, ctx } from "./config.js";
-import {centerX, centerY, radius, redrawAllPrevious} from "./drawCirlce.js";
+import {canvas, canvasElements, ctx, ctxElements} from "./config.js";
+import {centerX, centerY, radius,
+
+} from "./drawCirlce.js";
 
 export function drawDoubleCircleAt90() {
     const circleX = centerX + radius;
     const circleY = centerY;
 
-    const innerTargetRadius = 110;
-    const outerTargetRadius = 120;
-
+    const innerTargetRadius = 103;
+    const outerTargetRadius = 96;
     let currentInnerRadius = 0;
     let currentOuterRadius = 0;
     const radiusIncrement = 2; // Increase this value for faster animation
 
     function animateInner() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        redrawAllPrevious();
-        // Draw inner circle (filled for visibility)
-        ctx.beginPath();
-                ctx.arc(circleX, circleY, currentInnerRadius, 0, 2 * Math.PI);
-                ctx.strokeStyle = "black";
-                ctx.stroke();
+
+        ctxElements.clearRect(0, 0, canvasElements.width, canvasElements.height);
+         ctxElements.beginPath();
+                ctxElements.arc(circleX, circleY, currentInnerRadius, 0, 2 * Math.PI);
+                ctxElements.strokeStyle = "black";
+                ctxElements.stroke();
 
                 currentInnerRadius += radiusIncrement;
 
@@ -31,20 +31,20 @@ export function drawDoubleCircleAt90() {
     }
 
     function animateOuter() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        redrawAllPrevious();
+        ctxElements.clearRect(0, 0, canvas.width, canvas.height);
+
         // Keep the inner circle visible
-        ctx.beginPath();
-        ctx.arc(circleX, circleY, innerTargetRadius, 0, 2 * Math.PI);
-        ctx.strokeStyle = "black";
-        ctx.stroke();
+        ctxElements.beginPath();
+        ctxElements.arc(circleX, circleY, innerTargetRadius, 0, 2 * Math.PI);
+        ctxElements.strokeStyle = "black";
+        ctxElements.stroke();
 
         // Draw outer circle
-        ctx.beginPath();
-        ctx.arc(circleX, circleY, currentOuterRadius, 0, 2 * Math.PI);
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 1;
-        ctx.stroke();
+        ctxElements.beginPath();
+        ctxElements.arc(circleX, circleY, currentOuterRadius, 0, 2 * Math.PI);
+        ctxElements.strokeStyle = "black";
+        ctxElements.lineWidth = 1;
+        ctxElements.stroke();
 
         currentOuterRadius += radiusIncrement;
 

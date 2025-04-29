@@ -22,7 +22,7 @@ body {
 
 }
 
-#canvas {
+canvas {
     width:1200px;
     height:800px;
     position: absolute;
