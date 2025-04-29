@@ -172,11 +172,11 @@ let tetroColors = [
   'deeppin',
 ];
 
-startBtn.addEventListener('click', onStartBtnClick);
-pauseBtn.addEventListener('click', onPauseBtnClick);
-instructionsBtn.addEventListener('click', onInstructionBtnClick);
-instructionsExitBtn.addEventListener('click', onInstructionsExitBtnClick);
-exitBtn.addEventListener('click', onExitBtnClick);
+// startBtn.addEventListener('click', onStartBtnClick);
+// pauseBtn.addEventListener('click', onPauseBtnClick);
+// instructionsBtn.addEventListener('click', onInstructionBtnClick);
+// instructionsExitBtn.addEventListener('click', onInstructionsExitBtnClick);
+// exitBtn.addEventListener('click', onExitBtnClick);
 
 drawFieldNewState();
 
