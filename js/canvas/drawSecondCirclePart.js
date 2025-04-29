@@ -1,6 +1,7 @@
 import {canvas3, ctx3} from "./config.js";
-import {drawDoubleCircleAt90} from "./drawDoubleCircleAt90.js";
-import {centerX, centerY, drawCircle, radius} from "./drawCirlce.js";
+
+import {centerX, centerY,  radius} from "./drawCirlce.js";
+import {drawDoubleCircleAt270} from "./drawDoubleCircleAt270.js";
 
 let startAngle3 = Math.PI / 11.5;
 let endAngle3 = startAngle3 ;
@@ -29,6 +30,7 @@ export function drawSecondCirclePart() {
             endAngle3 = Math.min(endAngle3 + 0.02, Math.PI);
             requestAnimationFrame(drawSecondCirclePart);
         } else {
+            requestAnimationFrame(drawDoubleCircleAt270);
             animationDirection3 = -1;
             requestAnimationFrame(drawSecondCirclePart);
         }
