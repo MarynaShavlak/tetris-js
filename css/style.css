@@ -6,6 +6,7 @@
 }
 
 body {
+    font-family: "Lilita One", sans-serif;
     margin: 0;
     background: #FC4120;
     background-image: url('../images/background.jpg');
@@ -19,6 +20,7 @@ body {
 }
 .container{
     position: relative;
+
 
 }
 
@@ -34,7 +36,8 @@ canvas {
 
 
 .game {
-
+opacity:0;
+    pointer-events:none;
     /*margin: 80px 0px;*/
     /*width: 1400px;*/
     /*height: 860px;*/
@@ -385,4 +388,60 @@ canvas {
     height: 100px;
     padding: 0px 60px;
     text-align: center;
+}
+
+/*SETTINGS*/
+.settings {
+    width:1200px;
+    height:800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.settings__list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    list-style: none;
+    padding:0;
+    margin:0;
+
+}
+
+.settings__item {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 50px;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    color: #F3F3F3;
+    cursor: pointer;
+
+    z-index: 0;
+}
+
+.settings__item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('../images/tetromino.jpg');
+    border-radius: 10px;
+    z-index: -1;
+    transform: scaleX(1);
+    transform-origin: center;
+    transition: transform 0.4s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.settings__item:hover::before {
+    transform: scaleX(1.2); /* Or tweak to desired effect */
 }
