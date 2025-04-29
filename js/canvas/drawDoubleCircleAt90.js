@@ -11,7 +11,7 @@ export function drawDoubleCircleAt90() {
     const outerTargetRadius = 96;
     let currentInnerRadius = 0;
     let currentOuterRadius = 0;
-    const radiusIncrement = 2; // Increase this value for faster animation
+    const radiusIncrement = 4; // Increase this value for faster animation
 
     function animateInner() {
 

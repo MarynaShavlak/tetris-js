@@ -106,16 +106,21 @@ export function drawCircle() {
             endAngle += 0.02; // increase for smoother or faster animation
             requestAnimationFrame(drawCircle);
         } else {
+            requestAnimationFrame(drawDoubleCircleAt90);
             animationDirection = -1; // Change animation direction to reverse
             requestAnimationFrame(drawCircle); // Continue animation for reverse cleanup
         }
     } else if (animationDirection === -1) {
+
+
         if (endAngle > startAngle / 6) {
-            endAngle -= 0.02; // decrease to clean up the third part of the line
+            endAngle -= 0.02;
+            // decrease to clean up the third part of the line
             requestAnimationFrame(drawCircle);
+
         } else {
             // Reverse animation completed, trigger next animation or action
-            requestAnimationFrame(drawDoubleCircleAt90);
+            // requestAnimationFrame(drawDoubleCircleAt90);
         }
     }
 }
