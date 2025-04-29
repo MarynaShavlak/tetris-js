@@ -2,6 +2,7 @@ import {canvas3, ctx3} from "./config.js";
 
 import {centerX, centerY,  radius} from "./drawCirlce.js";
 import {drawDoubleCircleAt270} from "./drawDoubleCircleAt270.js";
+import {drawThirdCirclePart} from "./drawThirdCirclePart.js";
 
 let startAngle3 = Math.PI / 11.5;
 let endAngle3 = startAngle3 ;
@@ -38,8 +39,10 @@ export function drawSecondCirclePart() {
         if (endAngle3 > reverseLimit) {
             endAngle3 = Math.max(endAngle3 - 0.02, reverseLimit);
             requestAnimationFrame(drawSecondCirclePart);
+
         } else {
             animationDirection3 = 1;
+            requestAnimationFrame(drawThirdCirclePart)
         }
     }
 

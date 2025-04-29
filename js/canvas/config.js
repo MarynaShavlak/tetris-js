@@ -12,3 +12,7 @@ export const ctx3 = canvas3.getContext('2d');
 
 export const canvas4 = document.getElementById('canvas4');
 export const ctx4= canvas4.getContext('2d');
+
+
+export const canvas5 = document.getElementById('canvas5');
+export const ctx5= canvas5.getContext('2d');
