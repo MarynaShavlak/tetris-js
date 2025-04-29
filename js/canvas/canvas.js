@@ -1,3 +1,5 @@
 import {drawCircle} from "./drawCirlce.js";
+import {drawDoubleCircleAt90} from "./drawDoubleCircleAt90.js";
 
-drawCircle();
+// drawCircle();
+drawDoubleCircleAt90();

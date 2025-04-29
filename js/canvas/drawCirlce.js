@@ -3,25 +3,32 @@ import {drawDoubleCircleAt90} from "./drawDoubleCircleAt90.js";
 
 export const centerX = canvas.width / 2;
 export const centerY = canvas.height / 2 + 3 ;
-export const radius = canvas.height / 2 - 20; // Circle radius = half of canvas width
+export const radius = canvas.height / 2 - 20;
 let endAngle = -Math.PI / 2;
-let animationStage = 1; // Start at top (-90 degrees)
+let animationStage = 1;
+let doubleCircleDrawn = false;
 
 const dottedRadius = radius + 15;
 let dotAngle = -Math.PI / 2;
-const dotStep = 0.05; // angle between dots
+const dotStep = 0.05;
 const dotRadius = 1;
 
 export function drawCircle() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, -Math.PI / 2, endAngle); // From top, clockwise
+    ctx.arc(centerX, centerY, radius, -Math.PI / 2, endAngle);
     ctx.strokeStyle = "black";
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    if (endAngle < 1.5 * Math.PI) { // Until full circle (270 deg from start)
-        endAngle += 0.02; // Adjust for speed/smoothness
+
+    // if (endAngle >= 0 && !doubleCircleDrawn) {
+    //     drawDoubleCircleAt90();
+    //     doubleCircleDrawn = true; // Set flag to avoid drawing multiple times
+    // }
+
+    if (endAngle < 1.5 * Math.PI) {
+        endAngle += 0.02;
         requestAnimationFrame(drawCircle);
     } else {
         animationStage = 2;
@@ -46,7 +53,5 @@ export function drawDottedCircle() {
     if (dotAngle < 1.5 * Math.PI) {
         dotAngle += dotStep;
         requestAnimationFrame(drawDottedCircle);
-    } else {
-        drawDoubleCircleAt90(); // 👈 Call it here
     }
 }

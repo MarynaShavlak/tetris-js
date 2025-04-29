@@ -1,42 +1,54 @@
-import {ctx} from "./config.js";
-import {centerX, centerY, radius} from "./drawCirlce.js";
+import { canvas, ctx } from "./config.js";
+import { centerX, centerY } from "./drawCirlce.js";
 
 export function drawDoubleCircleAt90() {
-    const angleAt90 = 0; // 90 degrees from top
-    const cx = centerX + radius * Math.cos(angleAt90);
-    const cy = centerY + radius * Math.sin(angleAt90);
+    const circleX = centerX;
+    const circleY = centerY;
 
-    let currentRadius = 0;
-    const maxInnerRadius = 120;
-    const maxOuterRadius = 130;
-    const step = 1.5; // Control animation speed
+    const innerTargetRadius = 110;
+    const outerTargetRadius = 120;
 
-    function animateDoubleCircle() {
-        // ctx.clearRect(0, 0, canvas.width, canvas.height); // Optional if you want to clear all
-        // redrawAllPrevious(); // 👈 Redraw previous elements (main circle, dots)
+    let currentInnerRadius = 0;
+    let currentOuterRadius = 0;
 
-        // Inner circle
+    function animateInner() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw inner circle (filled for visibility)
         ctx.beginPath();
-        ctx.arc(cx, cy, Math.min(currentRadius, maxInnerRadius), 0, 2 * Math.PI);
-        ctx.strokeStyle = "green";
-        ctx.lineWidth = 1.5;
+        ctx.arc(circleX, circleY, currentInnerRadius, 0, 2 * Math.PI);
+        ctx.strokeStyle = "black";
         ctx.stroke();
 
-        // Outer circle
-        if (currentRadius >= 3) {
-            ctx.beginPath();
-            ctx.arc(cx, cy, Math.min(currentRadius, maxOuterRadius), 0, 2 * Math.PI);
-            ctx.strokeStyle = "green";
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-        }
+        currentInnerRadius += 1;
 
-        if (currentRadius < maxOuterRadius) {
-            currentRadius += step;
-            requestAnimationFrame(animateDoubleCircle);
+        if (currentInnerRadius <= innerTargetRadius) {
+            requestAnimationFrame(animateInner);
+        } else  {
+            requestAnimationFrame(animateOuter); // Start outer animation when inner is done
         }
     }
 
-    animateDoubleCircle();
-}
 
+    function animateOuter() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.arc(circleX, circleY, innerTargetRadius, 0, 2 * Math.PI);
+        ctx.strokeStyle = "black";
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(circleX, circleY, currentOuterRadius, 0, 2 * Math.PI);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        currentOuterRadius += 1;
+
+        if (currentOuterRadius <= outerTargetRadius) {
+            requestAnimationFrame(animateOuter);
+        }
+    }
+
+    animateInner();
+}
