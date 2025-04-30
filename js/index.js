@@ -7,6 +7,9 @@ import {
   handleShowUsernameInterface, levelBlock, linesBlock, playerInfoBlock, scoreEl, settingsEl,
 } from "./eventHandlers/rules.js";
 import {possibleLevels} from "./gameConfig.js";
+import {resetAnimations} from "./canvas/resetAnimations.js";
+
+
 
 
 const showRulesBtn = document.getElementById('rules-btn');
@@ -728,6 +731,7 @@ function onSureExitBtnClick() {
   playerInfoBlock.classList.add('hidden');
   linesBlock.classList.add('hidden');
   controlButtonsBlock.classList.add('hidden');
+  resetAnimations();
 
 }
 
