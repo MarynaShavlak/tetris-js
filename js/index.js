@@ -1,10 +1,16 @@
-import {handleBackToMenu, handleShowRules, handleShowUsernameInterface} from "./eventHandlers/rules.js";
+import {
+  handleBackToMenu,
+  handleInterfaceToStartGame,
+  handleShowRules,
+  handleShowUsernameInterface
+} from "./eventHandlers/rules.js";
 
 
 const showRulesBtn = document.getElementById('rules-btn');
 const backBtn = document.getElementById('back-btn');
 const usernameBtn = document.getElementById('username-btn');
 const setPlayerNameBtn = document.getElementById('submit-user-name');
+const allStartBtns = document.querySelectorAll('.settings__btn--start')
 
 
 
@@ -13,7 +19,7 @@ backBtn.addEventListener('click', handleBackToMenu);
 usernameBtn.addEventListener('click', handleShowUsernameInterface);
 setPlayerNameBtn.addEventListener('click', handleSetPlayerName);
 
-
+allStartBtns.forEach((btn)=> btn.addEventListener('click', handleInterfaceToStartGame))
 
 
 

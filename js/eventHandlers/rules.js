@@ -60,3 +60,6 @@ export function  handleShowUsernameInterface() {
     }, 300);
 }
 
+export function  handleInterfaceToStartGame() {
+ console.log('startGame');
+}
