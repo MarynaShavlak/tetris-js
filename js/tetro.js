@@ -170,6 +170,7 @@ function _getNewTetro() {
 function _renderMovingCell(nextTetro) {
     return `<div class="moving-cell" style="background-color: ${nextTetro.color}"></div>`;
 }
+
 export function _hasCollisions() {
     for (let y = 0; y < activeTetro.shape.length; y++) {
         for (let x = 0; x < activeTetro.shape[y].length; x++) {
@@ -195,7 +196,6 @@ function _removePreviousActiveTetroPosition() {
         }
     }
 }
-
 
 export function resetGame() {
     isPaused = true;

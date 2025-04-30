@@ -79,7 +79,7 @@ export function handleSetPlayerName() {
 
     playerNameElement.value = enteredUserName.value;
 
-  // player = playerNameElement.value;
+  TetrisGame.player = playerNameElement.value;
   // userNameWindow.style.display = 'none';
 
 
@@ -195,7 +195,7 @@ function onExitBtnClick() {
 
     exitGameModal.innerHTML = `
         
-        <p>Hey, ${player}, thank you for your game!</p>
+        <p>Hey, ${TetrisGame.player}, thank you for your game!</p>
         <p> You were doing fine!</p>
         <p> You have reached level ${reachedLevelInFinishedGame} and scored ${scoredPointsInFinishedGame} points by filling ${TetrisGame.linesInFinishedGame} lines.</p>
         <ul class="exit-game__user-btns">
@@ -274,33 +274,9 @@ function _makeControlBtnsEnabled() {
 
 // let playField = Array(20).fill(Array(10).fill(0));
 
-export let player;
+// export let player;
 export let reachedLevelInFinishedGame;
 export let scoredPointsInFinishedGame;
-// export let linesInFinishedGame;
-
-// export let playField = [
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-// ];
 
 export let playerScore = 0;
 export let currentLevel = 1;
@@ -324,7 +300,6 @@ function startGame() {
     gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
   }
 }
-
 
 function resetGame() {
   isPaused = true;

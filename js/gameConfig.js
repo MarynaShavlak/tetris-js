@@ -95,4 +95,5 @@ export const tetroColors = [
 export const TetrisGame = {
     playField: Array.from({ length: 20 }, () => Array(10).fill(0)),
     linesInFinishedGame: null,
+    player: 'Player 1',
 }
