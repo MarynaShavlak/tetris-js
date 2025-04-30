@@ -26,10 +26,9 @@ import {
   exitBtn, exitGameModal,
   gameEl, goalElement,
   goalOutput,
-  levelBlock, levelElement,
-  levelOutput,
-  linesBlock, linesElement,
+  levelBlock, levelOutput,
 
+  linesBlock, linesElement,
   pauseBtn,
   playerInfoBlock,
   playerNameElement,
@@ -62,7 +61,7 @@ function gamePusk() {
 
 function setInitialOptions() {
   levelOutput.value = currentLevel;
-  reachedLevelInFinishedGame = levelOutput.value;
+  TetrisGame.reachedLevelInFinishedGame = levelOutput.value;
   TetrisGame.linesInFinishedGame = linesElement.value;
   goalOutput.value = possibleLevels[currentLevel].goalForNextLevel;
   pointsLeftElement.value = possibleLevels[currentLevel].goalForNextLevel;
@@ -197,7 +196,7 @@ function onExitBtnClick() {
         
         <p>Hey, ${TetrisGame.player}, thank you for your game!</p>
         <p> You were doing fine!</p>
-        <p> You have reached level ${reachedLevelInFinishedGame} and scored ${scoredPointsInFinishedGame} points by filling ${TetrisGame.linesInFinishedGame} lines.</p>
+        <p> You have reached level ${TetrisGame.reachedLevelInFinishedGame} and scored ${TetrisGame.scoredPointsInFinishedGame} points by filling ${TetrisGame.linesInFinishedGame} lines.</p>
         <ul class="exit-game__user-btns">
     <li>
       <button class="btn exit-game action-btn" id="btn-sure-exit">
@@ -272,15 +271,8 @@ function _makeControlBtnsEnabled() {
 
 //_________________________________________________________________//
 
-// let playField = Array(20).fill(Array(10).fill(0));
-
-// export let player;
-export let reachedLevelInFinishedGame;
-export let scoredPointsInFinishedGame;
-
-export let playerScore = 0;
+// export let playerScore = 0;
 export let currentLevel = 1;
-export let nextGoal;
 
 export let wasGameStartedBefore = false;
 export let isPaused = true;
@@ -312,29 +304,29 @@ function resetGame() {
 export function calculateScore(lines) {
   switch (lines.length) {
     case 1:
-      playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine;
+      TetrisGame.playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine;
       break;
     case 2:
-      playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine * 2;
+      TetrisGame.playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine * 2;
       break;
     case 3:
-      playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine * 3;
+      TetrisGame.playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine * 3;
       break;
     case 4:
-      playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine * 4;
+      TetrisGame.playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine * 4;
       break;
   }
-  scoreElement.value = playerScore;
-  scoredPointsInFinishedGame = scoreElement.value;
+  scoreElement.value = TetrisGame.playerScore;
+  TetrisGame.scoredPointsInFinishedGame = scoreElement.value;
 }
 
 export function moveToNextLevel(score) {
   if (score >= possibleLevels[currentLevel].goalForNextLevel) {
     currentLevel += 1;
-    levelElement.value = currentLevel;
-    reachedLevelInFinishedGame = levelElement.value;
-    nextGoal = possibleLevels[currentLevel].goalForNextLevel;
-    goalElement.value = nextGoal;
+    levelOutput.value = currentLevel;
+    TetrisGame.reachedLevelInFinishedGame = levelOutput.value;
+    TetrisGame.nextGoal = possibleLevels[currentLevel].goalForNextLevel;
+    goalElement.value = TetrisGame.nextGoal;
     calculatePointLeftForNextLevel(score);
   }
 }

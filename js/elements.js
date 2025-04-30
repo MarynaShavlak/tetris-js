@@ -35,7 +35,7 @@ export const exitBtn = document.getElementById('exit-btn');
 
 export const gameWindow = document.getElementById('game-window');
 export const nextTetroDisplay = document.getElementById('next-tetro');
-export const levelElement = document.getElementById('player-level');
+
 export const scoreElement = document.getElementById('player-score');
 export const goalElement = document.getElementById('player-goal');
 export const linesElement = document.getElementById('player__filled-lines');

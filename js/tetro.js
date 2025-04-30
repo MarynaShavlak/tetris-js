@@ -6,7 +6,7 @@ import {
     isPaused,
 
     moveToNextLevel,
-    playerScore,
+    // playerScore,
 } from "./index.js";
 import {linesElement} from "./elements.js";
 
@@ -148,8 +148,8 @@ function deleteFullLine() {
     }
 
     calculateScore(filledLines);
-    calculatePointLeftForNextLevel(playerScore);
-    moveToNextLevel(playerScore);
+    calculatePointLeftForNextLevel(TetrisGame.playerScore);
+    moveToNextLevel(TetrisGame.playerScore);
 }
 
 function _getNewTetro() {
