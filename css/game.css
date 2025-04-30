@@ -63,13 +63,17 @@ main {
 .game__results {
     width:1200px;
     height:800px;
-
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     /*border: 1px solid blue;*/
 }
+
+
+
+
+
 
 #player__filled-lines, #player__level {
     font-size: 34px;
@@ -128,4 +132,22 @@ main {
 #player-name{
     font-size: 28px;
     color: #1A1A1A;
+}
+
+/*BUTTONS*/
+.game__controlButtons {
+    width:1200px;
+    height:800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.controlButtonsList {
+    position: absolute;
+    bottom:0;
+    left:0;
+    display:flex;
+    gap:10px;
 }
