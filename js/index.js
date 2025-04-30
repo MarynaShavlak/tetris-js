@@ -60,11 +60,11 @@ function gamePusk() {
 }
 
 function setInitialOptions() {
-  levelOutput.value = currentLevel;
+  levelOutput.value = TetrisGame.currentLevel;
   TetrisGame.reachedLevelInFinishedGame = levelOutput.value;
   TetrisGame.linesInFinishedGame = linesElement.value;
-  goalOutput.value = possibleLevels[currentLevel].goalForNextLevel;
-  pointsLeftElement.value = possibleLevels[currentLevel].goalForNextLevel;
+  goalOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
+  pointsLeftElement.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
   isPaused = false;
   if (enteredUserName.value === '') {
     playerNameElement.value = 'Player 1';
@@ -82,7 +82,7 @@ export function handleSetPlayerName() {
   // userNameWindow.style.display = 'none';
 
 
-  // gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
+  // gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
 }
 
 
@@ -108,7 +108,7 @@ function onStartBtnClick() {
 function continueGame() {
   pauseBtn.innerHTML = 'Pause';
   isPaused= false;
-  gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
+  gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
 }
 
 function onCancelNewGameBtnClick() {
@@ -117,7 +117,7 @@ function onCancelNewGameBtnClick() {
   pauseBtn.value = 'pause';
   pauseBtn.innerHTML = 'Pause';
   isPaused = false;
-  gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
+  gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
 }
 
 function onConfirmNewGameBtnClick() {
@@ -126,7 +126,7 @@ function onConfirmNewGameBtnClick() {
   // pauseBtn.value = 'pause';
   // pauseBtn.innerHTML = 'Pause';
   // isPaused = false;
-  // gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
+  // gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
 
 
   startBtn.innerHTML = 'NEW GAME';
@@ -272,7 +272,7 @@ function _makeControlBtnsEnabled() {
 //_________________________________________________________________//
 
 // export let playerScore = 0;
-export let currentLevel = 1;
+// export let TetrisGame.currentLevel = 1;
 
 export let wasGameStartedBefore = false;
 export let isPaused = true;
@@ -289,7 +289,7 @@ function startGame() {
   console.log('pause', isPaused)
   if (!isPaused) {
     updateGameState();
-    gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
+    gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
   }
 }
 
@@ -304,16 +304,16 @@ function resetGame() {
 export function calculateScore(lines) {
   switch (lines.length) {
     case 1:
-      TetrisGame.playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine;
+      TetrisGame.playerScore += possibleLevels[TetrisGame.currentLevel].pointsPerOneFilledLine;
       break;
     case 2:
-      TetrisGame.playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine * 2;
+      TetrisGame.playerScore += possibleLevels[TetrisGame.currentLevel].pointsPerOneFilledLine * 2;
       break;
     case 3:
-      TetrisGame.playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine * 3;
+      TetrisGame.playerScore += possibleLevels[TetrisGame.currentLevel].pointsPerOneFilledLine * 3;
       break;
     case 4:
-      TetrisGame.playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine * 4;
+      TetrisGame.playerScore += possibleLevels[TetrisGame.currentLevel].pointsPerOneFilledLine * 4;
       break;
   }
   scoreElement.value = TetrisGame.playerScore;
@@ -321,18 +321,18 @@ export function calculateScore(lines) {
 }
 
 export function moveToNextLevel(score) {
-  if (score >= possibleLevels[currentLevel].goalForNextLevel) {
-    currentLevel += 1;
-    levelOutput.value = currentLevel;
+  if (score >= possibleLevels[TetrisGame.currentLevel].goalForNextLevel) {
+    TetrisGame.currentLevel += 1;
+    levelOutput.value = TetrisGame.currentLevel;
     TetrisGame.reachedLevelInFinishedGame = levelOutput.value;
-    TetrisGame.nextGoal = possibleLevels[currentLevel].goalForNextLevel;
+    TetrisGame.nextGoal = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
     goalElement.value = TetrisGame.nextGoal;
     calculatePointLeftForNextLevel(score);
   }
 }
 
 export function calculatePointLeftForNextLevel(score) {
-  let pointsLeft = possibleLevels[currentLevel].goalForNextLevel - score;
+  let pointsLeft = possibleLevels[TetrisGame.currentLevel].goalForNextLevel - score;
   pointsLeftElement.value = pointsLeft;
 }
 

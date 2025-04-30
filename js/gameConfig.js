@@ -100,4 +100,5 @@ export const TetrisGame = {
     player: 'Player 1',
     nextGoal: null,
     playerScore: 0,
+    currentLevel: 1,
 }
