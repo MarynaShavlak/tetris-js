@@ -1,24 +1,14 @@
 import {drawCircle} from "../canvas/drawCircle.js";
-
-
-export const settingsEl = document.querySelector('.settings');
-export const usernameEl = document.querySelector('.settings__item--username');
-export const startEl = document.querySelector('.settings__item--start');
-export const rulesEl = document.querySelector('.settings__item--rules');
-export const instructionsEl = document.querySelector('.instructions');
-export const usernameEditorEl = document.querySelector('.usernameEditor');
-const settingsFooterEl = document.querySelector('.settings__footer');
-
-export const gameEl = document.querySelector('.game');
-export const scoreEl = document.querySelector( '.player__score')
-export const gameResults = document.querySelector('.game__results');
-export const linesBlock = document.querySelector('.player__lines');
-export const levelBlock = document.querySelector('.player__level');
-export const playerInfoBlock = document.querySelector('.player__info');
-export const controlButtonsBlock = document.querySelector('.game__controlButtons');
-
-
-
+import {
+    controlButtonsBlock,
+    gameEl, instructionsEl,
+    levelBlock,
+    linesBlock,
+    playerInfoBlock,
+    rulesEl,
+    scoreEl,
+    settingsEl, settingsFooterEl, startEl, usernameEditorEl, usernameEl
+} from "../elements.js";
 
 export function handleShowRules() {
     usernameEl.classList.add('hidden');
