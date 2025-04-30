@@ -95,3 +95,36 @@ main {
     opacity:0;
     pointer-events: none;
 }
+
+.player__info {
+    position: absolute;
+    top:0;
+    right:0;
+    width: 250px;
+    opacity:1;
+    pointer-events: auto;
+    transition: opacity 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+
+}
+
+.player__info.hidden {
+    opacity:0;
+    pointer-events: none;
+}
+
+.player__points-left-for-next-level,
+.player__name,
+.player__goal {
+    display:flex;
+    align-items: center;
+    gap:10px;
+}
+
+#player-goal,
+#player-points-left-for-next-level {
+    font-size: 28px;
+    color: #1A1A1A;
+}

@@ -13,7 +13,7 @@ export const scoreEl = document.querySelector( '.player__score')
 export const gameResults = document.querySelector('.game__results');
 export const linesBlock = document.querySelector('.player__lines');
 export const levelBlock = document.querySelector('.player__level');
-
+export const playerInfoBlock = document.querySelector('.player__info');
 
 export function handleShowRules() {
     usernameEl.classList.add('hidden');
@@ -79,6 +79,10 @@ export function  handleInterfaceToStartGame() {
         levelBlock.classList.remove('hidden');
 
     }, 2000);
+    setTimeout(() => {
+        playerInfoBlock.classList.remove('hidden');
+
+    }, 3000);
     setTimeout(() => {
         linesBlock.classList.remove('hidden');
 
