@@ -4,10 +4,20 @@ import {handleBackToMenu, handleShowRules, handleShowUsernameInterface} from "./
 const showRulesBtn = document.getElementById('rules-btn');
 const backBtn = document.getElementById('back-btn');
 const usernameBtn = document.getElementById('username-btn');
+const setPlayerNameBtn = document.getElementById('submit-user-name');
+
+
 
 showRulesBtn.addEventListener('click', handleShowRules);
 backBtn.addEventListener('click', handleBackToMenu);
 usernameBtn.addEventListener('click', handleShowUsernameInterface);
+setPlayerNameBtn.addEventListener('click', handleSetPlayerName);
+
+
+
+
+
+
 
 
 
@@ -32,7 +42,7 @@ const exitBtn = document.getElementById('exit-btn');
 // const allControlBtns = [startBtn, pauseBtn, instructionsBtn, exitBtn];
 // const enabledFromStartControlBtns = [startBtn, instructionsBtn, exitBtn];
 
-const submitNameBtn = document.getElementById('submit-user-name');
+
 const confirmNewGameBtn = document.getElementById('confirm-start-new-game');
 const cancelNewGameBtn = document.getElementById('cancel-start-new-game');
 const instructionsExitBtn = document.getElementById('instructions-exit-btn');
@@ -122,6 +132,39 @@ let possibleLevels = {
   },
 };
 
+
+export function handleSetPlayerName() {
+  console.log('set name')
+  pauseBtn.innerHTML = 'Pause';
+  levelElement.value = currentLevel;
+  reachedLevelInFinishedGame = levelElement.value;
+  linesInFinishedGame = linesElement.value;
+  goalElement.value = possibleLevels[currentLevel].goalForNextLevel;
+  pointsLeftElement.value = possibleLevels[currentLevel].goalForNextLevel;
+  // _makeControlBtnsEnabled();
+  if (enteredUserName.value === '') {
+    playerNameElement.value = 'Player 1';
+  } else {
+    playerNameElement.value = enteredUserName.value;
+  }
+  player = playerNameElement.value;
+  userNameWindow.style.display = 'none';
+  isPaused = false;
+  // gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 let figures = {
   O: [
     [0, 1, 1, 0],
@@ -184,6 +227,16 @@ let tetroColors = [
   'yellow',
   'deeppin',
 ];
+
+
+
+
+
+
+
+
+
+
 
 // startBtn.addEventListener('click', onStartBtnClick);
 // pauseBtn.addEventListener('click', onPauseBtnClick);
@@ -512,24 +565,7 @@ function onStartBtnClick() {
   }
 }
 
-function onSubmitPlayerNameBtnClick() {
-  pauseBtn.innerHTML = 'Pause';
-  levelElement.value = currentLevel;
-  reachedLevelInFinishedGame = levelElement.value;
-  linesInFinishedGame = linesElement.value;
-  goalElement.value = possibleLevels[currentLevel].goalForNextLevel;
-  pointsLeftElement.value = possibleLevels[currentLevel].goalForNextLevel;
-  _makeControlBtnsEnabled();
-  if (enteredUserName.value === '') {
-    playerNameElement.value = 'Player 1';
-  } else {
-    playerNameElement.value = enteredUserName.value;
-  }
-  player = playerNameElement.value;
-  userNameWindow.style.display = 'none';
-  isPaused = false;
-  gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
-}
+
 
 function onCancelNewGameBtnClick() {
   confirmStartNewGameWindow.style.display = 'none';

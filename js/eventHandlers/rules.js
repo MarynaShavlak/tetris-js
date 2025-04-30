@@ -59,3 +59,4 @@ export function  handleShowUsernameInterface() {
         settingsFooterEl.classList.remove('hidden');
     }, 300);
 }
+
