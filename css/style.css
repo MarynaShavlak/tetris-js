@@ -1,6 +1,8 @@
 * {
     box-sizing: border-box;
     font-family: "Lilita One", sans-serif;
+    margin: 0;
+    padding:0;
 }
 
 body {
@@ -19,6 +21,14 @@ ul {
     list-style: none ;
     padding:0;
     margin: 0;
+}
+
+button {
+    border:none;
+    padding:0;
+    margin:0;
+    background-color: transparent;
+    cursor:pointer
 }
 
 .container{
@@ -286,50 +296,20 @@ opacity:0;
 }
 
 
-.user-name-block {
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    gap: 20px;
-}
 
-.user-name-block__name-request {
-    grid-column: span 2;
-}
-
-.user-name-block__user-entered-name {
-    height: 100%;
-    width: 100%;
-    font-size: 40px;
-    font-weight: bold;
-    padding: 20px;
-    border: 2px solid black;
-    border-radius: 20px;
-}
-
-
-.action-btn {
-    font-size: 40px;
-    font-weight: bold;
-    width: 120px;
-    border: 2px solid black;
-    border-radius: 20px;
-    height: 100%;
-    padding: 30px;
-    text-align: center;
-}
 
 
 
 
 .instructions {
-
     font-size: 30px;
     display: flex;
     flex-direction: column;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, calc(-50% ));
+    /*transform: translate(-50%, calc(-50% - 60px));*/
+    transform: translate(-50%, calc(-50%));
     opacity: 1;
     pointer-events: auto;
     transition: opacity 0.3s ease;
@@ -486,5 +466,63 @@ opacity:0;
 .footer__list {
     display: flex;
     justify-content: space-between;
+}
 
+.usernameEditor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /*transform: translate(-50%, calc(-50% - 60px));*/
+    transform: translate(-50%, calc(-50% - 50px ));
+    opacity:1;
+    pointer-events: auto;
+    transition: opacity 0.3s ease-in;
+}
+
+.usernameEditor.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.usernameEditor__greeting {
+ text-align: center;
+    font-size:30px;
+    margin-bottom: 10px;
+}
+
+.block__name-request {
+    font-size: 24px;
+    grid-column: span 2;
+}
+
+.usernameEditor__block {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 20px;
+}
+
+
+.block__usernameInput {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+
+.action-btn {
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-image: url('../images/tetromino.jpg');
+    /*height: 100%;*/
+    padding: 20px;
+    text-align: center;
+    color: #F3F3F3;
+    transition: bow-shadow 0.3s ease-in-out;
+}
+
+.action-btn:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }

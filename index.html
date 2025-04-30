@@ -27,7 +27,7 @@
     <canvas id="canvas8" width="1200" height="800"></canvas>
     <div class="settings">
       <ul class="settings__list">
-        <li class="settings__item settings__item--username"><button class="settings__btn">Set Username</button></li>
+        <li class="settings__item settings__item--username"><button class="settings__btn" id="username-btn">Set Username</button></li>
         <li class="settings__item settings__item--rules" ><button class="settings__btn" id="rules-btn">How to Play</button></li>
         <li class="settings__item settings__item--start"><button class="settings__btn">START</button></li>
         <li class="settings__footer hidden">
@@ -62,6 +62,24 @@
         </ul>
 
       </div>
+      <div class="usernameEditor hidden" id="usernameEditor">
+        <p class="usernameEditor__greeting" >Hi! Let's play Tetris.</p>
+        <div class="usernameEditor__block">
+          <p class="block__name-request">What is your name?</p>
+          <input
+                    type="text"
+                    class="block__usernameInput"
+                    id="user-entered-name"
+            />
+          <button
+                    class="block__user-btn action-btn"
+                    id="submit-user-name"
+          >
+              OK
+            </button>
+
+        </div>
+      </div>
     </div>
     <div class="game" id="game-window">
       <div class="tetris">
@@ -70,27 +88,7 @@
     </div>
   </main>
 
-    <div class="user-name-window" id="user-name-window">
-      <div>Hi! Let's play Tetris.</div>
-      <div class="user-name-block">
-        <div class="user-name-block__name-request">What is your name?</div>
-        <div>
-          <input
-            type="text"
-            class="user-name-block__user-entered-name"
-            id="user-entered-name"
-          />
-        </div>
-        <div>
-          <button
-            class="user-name-block__user-btn action-btn"
-            id="submit-user-name"
-          >
-            OK
-          </button>
-        </div>
-      </div>
-    </div>
+
     <div class="confirm-new-game-window" id="confirm-new-game-window">
       <div class="confirm-new-game-window__message">
         <div>Starting a new game will delete all your previous progress.</div>

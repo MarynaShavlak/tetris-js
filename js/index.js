@@ -1,12 +1,13 @@
-import {handleBackToMenu, handleShowRules} from "./eventHandlers/rules.js";
+import {handleBackToMenu, handleShowRules, handleShowUsernameInterface} from "./eventHandlers/rules.js";
 
 
 const showRulesBtn = document.getElementById('rules-btn');
 const backBtn = document.getElementById('back-btn');
+const usernameBtn = document.getElementById('username-btn');
 
 showRulesBtn.addEventListener('click', handleShowRules);
 backBtn.addEventListener('click', handleBackToMenu);
-
+usernameBtn.addEventListener('click', handleShowUsernameInterface);
 
 
 
