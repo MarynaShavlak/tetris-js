@@ -77,7 +77,7 @@ function onStartBtnClick() {
     // submitNameBtn.addEventListener('click', onSubmitPlayerNameBtnClick);
     startGame();
   } else {
-    confirmStartNewGameWindow.style.display = 'grid';
+    confirmStartNewGameWindow.classList.remove('hidden')
     pauseBtn.innerHTML = 'Keep playing... ';
     isPaused = true;
     _makeControlBtnsDisabled();
@@ -90,6 +90,7 @@ function onStartBtnClick() {
 //______________________BUTTONS______________________//
 const startBtn = document.getElementById('start-btn');
 const pauseBtn = document.getElementById('pause-btn');
+const exitBtn = document.getElementById('exit-btn');
 
 startBtn.addEventListener('click', onStartBtnClick);
 pauseBtn.addEventListener('click', onPauseBtnClick);
@@ -97,9 +98,9 @@ pauseBtn.addEventListener('click', onPauseBtnClick);
 
 
 
-const exitBtn = document.getElementById('exit-btn');
 
-// const allControlBtns = [startBtn, pauseBtn, instructionsBtn, exitBtn];
+
+const allControlBtns = [startBtn, pauseBtn, exitBtn];
 // const enabledFromStartControlBtns = [startBtn, instructionsBtn, exitBtn];
 
 
@@ -642,7 +643,7 @@ function _makeControlBtnsEnabled() {
 
 
 function onCancelNewGameBtnClick() {
-  confirmStartNewGameWindow.style.display = 'none';
+  confirmStartNewGameWindow.classList.add('hidden');
   _makeControlBtnsEnabled();
   pauseBtn.value = 'pause';
   pauseBtn.innerHTML = 'Pause';
