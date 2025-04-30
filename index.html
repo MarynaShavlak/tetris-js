@@ -92,29 +92,29 @@
     </div>
     <div class="results__block player__score hidden">
       <p class="player__section-name">SCORE</p>
-      <p id="player-score" >0</p>
+      <output id="player-score" value="0">0</output>
     </div>
     <div class="game__results ">
       <div class="results__block player__lines hidden">
         <p class="player__section-name">LINES</p>
-        <p id="player__filled-lines" >0</p>
+        <output id="player__filled-lines" value="0">0</output>
       </div>
       <div class="results__block player__level hidden">
         <p class=" player__section-name">Level</p>
-        <p id="player__level" >1</p>
+        <output id="player__level" value="1">1</output>
       </div>
       <div class="player__info hidden">
         <div class="player__name">
           <p class="player__section-name">PLAYER:</p>
-          <p id="player-name" ></p>
+          <output id="player-name" value=""></output>
         </div>
         <div class="player__goal">
           <p class="player__section-name">GOAL:</p>
-          <p id="player-goal" >0</p>
+          <output id="player-goal" value="0">0</output>
         </div>
         <div class="player__points-left-for-next-level">
           <p class="player__section-name">POINTS LEFT: </p>
-          <p id="player-points-left-for-next-level" >0</p>
+          <output id="player-points-left-for-next-level" value="0">0</output>
         </div>
       </div>
     </div>
@@ -162,14 +162,14 @@
             Yes
           </button>
         </li>
-        <li>
+        <div>
           <button
             class="cancel-new-game-window__user-btn action-btn"
             id="cancel-start-new-game"
           >
             No
           </button>
-        </li>
+        </div>
       </ul>
     </div>
     <div class="exit-message hidden" ></div>

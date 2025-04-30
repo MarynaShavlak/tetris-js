@@ -22,7 +22,7 @@ export const allStartBtns = document.querySelectorAll('.settings__btn--start');
 export const enteredUserName = document.getElementById('user-entered-name');
 export const playerNameElement = document.getElementById('player-name');
 export const levelOutput = levelBlock.querySelector('#player__level');
-export const linesOutput = linesBlock.querySelector('#player__filled-lines');
+
 export const goalOutput = document.getElementById('player-goal');
 export const pointsLeftElement = document.getElementById(
     'player-points-left-for-next-level',

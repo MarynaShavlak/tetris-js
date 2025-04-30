@@ -28,8 +28,8 @@ import {
   goalOutput,
   levelBlock, levelElement,
   levelOutput,
-  linesBlock,
-  linesOutput,
+  linesBlock, linesElement,
+
   pauseBtn,
   playerInfoBlock,
   playerNameElement,
@@ -63,7 +63,7 @@ function gamePusk() {
 function setInitialOptions() {
   levelOutput.value = currentLevel;
   reachedLevelInFinishedGame = levelOutput.value;
-  TetrisGame.linesInFinishedGame = linesOutput.value;
+  TetrisGame.linesInFinishedGame = linesElement.value;
   goalOutput.value = possibleLevels[currentLevel].goalForNextLevel;
   pointsLeftElement.value = possibleLevels[currentLevel].goalForNextLevel;
   isPaused = false;
