@@ -1,14 +1,9 @@
 import {figures, TetrisGame, tetroColors} from "./gameConfig.js";
 import {
-    calculatePointLeftForNextLevel,
-    calculateScore,
-    gameTimerID,
-    isPaused,
-
-    moveToNextLevel,
-    // playerScore,
+      moveToNextLevel,
 } from "./index.js";
 import {linesElement} from "./elements.js";
+import {calculatePointLeftForNextLevel, calculateScore} from "./calculateResults.js";
 
 const tetrisField = document.getElementById('tetris-field');
 
@@ -23,7 +18,7 @@ export function moveTetroDown() {
         activeTetro.y -= 1;
         fixTetro();
         deleteFullLine();
-        // activeTetro = _getNewTetro();
+
         activeTetro = nextTetro;
         if (_hasCollisions()) {
             resetGame();
@@ -34,7 +29,7 @@ export function moveTetroDown() {
 }
 
 export function updateGameState() {
-    if (!isPaused) {
+    if (!TetrisGame.isPaused) {
         addActiveTetro();
         drawFieldNewState();
         showWhatTetroWillBeNext();
@@ -198,8 +193,8 @@ function _removePreviousActiveTetroPosition() {
 }
 
 export function resetGame() {
-    isPaused = true;
-    clearTimeout(gameTimerID);
+    TetrisGame.isPaused = true;
+    clearTimeout(TetrisGame.gameTimerID);
     TetrisGame.playField = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

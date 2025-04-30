@@ -101,4 +101,7 @@ export const TetrisGame = {
     nextGoal: null,
     playerScore: 0,
     currentLevel: 1,
+    wasGameStartedBefore: false,
+    isPaused: true,
+    gameTimerID: null,
 }

@@ -40,6 +40,7 @@ import {
   startBtn,
   usernameBtn
 } from "./elements.js";
+import {calculatePointLeftForNextLevel} from "./calculateResults.js";
 
 showRulesBtn.addEventListener('click', handleShowRules);
 backBtn.addEventListener('click', handleBackToMenu);
@@ -65,7 +66,7 @@ function setInitialOptions() {
   TetrisGame.linesInFinishedGame = linesElement.value;
   goalOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
   pointsLeftElement.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
-  isPaused = false;
+  TetrisGame.isPaused = false;
   if (enteredUserName.value === '') {
     playerNameElement.value = 'Player 1';
   }
@@ -82,13 +83,13 @@ export function handleSetPlayerName() {
   // userNameWindow.style.display = 'none';
 
 
-  // gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
+  // TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
 }
 
 
 function onStartBtnClick() {
-  if (wasGameStartedBefore === false) {
-    wasGameStartedBefore = true;
+  if (TetrisGame.wasGameStartedBefore === false) {
+    TetrisGame.wasGameStartedBefore = true;
     startBtn.innerHTML = 'NEW GAME';
     pauseBtn.innerHTML = 'Pause';
     // _askUserName();
@@ -100,15 +101,15 @@ function onStartBtnClick() {
     confirmNewGameBtn.addEventListener('click', onConfirmNewGameBtnClick)
     cancelNewGameBtn.addEventListener('click', onCancelNewGameBtnClick);
     pauseBtn.innerHTML = 'Continue';
-    isPaused = true;
+    TetrisGame.isPaused = true;
     _makeControlBtnsDisabled();
   }
 }
 
 function continueGame() {
   pauseBtn.innerHTML = 'Pause';
-  isPaused= false;
-  gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
+  TetrisGame.isPaused= false;
+  TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
 }
 
 function onCancelNewGameBtnClick() {
@@ -116,8 +117,8 @@ function onCancelNewGameBtnClick() {
   _makeControlBtnsEnabled();
   pauseBtn.value = 'pause';
   pauseBtn.innerHTML = 'Pause';
-  isPaused = false;
-  gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
+  TetrisGame.isPaused = false;
+  TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
 }
 
 function onConfirmNewGameBtnClick() {
@@ -125,8 +126,8 @@ function onConfirmNewGameBtnClick() {
   // _makeControlBtnsEnabled();
   // pauseBtn.value = 'pause';
   // pauseBtn.innerHTML = 'Pause';
-  // isPaused = false;
-  // gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
+  // TetrisGame.isPaused = false;
+  // TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
 
 
   startBtn.innerHTML = 'NEW GAME';
@@ -137,8 +138,8 @@ function onConfirmNewGameBtnClick() {
   _makeControlBtnsEnabled();
   setTimeout(()=>{
     console.log('playField', TetrisGame.playField)
-        isPaused = false;
-        wasGameStartedBefore = true;
+        TetrisGame.isPaused = false;
+        TetrisGame.wasGameStartedBefore = true;
         startGame();
       },
       1000
@@ -146,22 +147,22 @@ function onConfirmNewGameBtnClick() {
 }
 
 function onPauseBtnClick() {
-  if (wasGameStartedBefore === true) {
-    if (isPaused === false) {
+  if (TetrisGame.wasGameStartedBefore === true) {
+    if (TetrisGame.isPaused === false) {
       pauseBtn.innerHTML = 'Continue';
-      clearTimeout(gameTimerID);
-      isPaused= true;
-    } else if (isPaused === true) {
+      clearTimeout(TetrisGame.gameTimerID);
+      TetrisGame.isPaused= true;
+    } else if (TetrisGame.isPaused === true) {
       continueGame();
 
     }
-    // isPaused = !isPaused;
+    // TetrisGame.isPaused = !TetrisGame.isPaused;
   }
 }
 
 function onExitBtnClick() {
 
-  if (wasGameStartedBefore === false) {
+  if (TetrisGame.wasGameStartedBefore === false) {
     exitGameModal.innerHTML = `
     <p class="exit-game__notice">
     <i class="fa-sharp fa-solid fa-heart-crack"></i>
@@ -187,7 +188,7 @@ function onExitBtnClick() {
     exitGameModal.classList.remove('hidden');
   }
   else {
-    // isPaused = true;
+    // TetrisGame.isPaused = true;
     onPauseBtnClick();
     // pauseBtn.innerHTML = 'Pause';
     _makeControlBtnsDisabled();
@@ -223,7 +224,7 @@ function onBackToTetrisBtnClick() {
   exitGameModal.innerHTML = '';
   continueGame()
   _makeControlBtnsEnabled();
-  // if (wasGameStartedBefore) {
+  // if (TetrisGame.wasGameStartedBefore) {
   //   pauseBtn.innerHTML = 'Pause';
   // }
 
@@ -257,7 +258,7 @@ function _makeControlBtnsDisabled() {
 }
 
 function _makeControlBtnsEnabled() {
-  if (wasGameStartedBefore === true) {
+  if (TetrisGame.wasGameStartedBefore === true) {
     allControlBtns.forEach(btn => {
       btn.disabled = false;
     });
@@ -269,56 +270,27 @@ function _makeControlBtnsEnabled() {
 }
 
 
-//_________________________________________________________________//
-
-// export let playerScore = 0;
-// export let TetrisGame.currentLevel = 1;
-
-export let wasGameStartedBefore = false;
-export let isPaused = true;
-
-export let gameTimerID;
-let movingCells;
-
-
 drawFieldNewState();
 
 //____________________________________________________________________________________________________________//
 function startGame() {
   moveTetroDown();
-  console.log('pause', isPaused)
-  if (!isPaused) {
+  console.log('pause', TetrisGame.isPaused)
+  if (!TetrisGame.isPaused) {
     updateGameState();
-    gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
+    TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
   }
 }
 
 function resetGame() {
-  isPaused = true;
-  clearTimeout(gameTimerID);
+  TetrisGame.isPaused = true;
+  clearTimeout(TetrisGame.gameTimerID);
   TetrisGame.playField = Array.from({ length: 20 }, () => Array(10).fill(0));
   drawFieldNewState();
   // gameOver.style.display = 'block';
 }
 
-export function calculateScore(lines) {
-  switch (lines.length) {
-    case 1:
-      TetrisGame.playerScore += possibleLevels[TetrisGame.currentLevel].pointsPerOneFilledLine;
-      break;
-    case 2:
-      TetrisGame.playerScore += possibleLevels[TetrisGame.currentLevel].pointsPerOneFilledLine * 2;
-      break;
-    case 3:
-      TetrisGame.playerScore += possibleLevels[TetrisGame.currentLevel].pointsPerOneFilledLine * 3;
-      break;
-    case 4:
-      TetrisGame.playerScore += possibleLevels[TetrisGame.currentLevel].pointsPerOneFilledLine * 4;
-      break;
-  }
-  scoreElement.value = TetrisGame.playerScore;
-  TetrisGame.scoredPointsInFinishedGame = scoreElement.value;
-}
+
 
 export function moveToNextLevel(score) {
   if (score >= possibleLevels[TetrisGame.currentLevel].goalForNextLevel) {
@@ -331,15 +303,12 @@ export function moveToNextLevel(score) {
   }
 }
 
-export function calculatePointLeftForNextLevel(score) {
-  let pointsLeft = possibleLevels[TetrisGame.currentLevel].goalForNextLevel - score;
-  pointsLeftElement.value = pointsLeft;
-}
+
 
 
 document.onkeydown = function (event) {
 
-  if (!isPaused) {
+  if (!TetrisGame.isPaused) {
     if (event.key === 'ArrowUp') {
       rotateTetro();
     } else if (event.key === 'ArrowDown') {
