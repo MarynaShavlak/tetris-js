@@ -2,10 +2,7 @@ import {handleShowRules} from "./eventHandlers/rules.js";
 
 
 const showRulesBtn = document.getElementById('rules-btn');
-export const usernameEl = document.querySelector('.settings__item--username');
-export const startEl = document.querySelector('.settings__item--start');
-export const rulesEl = document.querySelector('.settings__item--rules');
-export const instructionsEl = document.querySelector('.instructions');
+
 showRulesBtn.addEventListener('click', handleShowRules);
 
 

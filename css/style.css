@@ -329,9 +329,15 @@ opacity:0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, calc(-50% + 100px));
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.3s ease;
+
+}
+
+.instructions.hidden {
     opacity: 0;
     pointer-events: none;
-
 }
 
 .rules-block {
@@ -429,7 +435,8 @@ opacity:0;
     opacity: 0;
     transform: translateY(-100%);
 }
-settings__item--rules {
+
+.settings__item--rules {
     order: 2; /* Initial order to be moved to the top */
 }
 
