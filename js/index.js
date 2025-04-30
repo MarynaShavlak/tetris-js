@@ -26,35 +26,56 @@ backBtn.addEventListener('click', handleBackToMenu);
 usernameBtn.addEventListener('click', handleShowUsernameInterface);
 setPlayerNameBtn.addEventListener('click', handleSetPlayerName);
 
-allStartBtns.forEach((btn)=> btn.addEventListener('click', handleInterfaceToStartGame))
+allStartBtns.forEach((btn)=> btn.addEventListener('click', gamePusk))
 
 
+function gamePusk() {
+  setInitialOptions()
+  handleInterfaceToStartGame();
+}
 
-
-export function handleSetPlayerName() {
-  console.log('set name')
-  // pauseBtn.innerHTML = 'Pause';
+function setInitialOptions() {
   levelOutput.value = currentLevel;
   reachedLevelInFinishedGame = levelOutput.value;
   linesInFinishedGame = linesOutput.value;
   goalOutput.value = possibleLevels[currentLevel].goalForNextLevel;
   pointsLeftElement.value = possibleLevels[currentLevel].goalForNextLevel;
-  // // _makeControlBtnsEnabled();
+  isPaused = false;
   if (enteredUserName.value === '') {
     playerNameElement.value = 'Player 1';
-  } else {
-    playerNameElement.value = enteredUserName.value;
   }
+}
+
+export function handleSetPlayerName() {
+  // pauseBtn.innerHTML = 'Pause';
+
+  // // _makeControlBtnsEnabled();
+
+    playerNameElement.value = enteredUserName.value;
+
   // player = playerNameElement.value;
   // userNameWindow.style.display = 'none';
-  // isPaused = false;
-
-
 
 
   // gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
 }
 
+
+function onStartBtnClick() {
+  if (wasGameStartedBefore === false) {
+    wasGameStartedBefore = true;
+    startBtn.innerHTML = 'NEW GAME';
+    pauseBtn.innerHTML = 'Keep playing... ';
+    _askUserName();
+    submitNameBtn.addEventListener('click', onSubmitPlayerNameBtnClick);
+  } else {
+    confirmStartNewGameWindow.style.display = 'grid';
+    pauseBtn.innerHTML = 'Keep playing... ';
+    isPaused = true;
+    _makeControlBtnsDisabled();
+    cancelNewGameBtn.addEventListener('click', onCancelNewGameBtnClick);
+  }
+}
 
 
 
@@ -594,21 +615,7 @@ function _makeControlBtnsEnabled() {
 
 //_________________EVENLISTENER FUNCTIONS____________________________________________//
 
-function onStartBtnClick() {
-  if (wasGameStartedBefore === false) {
-    wasGameStartedBefore = true;
-    startBtn.innerHTML = 'NEW GAME';
-    pauseBtn.innerHTML = 'Keep playing... ';
-    _askUserName();
-    submitNameBtn.addEventListener('click', onSubmitPlayerNameBtnClick);
-  } else {
-    confirmStartNewGameWindow.style.display = 'grid';
-    pauseBtn.innerHTML = 'Keep playing... ';
-    isPaused = true;
-    _makeControlBtnsDisabled();
-    cancelNewGameBtn.addEventListener('click', onCancelNewGameBtnClick);
-  }
-}
+
 
 
 

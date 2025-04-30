@@ -74,7 +74,6 @@ export function  handleShowUsernameInterface() {
 }
 
 export function  handleInterfaceToStartGame() {
- console.log('startGame');
     settingsEl.classList.add('hidden');
     gameEl.classList.remove('hidden');
     scoreEl.classList.remove('hidden');
