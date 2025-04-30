@@ -157,19 +157,19 @@ body {
 
 }
 
-.btn {
-    font-size: 40px;
-    font-weight: bold;
-    border: 2px solid black;
-    border-radius: 20px;
-    background-color: black;
-    color: white;
-}
+/*.btn {*/
+/*    font-size: 40px;*/
+/*    font-weight: bold;*/
+/*    border: 2px solid black;*/
+/*    border-radius: 20px;*/
+/*    background-color: black;*/
+/*    color: white;*/
+/*}*/
 
-.btn--enabled-from-start-btn:hover,
-.user-btn:hover {
-    background-color: red;
-}
+/*.btn--enabled-from-start-btn:hover,*/
+/*.user-btn:hover {*/
+/*    background-color: red;*/
+/*}*/
 
 .btn:disabled {
     background-color: grey;
