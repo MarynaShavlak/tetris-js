@@ -1,9 +1,6 @@
-* {
-    box-sizing: border-box;
-    font-family: "Lilita One", sans-serif;
-    margin: 0;
-    padding:0;
-}
+@import './reset.css';
+@import './settings.css';
+@import './game.css';
 
 body {
     font-family: "Lilita One", sans-serif;
@@ -12,52 +9,34 @@ body {
     background-image: url('../images/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: Arial, Helvetica, sans-serif;
     height: 100vh;
-    padding-top: 100px;
+    /*padding-top: 20px;*/
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
-ul {
-    list-style: none ;
-    padding:0;
-    margin: 0;
-}
-
-button {
-    border:none;
-    padding:0;
-    margin:0;
-    background-color: transparent;
-    cursor:pointer
-}
 
 .container{
     position: relative;
+    /*width:1200px;*/
+    /*height:1000px;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
 
 }
 
-canvas {
-    width:1200px;
-    height:800px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid black;
-}
 
 
-.game {
-    margin: 80px 0px;
-    border-radius: 20px;
-    transition: opacity 0.5s ease;
-}
 
-.game.hidden {
-    opacity:0;
-    pointer-events:none;
-}
+
+
+ /*another*/
+
+
 
 
 .player,
@@ -85,17 +64,6 @@ canvas {
 
 }
 
-.player__section-name {
-    padding: 0px 10px;
-    font-size: 40px;
-    font-weight: bold;
-    text-align: center;
-    justify-self: center;
-    align-self: center;
-    color: pink;
-
-
-}
 
 
 .player__name {
@@ -120,8 +88,7 @@ canvas {
 }
 
 .player__level,
-.player__goal,
-.player__score,
+.player__goal
 .player__lines,
 .player__points-left-for-next-level  {
     display: grid;
@@ -297,32 +264,7 @@ canvas {
 
 
 
-.instructions {
-    font-size: 30px;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    /*transform: translate(-50%, calc(-50% - 60px));*/
-    transform: translate(-50%, calc(-50%));
-    opacity: 1;
-    pointer-events: auto;
-    transition: opacity 0.3s ease;
 
-}
-
-.instructions.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.rules-block {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-  }
 
 .instructions__exit-btn {
     text-align: end;
@@ -373,159 +315,3 @@ canvas {
     text-align: center;
 }
 
-/*SETTINGS*/
-.settings {
-    width:1200px;
-    height:800px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity:1;
-    pointer-events: auto;
-    transition: opacity 0.5s ease;
-
-}
-.settings.hidden {
-    opacity: 0;
-    pointer-events: none;
- }
-
-
-.settings__list {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    list-style: none;
-    padding:0;
-    margin:0;
-
-}
-
-.settings__item {
-    position: relative;
-    display: inline-block;
-
-    cursor: pointer;
-    z-index: 0;
-    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-}
-
-.settings__item.hidden {
-    opacity: 0;
-    transform: translateY(-100%);
-}
-
-.settings__item--rules {
-    /*order: 2; !* Initial order to be moved to the top *!*/
-}
-
-.settings__item::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url('../images/tetromino.jpg');
-    border-radius: 10px;
-    z-index: -1;
-    transform: scaleX(1);
-    transform-origin: center;
-    transition: transform 0.4s ease-in-out;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-}
-
-.settings__item:hover::before {
-    transform: scaleX(1.2); /* Or tweak to desired effect */
-}
-.settings__btn {
-    width:100%;
-    font-size: 50px;
-    color: #F3F3F3;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-align: center;
-    background: transparent;
-    margin:0;
-    border:none;
-    cursor:pointer;
-    padding: 10px 20px;
-
-}
-
-.settings__footer {
-    margin-top: 140px;
-    opacity:1;
-    pointer-events: auto;
-    transition: opacity 0.3s ease-in;
-}
-.settings__footer.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.footer__list {
-    display: flex;
-    justify-content: space-between;
-}
-
-.usernameEditor {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    /*transform: translate(-50%, calc(-50% - 60px));*/
-    transform: translate(-50%, calc(-50% - 50px ));
-    opacity:1;
-    pointer-events: auto;
-    transition: opacity 0.3s ease-in;
-}
-
-.usernameEditor.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.usernameEditor__greeting {
- text-align: center;
-    font-size:30px;
-    margin-bottom: 10px;
-}
-
-.block__name-request {
-    font-size: 24px;
-    grid-column: span 2;
-}
-
-.usernameEditor__block {
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    gap: 20px;
-}
-
-
-.block__usernameInput {
-    font-size: 30px;
-    font-weight: bold;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 20px;
-}
-
-
-.action-btn {
-    font-size: 30px;
-    font-weight: bold;
-    border-radius: 10px;
-    background-image: url('../images/tetromino.jpg');
-    /*height: 100%;*/
-    padding: 20px;
-    text-align: center;
-    color: #F3F3F3;
-    transition: bow-shadow 0.3s ease-in-out;
-}
-
-.action-btn:hover {
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-}

@@ -16,77 +16,85 @@
   </head>
 
   <body>
-  <main class="container">
-    <canvas id="canvas" width="1200" height="800"></canvas>
-    <canvas id="canvas2" width="1200" height="800"></canvas>
-    <canvas id="canvas3" width="1200" height="800"></canvas>
-    <canvas id="canvas4" width="1200" height="800"></canvas>
-    <canvas id="canvas5" width="1200" height="800"></canvas>
-    <canvas id="canvas6" width="1200" height="800"></canvas>
-    <canvas id="canvas7" width="1200" height="800"></canvas>
-    <canvas id="canvas8" width="1200" height="800"></canvas>
-    <div class="settings hidden">
-      <ul class="settings__list">
-        <li class="settings__item settings__item--username"><button class="settings__btn" id="username-btn">Set Username</button></li>
-        <li class="settings__item settings__item--rules" ><button class="settings__btn" id="rules-btn">How to Play</button></li>
-        <li class="settings__item settings__item--start"><button class="settings__btn settings__btn--start">START</button></li>
-        <li class="settings__footer hidden">
-          <ul class="footer__list">
-            <li class="settings__item settings__item--back"><button class="settings__btn" id="back-btn">Back</button></li>
-            <li class="settings__item settings__item--start"><button class="settings__btn settings__btn--start" >START</button></li>
-          </ul>
-        </li>
-      </ul>
-      <div class="instructions hidden" id="instructions">
-        <ul class="rules-block">
-          <li class="rules-block__rule">
-            Press <i class="fa-solid fa-arrow-left"></i> key to move tetromino
-            <b>Left</b>.
+  <main>
+    <div class="container">
+      <canvas id="canvas" width="1200" height="800"></canvas>
+      <canvas id="canvas2" width="1200" height="800"></canvas>
+      <canvas id="canvas3" width="1200" height="800"></canvas>
+      <canvas id="canvas4" width="1200" height="800"></canvas>
+      <canvas id="canvas5" width="1200" height="800"></canvas>
+      <canvas id="canvas6" width="1200" height="800"></canvas>
+      <canvas id="canvas7" width="1200" height="800"></canvas>
+      <canvas id="canvas8" width="1200" height="800"></canvas>
+      <div class="settings hidden">
+        <ul class="settings__list">
+          <li class="settings__item settings__item--username"><button class="settings__btn" id="username-btn">Set Username</button></li>
+          <li class="settings__item settings__item--rules" ><button class="settings__btn" id="rules-btn">How to Play</button></li>
+          <li class="settings__item settings__item--start"><button class="settings__btn settings__btn--start">START</button></li>
+          <li class="settings__footer hidden">
+            <ul class="footer__list">
+              <li class="settings__item settings__item--back"><button class="settings__btn" id="back-btn">Back</button></li>
+              <li class="settings__item settings__item--start"><button class="settings__btn settings__btn--start" >START</button></li>
+            </ul>
           </li>
-          <li class="rules-block__rule">
-            Press <i class="fa-solid fa-arrow-right"></i> key to move tetromino
-            <b>Right</b>.
-          </li>
-          <li class="rules-block__rule">
-            Press <i class="fa-solid fa-arrow-down"></i> key to move tetromino
-            <b>Down</b>.
-          </li>
-          <li class="rules-block__rule">
-            Press <i class="fa-solid fa-arrow-up"></i> key to <b>Rotate</b> the
-            tetromino.
-          </li>
-          <li class="rules-block__rule">
-            GAME TIP: Hold Down key to move tetromino fall fast.
-          </li>
-
         </ul>
+        <div class="instructions hidden" id="instructions">
+          <ul class="rules-block">
+            <li class="rules-block__rule">
+              Press <i class="fa-solid fa-arrow-left"></i> key to move tetromino
+              <b>Left</b>.
+            </li>
+            <li class="rules-block__rule">
+              Press <i class="fa-solid fa-arrow-right"></i> key to move tetromino
+              <b>Right</b>.
+            </li>
+            <li class="rules-block__rule">
+              Press <i class="fa-solid fa-arrow-down"></i> key to move tetromino
+              <b>Down</b>.
+            </li>
+            <li class="rules-block__rule">
+              Press <i class="fa-solid fa-arrow-up"></i> key to <b>Rotate</b> the
+              tetromino.
+            </li>
+            <li class="rules-block__rule">
+              GAME TIP: Hold Down key to move tetromino fall fast.
+            </li>
 
-      </div>
-      <div class="usernameEditor hidden" id="usernameEditor">
-        <p class="usernameEditor__greeting" >Hi! Let's play Tetris.</p>
-        <div class="usernameEditor__block">
-          <p class="block__name-request">What is your name?</p>
-          <input
+          </ul>
+
+        </div>
+        <div class="usernameEditor hidden" id="usernameEditor">
+          <p class="usernameEditor__greeting" >Hi! Let's play Tetris.</p>
+          <div class="usernameEditor__block">
+            <p class="block__name-request">What is your name?</p>
+            <input
                     type="text"
                     class="block__usernameInput"
                     id="user-entered-name"
             />
-          <button
+            <button
                     class="block__user-btn action-btn"
                     id="submit-user-name"
-          >
+            >
               OK
             </button>
 
+          </div>
         </div>
       </div>
-    </div>
-    <div class="game " id="game-window">
-      <div class="tetris">
-        <div class="tetris__field" id="tetris-field"></div>
+      <div class="game  " id="game-window">
+        <div class="tetris">
+          <div class="tetris__field" id="tetris-field"></div>
+        </div>
       </div>
+
+    </div>
+    <div class="player__score">
+      <p class="player__section-name">SCORE</p>
+      <output id="player-score" value="0">0</output>
     </div>
   </main>
+
 
 
     <div class="confirm-new-game-window" id="confirm-new-game-window">
@@ -159,12 +167,7 @@
 <!--            </div>-->
 <!--          </div>-->
 
-<!--          <div class="player__score">-->
-<!--            <div class="player__section-name">SCORE</div>-->
-<!--            <div class="player__result">-->
-<!--              <output id="player-score" value="0">0</output>-->
-<!--            </div>-->
-<!--          </div>-->
+
 
 <!--          <div class="player__points-left-for-next-level">-->
 <!--            <div class="player__section-name">POINTS LEFT</div>-->
