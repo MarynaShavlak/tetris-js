@@ -4,6 +4,7 @@ import {
   handleShowRules,
   handleShowUsernameInterface, levelBlock,  linesBlock,
 } from "./eventHandlers/rules.js";
+import {possibleLevels} from "./gameConfig.js";
 
 
 const showRulesBtn = document.getElementById('rules-btn');
@@ -94,7 +95,7 @@ const exitBtn = document.getElementById('exit-btn');
 
 startBtn.addEventListener('click', onStartBtnClick);
 pauseBtn.addEventListener('click', onPauseBtnClick);
-
+exitBtn.addEventListener('click', onExitBtnClick);
 
 
 
@@ -144,12 +145,8 @@ const instructionsWindow = document.getElementById('instructions');
 const confirmStartNewGameWindow = document.getElementById(
   'confirm-new-game-window',
 );
-const withoutGameExitMessage = document.getElementById(
-  'without-game-exit-message',
-);
-const afterStartedGameExitMessage = document.getElementById(
-  'after-started-game-exit-message',
-);
+const exitGameModal = document.querySelector('.exit-message',);
+
 const gameOver = document.getElementById('game-over');
 //_________________________________________________________________//
 
@@ -193,34 +190,7 @@ export let isPaused = true;
 export let gameTimerID;
 let movingCells;
 
-let possibleLevels = {
-  1: {
-    pointsPerOneFilledLine: 40,
-    speed: 600,
-    goalForNextLevel: 200,
-  },
-  2: {
-    pointsPerOneFilledLine: 10,
-    speed: 500,
-    goalForNextLevel: 600,
-  },
-  3: {
-    pointsPerOneFilledLine: 15,
-    speed: 400,
-    goalForNextLevel: 1200,
-  },
-  4: {
-    pointsPerOneFilledLine: 20,
-    speed: 400,
-    goalForNextLevel: 2000,
-  },
-  5: {
-    pointsPerOneFilledLine: 25,
-    speed: 300,
-    goalForNextLevel: 3000,
-    // goalForNextLevel: Infinity,
-  },
-};
+
 
 
 // export function handleSetPlayerName() {
@@ -331,7 +301,7 @@ let tetroColors = [
 
 
 // instructionsExitBtn.addEventListener('click', onInstructionsExitBtnClick);
-// exitBtn.addEventListener('click', onExitBtnClick);
+//
 
 drawFieldNewState();
 
@@ -683,49 +653,66 @@ function onInstructionsExitBtnClick() {
 }
 
 function onExitBtnClick() {
-  gameWindow.style.display = 'none';
-  if (wasGameStartedBefore === false) {
-    withoutGameExitMessage.innerHTML = `
-        <div><i class="fa-solid fa-face-sad-cry"></i></div>
-        <div>
-            <i class="fa-sharp fa-solid fa-heart-crack"></i>
-            It's a pity you left game even without trying to play Tetris
-            <i class="fa-sharp fa-solid fa-heart-crack"></i>
-        </div>
-        <div><button class="btn back-to-tetris" id='btn-back-to-tetris'><i class="fa-regular fa-face-laugh-beam"></i>Back to
-                Tetris<i class="fa-regular fa-face-laugh-beam"></i></button></div>
-        `;
 
-    withoutGameExitMessage.style.display = 'block';
+  if (wasGameStartedBefore === false) {
+    exitGameModal.innerHTML = `
+    <p class="exit-game__notice">
+    <i class="fa-sharp fa-solid fa-heart-crack"></i>
+    It's a pity you left the game without even giving Tetris a try.
+    <i class="fa-sharp fa-solid fa-heart-crack"></i>
+    </p>
+    <p class="exit-game__prompt">Are you sure you want to proceed?</p>
+
+    <ul class="exit-game__user-btns">
+    <li>
+      <button class="btn exit-game action-btn" id="btn-sure-exit">
+        Exit
+      </button>
+    </li>
+    <li>
+      <button class="btn back-to-tetris action-btn" id="btn-back-to-tetris">
+        Back to Tetris
+      </button>
+    </li>
+   </ul>
+`;
+
+    exitGameModal.classList.remove('hidden');
   } else {
     isPaused = true;
+    pauseBtn.innerHTML = 'Pause';
 
-    afterStartedGameExitMessage.innerHTML = `
-        <div><i class="fa-solid fa-face-smile-beam"></i></div>
-        <div>Hey, ${player}, thank you for your game!</div>
-        <div> You were doing fine!</div>
-        <div> You have reached level ${reachedLevelInFinishedGame} and scored ${scoredPointsInFinishedGame} points by filling ${linesInFinishedGame} lines.</div>
-        <div><button class="btn back-to-tetris" id="btn-back-to-tetris"><i class="fa-regular fa-face-laugh-beam"></i>Back to
-                Tetris<i class="fa-regular fa-face-laugh-beam"></i></button></div>
+    exitGameModal.innerHTML = `
+        
+        <p>Hey, ${player}, thank you for your game!</p>
+        <p> You were doing fine!</p>
+        <p> You have reached level ${reachedLevelInFinishedGame} and scored ${scoredPointsInFinishedGame} points by filling ${linesInFinishedGame} lines.</p>
+        <ul class="exit-game__user-btns">
+    <li>
+      <button class="btn exit-game action-btn" id="btn-sure-exit">
+        Exit
+      </button>
+    </li>
+    <li>
+      <button class="btn back-to-tetris action-btn" id="btn-back-to-tetris">
+        Back to Tetris
+      </button>
+    </li>
+   </ul>
       `;
-
-    afterStartedGameExitMessage.style.display = 'block';
+    exitGameModal.classList.remove('hidden');
   }
   const backToTetrisBtn = document.getElementById('btn-back-to-tetris');
   backToTetrisBtn.addEventListener('click', onBackToTetrisBtnClick);
 }
 
 function onBackToTetrisBtnClick() {
-  if (withoutGameExitMessage.innerHTML !== '') {
-    withoutGameExitMessage.innerHTML = '';
-    withoutGameExitMessage.style.display = 'none';
-  } else if (afterStartedGameExitMessage.innerHTML !== '') {
-    afterStartedGameExitMessage.innerHTML = '';
-    afterStartedGameExitMessage.style.display = 'none';
-    pauseBtn.innerHTML = 'Keep playing... ';
+  exitGameModal.classList.add('hidden')
+  exitGameModal.innerHTML = '';
+  if (wasGameStartedBefore) {
+     pauseBtn.innerHTML = 'Keep playing... ';
   }
 
-  gameWindow.style.display = 'grid';
 }
 
 // change the color of one tetro

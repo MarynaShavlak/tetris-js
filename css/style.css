@@ -1,6 +1,8 @@
 @import './reset.css';
 @import './settings.css';
 @import './game.css';
+@import './newGameModal.css';
+@import './exitGameModal.css';
 
 body {
     font-family: "Lilita One", sans-serif;
@@ -157,20 +159,6 @@ body {
 
 }
 
-/*.btn {*/
-/*    font-size: 40px;*/
-/*    font-weight: bold;*/
-/*    border: 2px solid black;*/
-/*    border-radius: 20px;*/
-/*    background-color: black;*/
-/*    color: white;*/
-/*}*/
-
-/*.btn--enabled-from-start-btn:hover,*/
-/*.user-btn:hover {*/
-/*    background-color: red;*/
-/*}*/
-
 
 
 
@@ -183,8 +171,8 @@ body {
 }
 
 .fixed-cell {
-    background: green;
-    border: 1px solid black;
+    background-image: url('../images/tetromino.jpg');
+    /*border: 1px solid black;*/
     display: inline-block
 }
 
@@ -211,61 +199,7 @@ body {
 }
 
 
-.confirm-new-game-window {
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-    background-color: #F3F3F3;
-    width: 600px;
-    height: 350px;
-    font-size: 30px;
-    font-weight: 400;
-    border: 1px solid #1A1A1A;
-    border-radius: 10px;
-    align-content: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity:1;
-    pointer-events: auto;
-    transition: opacity 0.5s ease;
-    text-align: center;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    z-index: 33333;
 
-}
-
-.confirm-new-game-window.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.confirm-new-game-window__message {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    margin-top: 50px;
-
-}
-
-.confirm-new-game-window__user-btns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 0px 60px 30px 60px;
-
-
-}
-
-#confirm-start-new-game {
-    border: 1px solid #650D19;
-    background: url('../images/tetromino.jpg') no-repeat center;
-    background-size: cover;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    background-clip: text;
-    color: transparent;
-}
 
 
 
@@ -303,23 +237,5 @@ body {
 
 
 
-.exit-message {
-    display: none;
-    font-size: 100px;
-    text-align: center;
-    margin: 100px;
-    position: absolute;
-    /* background-color: blue; */
 
-}
-
-.exit-message div:first-child {
-    font-size: 150px;
-}
-
-.back-to-tetris {
-    height: 100px;
-    padding: 0px 60px;
-    text-align: center;
-}
 
