@@ -1,8 +1,10 @@
 import {
+  controlButtonsBlock,
+  gameEl,
   handleBackToMenu,
   handleInterfaceToStartGame,
   handleShowRules,
-  handleShowUsernameInterface, levelBlock,  linesBlock,
+  handleShowUsernameInterface, levelBlock, linesBlock, playerInfoBlock, scoreEl, settingsEl,
 } from "./eventHandlers/rules.js";
 import {possibleLevels} from "./gameConfig.js";
 
@@ -704,6 +706,8 @@ function onExitBtnClick() {
   }
   const backToTetrisBtn = document.getElementById('btn-back-to-tetris');
   backToTetrisBtn.addEventListener('click', onBackToTetrisBtnClick);
+  const sureExitBtn = document.getElementById('btn-sure-exit');
+  sureExitBtn.addEventListener('click', onSureExitBtnClick);
 }
 
 function onBackToTetrisBtnClick() {
@@ -712,6 +716,18 @@ function onBackToTetrisBtnClick() {
   if (wasGameStartedBefore) {
      pauseBtn.innerHTML = 'Keep playing... ';
   }
+}
+
+function onSureExitBtnClick() {
+  exitGameModal.classList.add('hidden')
+  exitGameModal.innerHTML = '';
+  settingsEl.classList.remove('hidden');
+  gameEl.classList.add('hidden');
+  scoreEl.classList.add('hidden');
+  levelBlock.classList.add('hidden');
+  playerInfoBlock.classList.add('hidden');
+  linesBlock.classList.add('hidden');
+  controlButtonsBlock.classList.add('hidden');
 
 }
 
