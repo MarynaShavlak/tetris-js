@@ -9,6 +9,7 @@ export const usernameEditorEl = document.querySelector('.usernameEditor');
 const settingsFooterEl = document.querySelector('.settings__footer');
 
 export const gameEl = document.querySelector('.game');
+export const scoreEl = document.querySelector( '.player__score')
 
 export function handleShowRules() {
     usernameEl.classList.add('hidden');
@@ -67,5 +68,6 @@ export function  handleInterfaceToStartGame() {
  console.log('startGame');
     settingsEl.classList.add('hidden');
     gameEl.classList.remove('hidden');
+    scoreEl.classList.remove('hidden');
     drawCircle();
 }

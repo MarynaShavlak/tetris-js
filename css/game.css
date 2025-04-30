@@ -7,10 +7,14 @@ canvas {
     transform: translate(-50%, -50%);
     border: 1px solid black;
 }
-
+main {
+    position:relative;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .game {
-
     border-radius: 20px;
     transition: opacity 0.5s ease;
 }
@@ -20,13 +24,25 @@ canvas {
     pointer-events:none;
 }
 .player__score {
-    margin-top: 90px;
+
     display: flex;
-   justify-content: center;
+    justify-content: center;
     align-items: center;
     gap:15px;
     flex-direction: column;
+    opacity:1;
+    pointer-events: auto;
+    transition: opacity 0.5s ease;
+    position: absolute;
+    bottom: -160px;
 }
+
+.player__score.hidden {
+    opacity:0;
+    pointer-events: none;
+}
+
+
 .player__section-name {
     letter-spacing:2px;
     color: #5A5A5A;
@@ -40,5 +56,14 @@ canvas {
     font-size: 34px;
 }
 
+.game__results {
+    width:1200px;
+    height:800px;
 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*border: 1px solid blue;*/
+}
 
