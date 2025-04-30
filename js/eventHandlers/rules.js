@@ -1,3 +1,6 @@
+import {drawCircle} from "../canvas/drawCircle.js";
+
+export const settingsEl = document.querySelector('.settings');
 export const usernameEl = document.querySelector('.settings__item--username');
 export const startEl = document.querySelector('.settings__item--start');
 export const rulesEl = document.querySelector('.settings__item--rules');
@@ -5,7 +8,7 @@ export const instructionsEl = document.querySelector('.instructions');
 export const usernameEditorEl = document.querySelector('.usernameEditor');
 const settingsFooterEl = document.querySelector('.settings__footer');
 
-
+export const gameEl = document.querySelector('.game');
 
 export function handleShowRules() {
     usernameEl.classList.add('hidden');
@@ -62,4 +65,7 @@ export function  handleShowUsernameInterface() {
 
 export function  handleInterfaceToStartGame() {
  console.log('startGame');
+    settingsEl.classList.add('hidden');
+    gameEl.classList.remove('hidden');
+    drawCircle();
 }

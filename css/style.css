@@ -49,18 +49,14 @@ canvas {
 
 
 .game {
-opacity:0;
+    margin: 80px 0px;
+    border-radius: 20px;
+    transition: opacity 0.5s ease;
+}
+
+.game.hidden {
+    opacity:0;
     pointer-events:none;
-    /*margin: 80px 0px;*/
-    /*width: 1400px;*/
-    /*height: 860px;*/
-    /*display: grid;*/
-    /*justify-self: center;*/
-    /*grid-template-columns: 600px 1fr 1fr;*/
-    /*grid-template-rows: repeat(3, 1fr);*/
-    /*gap: 20px;*/
-    /*background-color: blanchedalmond;*/
-    /*border-radius: 20px;*/
 }
 
 
@@ -389,8 +385,15 @@ opacity:0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    opacity:1;
+    pointer-events: auto;
+    transition: opacity 0.5s ease;
 
 }
+.settings.hidden {
+    opacity: 0;
+    pointer-events: none;
+ }
 
 
 .settings__list {
