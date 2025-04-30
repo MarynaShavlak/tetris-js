@@ -1,10 +1,6 @@
 import { ctx7 } from "./config.js";
 import { centerX, centerY, radius } from "./drawCircle.js";
 
-// export let dotAngle = -Math.PI / 2; // Start at 12am
-// export const dotStep = 0.05;
-// export const dotRadius = 1;
-
 export const circleStateDotted = {
     dotAngle: -Math.PI / 2,
     dotStep: 0.05,

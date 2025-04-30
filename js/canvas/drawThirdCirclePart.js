@@ -9,11 +9,6 @@ export const circleState5 = {
 };
 
 
-//
-// export let startAngle5 =  -(Math.PI - Math.PI / 11.5);
-// export let endAngle5 = startAngle5 ;
-// export const targetAngle5 = - Math.PI / 2;
-
 export function drawThirdCirclePart() {
     ctx5.clearRect(0, 0, canvas5.width, canvas5.height);
     ctx5.beginPath();

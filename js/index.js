@@ -6,7 +6,7 @@ import {
   handleShowRules,
   handleShowUsernameInterface, levelBlock, linesBlock, playerInfoBlock, scoreEl, settingsEl,
 } from "./eventHandlers/rules.js";
-import {possibleLevels} from "./gameConfig.js";
+import {figures, possibleLevels, tetroColors} from "./gameConfig.js";
 import {resetAnimations} from "./canvas/resetAnimations.js";
 
 
@@ -78,13 +78,14 @@ function onStartBtnClick() {
   if (wasGameStartedBefore === false) {
     wasGameStartedBefore = true;
     startBtn.innerHTML = 'NEW GAME';
-    pauseBtn.innerHTML = 'Keep playing... ';
+    pauseBtn.innerHTML = 'Pause';
     // _askUserName();
     // submitNameBtn.addEventListener('click', onSubmitPlayerNameBtnClick);
     startGame();
+    _makeControlBtnsEnabled()
   } else {
     confirmStartNewGameWindow.classList.remove('hidden')
-    pauseBtn.innerHTML = 'Keep playing... ';
+    pauseBtn.innerHTML = 'Continue';
     isPaused = true;
     _makeControlBtnsDisabled();
     cancelNewGameBtn.addEventListener('click', onCancelNewGameBtnClick);
@@ -92,8 +93,6 @@ function onStartBtnClick() {
 }
 
 
-
-//______________________BUTTONS______________________//
 const startBtn = document.getElementById('start-btn');
 const pauseBtn = document.getElementById('pause-btn');
 const exitBtn = document.getElementById('exit-btn');
@@ -107,16 +106,25 @@ exitBtn.addEventListener('click', onExitBtnClick);
 
 
 const allControlBtns = [startBtn, pauseBtn, exitBtn];
-// const enabledFromStartControlBtns = [startBtn, instructionsBtn, exitBtn];
+const enabledFromStartControlBtns = [startBtn, exitBtn];
 
+function _makeControlBtnsDisabled() {
+  allControlBtns.forEach(btn => {
+    btn.disabled = true;
+  });
+}
 
-
-
-
-
-
-
-
+function _makeControlBtnsEnabled() {
+  if (wasGameStartedBefore === true) {
+    allControlBtns.forEach(btn => {
+      btn.disabled = false;
+    });
+  } else {
+    enabledFromStartControlBtns.forEach(btn => {
+      btn.disabled = false;
+    });
+  }
+}
 
 
 
@@ -141,7 +149,7 @@ const linesElement = document.getElementById('player-filled-lines');
 
 const confirmNewGameBtn = document.getElementById('confirm-start-new-game');
 const cancelNewGameBtn = document.getElementById('cancel-start-new-game');
-const instructionsExitBtn = document.getElementById('instructions-exit-btn');
+
 
 //______________WINDOWS FOR COMUNICATION WITH USER______//
 const userNameWindow = document.getElementById('user-name-window');
@@ -217,92 +225,6 @@ let movingCells;
 //   isPaused = false;
 //   // gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-let figures = {
-  O: [
-    [0, 1, 1, 0],
-    [0, 1, 1, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-
-  I: [
-    [1, 1, 1, 1],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-
-  S: [
-    [0, 0, 1, 1],
-    [0, 1, 1, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-
-  Z: [
-    [0, 1, 1, 0],
-    [0, 0, 1, 1],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-
-  L: [
-    [0, 1, 0, 0],
-    [0, 1, 1, 1],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-
-  J: [
-    [0, 0, 1, 0],
-    [0, 0, 1, 0],
-    [0, 1, 1, 0],
-    [0, 0, 0, 0],
-  ],
-
-  T: [
-    [1, 1, 1, 0],
-    [0, 1, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-};
-let tetroColors = [
-  'red',
-  'blue',
-  'aqua',
-  'fuchsia',
-  'orange',
-  'greenyellow',
-  'indigo',
-  'darkgreen',
-  'yellow',
-  'deeppin',
-];
-
-
-
-
-
-
-
-
-
-
-
 
 
 // instructionsExitBtn.addEventListener('click', onInstructionsExitBtnClick);
@@ -593,27 +515,9 @@ function calculatePointLeftForNextLevel(score) {
 //   _makeControlBtnsDisabled();
 // }
 
-function _makeControlBtnsDisabled() {
-  allControlBtns.forEach(btn => {
-    btn.disabled = true;
-  });
-}
 
-function _makeControlBtnsEnabled() {
-  if (wasGameStartedBefore === true) {
-    allControlBtns.forEach(btn => {
-      btn.disabled = false;
-    });
-  } else {
-    enabledFromStartControlBtns.forEach(btn => {
-      btn.disabled = false;
-    });
-  }
-}
 
 //_________________EVENLISTENER FUNCTIONS____________________________________________//
-
-
 
 
 
@@ -629,7 +533,7 @@ function onCancelNewGameBtnClick() {
 function onPauseBtnClick() {
   if (wasGameStartedBefore === true) {
     if (isPaused === false) {
-      pauseBtn.innerHTML = 'Keep playing... ';
+      pauseBtn.innerHTML = 'Continue';
       clearTimeout(gameTimerID);
     } else if (isPaused === true) {
       pauseBtn.innerHTML = 'Pause';
@@ -639,23 +543,6 @@ function onPauseBtnClick() {
   }
 }
 
-function onInstructionBtnClick() {
-  instructionsWindow.style.display = 'grid';
-  pauseBtn.innerHTML = 'Keep playing... ';
-  isPaused = true;
-  _makeControlBtnsDisabled();
-}
-
-function onInstructionsExitBtnClick() {
-  instructionsWindow.style.display = 'none';
-  pauseBtn.innerHTML = 'Pause';
-  _makeControlBtnsEnabled();
-
-  if (wasGameStartedBefore === true) {
-    isPaused = false;
-    gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
-  }
-}
 
 function onExitBtnClick() {
 
@@ -745,4 +632,25 @@ function onSureExitBtnClick() {
 // for (const movingCell of movingCells) {
 //   movingCell.style.backgroundColor = thisColor;
 //   console.log(movingCell.style.backgroundColor);
+// }
+
+
+
+
+// function onInstructionBtnClick() {
+//   instructionsWindow.style.display = 'grid';
+//   pauseBtn.innerHTML = 'Keep playing... ';
+//   isPaused = true;
+//   _makeControlBtnsDisabled();
+// }
+//
+// function onInstructionsExitBtnClick() {
+//   instructionsWindow.style.display = 'none';
+//   pauseBtn.innerHTML = 'Pause';
+//   _makeControlBtnsEnabled();
+//
+//   if (wasGameStartedBefore === true) {
+//     isPaused = false;
+//     gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
+//   }
 // }

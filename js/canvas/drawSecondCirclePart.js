@@ -9,15 +9,10 @@ import {drawDoubleCircleAt280} from "./drawDoubleCircleAt280.js";
 export const circleState3 = {
     startAngle: Math.PI / 11.5,
     endAngle: Math.PI / 11.5,
-    animationDirection: 1,
-    // targetAngle: Math.PI,
+    targetAngle: Math.PI,
+    animationDirection: 1
 };
 
-
-// export let startAngle3 = Math.PI / 11.5;
-// export let endAngle3 = startAngle3 ;
-const targetAngle3 = Math.PI;
-let animationDirection3 = 1;
 
 export function drawSecondCirclePart() {
     ctx3.clearRect(0, 0, canvas3.width, canvas3.height);

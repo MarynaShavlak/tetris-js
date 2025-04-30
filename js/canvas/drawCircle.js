@@ -22,10 +22,6 @@ import {drawDoubleCircleAt100} from "./drawDoubleCircleAt100.js";
 export const centerX = canvas.width / 2;
 export const centerY = canvas.height / 2 + 3;
 export const radius = canvas.height / 2 - 20;
-// export let startAngle = -Math.PI / 2;   // 12 o'clock
-// export let endAngle = startAngle ;       // animation begins from -90°
-// export const targetAngle = 0;
-// export let animationDirection = 1;
 
 export const circleState = {
     startAngle: -Math.PI / 2,
@@ -34,8 +30,6 @@ export const circleState = {
     dotAngle: -Math.PI / 2,
     targetAngle: 0,
 };
-
-
 
 export function drawCircle() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -71,8 +65,3 @@ export function drawCircle() {
         }
     }
 }
-
-
-
-
-
