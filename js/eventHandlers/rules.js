@@ -15,7 +15,7 @@ export const gameResults = document.querySelector('.game__results');
 export const linesBlock = document.querySelector('.player__lines');
 export const levelBlock = document.querySelector('.player__level');
 export const playerInfoBlock = document.querySelector('.player__info');
-
+export const controlButtonsBlock = document.querySelector('.game__controlButtons');
 
 
 
@@ -89,7 +89,7 @@ export function  handleInterfaceToStartGame() {
     }, 3000);
     setTimeout(() => {
         linesBlock.classList.remove('hidden');
-
+        controlButtonsBlock.classList.remove('hidden');
     }, 5000);
 }
 

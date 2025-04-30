@@ -21,6 +21,11 @@ const pointsLeftElement = document.getElementById(
     'player-points-left-for-next-level',
 );
 
+
+
+
+
+
 showRulesBtn.addEventListener('click', handleShowRules);
 backBtn.addEventListener('click', handleBackToMenu);
 usernameBtn.addEventListener('click', handleShowUsernameInterface);
@@ -32,6 +37,8 @@ allStartBtns.forEach((btn)=> btn.addEventListener('click', gamePusk))
 function gamePusk() {
   setInitialOptions()
   handleInterfaceToStartGame();
+  // onStartBtnClick();
+
 }
 
 function setInitialOptions() {
@@ -66,8 +73,9 @@ function onStartBtnClick() {
     wasGameStartedBefore = true;
     startBtn.innerHTML = 'NEW GAME';
     pauseBtn.innerHTML = 'Keep playing... ';
-    _askUserName();
-    submitNameBtn.addEventListener('click', onSubmitPlayerNameBtnClick);
+    // _askUserName();
+    // submitNameBtn.addEventListener('click', onSubmitPlayerNameBtnClick);
+    startGame();
   } else {
     confirmStartNewGameWindow.style.display = 'grid';
     pauseBtn.innerHTML = 'Keep playing... ';
@@ -77,6 +85,22 @@ function onStartBtnClick() {
   }
 }
 
+
+
+//______________________BUTTONS______________________//
+const startBtn = document.getElementById('start-btn');
+const pauseBtn = document.getElementById('pause-btn');
+
+startBtn.addEventListener('click', onStartBtnClick);
+pauseBtn.addEventListener('click', onPauseBtnClick);
+
+
+
+
+const exitBtn = document.getElementById('exit-btn');
+
+// const allControlBtns = [startBtn, pauseBtn, instructionsBtn, exitBtn];
+// const enabledFromStartControlBtns = [startBtn, instructionsBtn, exitBtn];
 
 
 
@@ -99,14 +123,13 @@ const scoreElement = document.getElementById('player-score');
 
 const linesElement = document.getElementById('player-filled-lines');
 
-//______________________BUTTONS______________________//
-const startBtn = document.getElementById('start-btn');
-const pauseBtn = document.getElementById('pause-btn');
 
-const exitBtn = document.getElementById('exit-btn');
 
-// const allControlBtns = [startBtn, pauseBtn, instructionsBtn, exitBtn];
-// const enabledFromStartControlBtns = [startBtn, instructionsBtn, exitBtn];
+
+
+
+
+
 
 
 const confirmNewGameBtn = document.getElementById('confirm-start-new-game');
@@ -304,8 +327,7 @@ let tetroColors = [
 
 
 
-// startBtn.addEventListener('click', onStartBtnClick);
-// pauseBtn.addEventListener('click', onPauseBtnClick);
+
 
 // instructionsExitBtn.addEventListener('click', onInstructionsExitBtnClick);
 // exitBtn.addEventListener('click', onExitBtnClick);
@@ -420,7 +442,7 @@ function showWhatTetroWillBeNext() {
     }
     // nextTetroConstruction += '<br/>';
   }
-  nextTetroDisplay.innerHTML = nextTetroConstruction;
+  // nextTetroDisplay.innerHTML = nextTetroConstruction;
 }
 
 function dropTetro() {
@@ -590,10 +612,10 @@ function calculatePointLeftForNextLevel(score) {
   pointsLeftElement.value = pointsLeft;
 }
 
-function _askUserName() {
-  userNameWindow.style.display = 'grid';
-  _makeControlBtnsDisabled();
-}
+// function _askUserName() {
+//   userNameWindow.style.display = 'grid';
+//   _makeControlBtnsDisabled();
+// }
 
 function _makeControlBtnsDisabled() {
   allControlBtns.forEach(btn => {

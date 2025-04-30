@@ -178,8 +178,8 @@ body {
 
 
 .moving-cell {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     /* background: red; */
     border: 1px solid black;
     display: inline-block
@@ -215,21 +215,27 @@ body {
 
 
 .confirm-new-game-window {
-    background-color: rgb(0, 208, 255);
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    background-color: #F3F3F3;
     width: 600px;
     height: 350px;
     font-size: 30px;
-    font-weight: bold;
-    border: 1px solid black;
-    border-radius: 20px;
-    display: none;
-
+    font-weight: 400;
+    border: 1px solid #1A1A1A;
+    border-radius: 10px;
     align-content: center;
-    grid-template-rows: 200px 150px;
     position: absolute;
-    top: 350px;
-    left: 700px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity:1;
+    pointer-events: auto;
+    transition: opacity 0.5s ease;
     text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    z-index: 33333;
 
 }
 
@@ -248,6 +254,16 @@ body {
 
 }
 
+#confirm-start-new-game {
+    border: 1px solid #650D19;
+    background: url('../images/tetromino.jpg') no-repeat center;
+    background-size: cover;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+    color: transparent;
+}
 
 
 
