@@ -322,13 +322,14 @@ opacity:0;
 
 
 .instructions {
+
     font-size: 30px;
     display: flex;
     flex-direction: column;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, calc(-50% + 100px));
+    transform: translate(-50%, calc(-50% ));
     opacity: 1;
     pointer-events: auto;
     transition: opacity 0.3s ease;
@@ -437,7 +438,7 @@ opacity:0;
 }
 
 .settings__item--rules {
-    order: 2; /* Initial order to be moved to the top */
+    /*order: 2; !* Initial order to be moved to the top *!*/
 }
 
 .settings__item::before {
@@ -471,3 +472,19 @@ opacity:0;
 
 }
 
+.settings__footer {
+    margin-top: 140px;
+    opacity:1;
+    pointer-events: auto;
+    transition: opacity 0.3s ease-in;
+}
+.settings__footer.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.footer__list {
+    display: flex;
+    justify-content: space-between;
+
+}
