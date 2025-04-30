@@ -4,8 +4,9 @@ export const rulesEl = document.querySelector('.settings__item--rules');
 export const instructionsEl = document.querySelector('.instructions');
 const settingsFooterEl = document.querySelector('.settings__footer');
 
+
+
 export function handleShowRules() {
-    console.log('show rules')
     usernameEl.classList.add('hidden');
     startEl.classList.add('hidden');
     rulesEl.style.order = -1;
@@ -14,5 +15,15 @@ export function handleShowRules() {
         settingsFooterEl.classList.remove('hidden');
     }, 300);
 
+}
 
+export function handleBackToMenu() {
+    instructionsEl.classList.add('hidden');
+    settingsFooterEl.classList.add('hidden');
+
+    setTimeout(() => {
+        usernameEl.classList.remove('hidden');
+        startEl.classList.remove('hidden');
+        rulesEl.style.order = 0;
+    }, 300);
 }
