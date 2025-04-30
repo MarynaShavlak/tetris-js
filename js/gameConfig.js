@@ -77,6 +77,7 @@ export const figures = {
         [0, 0, 0, 0],
     ],
 };
+
 export const tetroColors = [
     'red',
     'blue',
@@ -89,3 +90,9 @@ export const tetroColors = [
     'yellow',
     'deeppin',
 ];
+
+
+export const TetrisGame = {
+    playField: Array.from({ length: 20 }, () => Array(10).fill(0)),
+    linesInFinishedGame: null,
+}

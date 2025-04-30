@@ -165,9 +165,10 @@ body {
 .moving-cell {
     width: 30px;
     height: 30px;
-    /* background: red; */
-    border: 1px solid black;
-    display: inline-block
+    background-image: url('../images/tetromino.jpg');
+    /*border: 1px solid black;*/
+    display: inline-block;
+    z-index: 20;
 }
 
 .fixed-cell {

@@ -4,16 +4,41 @@ import {
   handleShowRules,
   handleShowUsernameInterface,
 } from "./eventHandlers/rules.js";
-import {figures, possibleLevels, tetroColors} from "./gameConfig.js";
+import {figures, possibleLevels, TetrisGame, tetroColors} from "./gameConfig.js";
 import {resetAnimations} from "./canvas/resetAnimations.js";
-import {_hasCollisions, drawFieldNewState, dropTetro, moveTetroDown, rotateTetro, updateGameState} from "./tetro.js";
+import {
+  _hasCollisions,
+  activeTetro,
+  drawFieldNewState,
+  dropTetro,
+  moveTetroDown,
+  rotateTetro,
+  updateGameState
+} from "./tetro.js";
 import {
   allStartBtns,
-  backBtn, controlButtonsBlock, enteredUserName, exitBtn, gameEl,
-  goalOutput, levelBlock,
-  levelOutput, linesBlock, linesOutput, pauseBtn, playerInfoBlock, playerNameElement, pointsLeftElement, scoreEl,
-  setPlayerNameBtn, settingsEl,
-  showRulesBtn, startBtn,
+  backBtn,
+  cancelNewGameBtn,
+  confirmNewGameBtn,
+  confirmStartNewGameWindow,
+  controlButtonsBlock,
+  enteredUserName,
+  exitBtn, exitGameModal,
+  gameEl, goalElement,
+  goalOutput,
+  levelBlock, levelElement,
+  levelOutput,
+  linesBlock,
+  linesOutput,
+  pauseBtn,
+  playerInfoBlock,
+  playerNameElement,
+  pointsLeftElement,
+  scoreEl, scoreElement,
+  setPlayerNameBtn,
+  settingsEl,
+  showRulesBtn,
+  startBtn,
   usernameBtn
 } from "./elements.js";
 
@@ -38,7 +63,7 @@ function gamePusk() {
 function setInitialOptions() {
   levelOutput.value = currentLevel;
   reachedLevelInFinishedGame = levelOutput.value;
-  linesInFinishedGame = linesOutput.value;
+  TetrisGame.linesInFinishedGame = linesOutput.value;
   goalOutput.value = possibleLevels[currentLevel].goalForNextLevel;
   pointsLeftElement.value = possibleLevels[currentLevel].goalForNextLevel;
   isPaused = false;
@@ -112,7 +137,7 @@ function onConfirmNewGameBtnClick() {
   resetGame();
   _makeControlBtnsEnabled();
   setTimeout(()=>{
-    console.log('playField', playField)
+    console.log('playField', TetrisGame.playField)
         isPaused = false;
         wasGameStartedBefore = true;
         startGame();
@@ -120,7 +145,6 @@ function onConfirmNewGameBtnClick() {
       1000
       )
 }
-
 
 function onPauseBtnClick() {
   if (wasGameStartedBefore === true) {
@@ -173,7 +197,7 @@ function onExitBtnClick() {
         
         <p>Hey, ${player}, thank you for your game!</p>
         <p> You were doing fine!</p>
-        <p> You have reached level ${reachedLevelInFinishedGame} and scored ${scoredPointsInFinishedGame} points by filling ${linesInFinishedGame} lines.</p>
+        <p> You have reached level ${reachedLevelInFinishedGame} and scored ${scoredPointsInFinishedGame} points by filling ${TetrisGame.linesInFinishedGame} lines.</p>
         <ul class="exit-game__user-btns">
     <li>
       <button class="btn exit-game action-btn" id="btn-sure-exit">
@@ -253,30 +277,30 @@ function _makeControlBtnsEnabled() {
 export let player;
 export let reachedLevelInFinishedGame;
 export let scoredPointsInFinishedGame;
-export let linesInFinishedGame;
+// export let linesInFinishedGame;
 
-export let playField = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
+// export let playField = [
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+// ];
 
 export let playerScore = 0;
 export let currentLevel = 1;
@@ -289,37 +313,7 @@ export let gameTimerID;
 let movingCells;
 
 
-
-
-// export function handleSetPlayerName() {
-//   console.log('set name')
-//   pauseBtn.innerHTML = 'Pause';
-//   levelElement.value = currentLevel;
-//   reachedLevelInFinishedGame = levelElement.value;
-//   linesInFinishedGame = linesElement.value;
-//   goalElement.value = possibleLevels[currentLevel].goalForNextLevel;
-//   pointsLeftElement.value = possibleLevels[currentLevel].goalForNextLevel;
-//   // _makeControlBtnsEnabled();
-//   if (enteredUserName.value === '') {
-//     playerNameElement.value = 'Player 1';
-//   } else {
-//     playerNameElement.value = enteredUserName.value;
-//   }
-//   player = playerNameElement.value;
-//   userNameWindow.style.display = 'none';
-//   isPaused = false;
-//   // gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
-// }
-
-
-// instructionsExitBtn.addEventListener('click', onInstructionsExitBtnClick);
-//
-
 drawFieldNewState();
-
-
-
-
 
 //____________________________________________________________________________________________________________//
 function startGame() {
@@ -327,7 +321,7 @@ function startGame() {
   console.log('pause', isPaused)
   if (!isPaused) {
     updateGameState();
-    gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed); // we need to move our element to the lower border of Tetris
+    gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
   }
 }
 
@@ -335,33 +329,12 @@ function startGame() {
 function resetGame() {
   isPaused = true;
   clearTimeout(gameTimerID);
-  playField = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  ];
+  TetrisGame.playField = Array.from({ length: 20 }, () => Array(10).fill(0));
   drawFieldNewState();
   // gameOver.style.display = 'block';
 }
 
-function calculateScore(lines) {
+export function calculateScore(lines) {
   switch (lines.length) {
     case 1:
       playerScore += possibleLevels[currentLevel].pointsPerOneFilledLine;
@@ -380,7 +353,7 @@ function calculateScore(lines) {
   scoredPointsInFinishedGame = scoreElement.value;
 }
 
-function moveToNextLevel(score) {
+export function moveToNextLevel(score) {
   if (score >= possibleLevels[currentLevel].goalForNextLevel) {
     currentLevel += 1;
     levelElement.value = currentLevel;
@@ -391,51 +364,14 @@ function moveToNextLevel(score) {
   }
 }
 
-function calculatePointLeftForNextLevel(score) {
+export function calculatePointLeftForNextLevel(score) {
   let pointsLeft = possibleLevels[currentLevel].goalForNextLevel - score;
   pointsLeftElement.value = pointsLeft;
 }
 
 
-
-
-
-// change the color of one tetro
-
-//______________________HOW TO CHANGE COLOR OF TETRO____________________________//
-
-// movingCells = Array.prototype.slice.call(
-//   document.getElementById('next-tetro').getElementsByClassName('moving-cell'),
-// );
-// for (const movingCell of movingCells) {
-//   movingCell.style.backgroundColor = thisColor;
-//   console.log(movingCell.style.backgroundColor);
-// }
-
-
-
-
-// function onInstructionBtnClick() {
-//   instructionsWindow.style.display = 'grid';
-//   pauseBtn.innerHTML = 'Keep playing... ';
-//   isPaused = true;
-//   _makeControlBtnsDisabled();
-// }
-//
-// function onInstructionsExitBtnClick() {
-//   instructionsWindow.style.display = 'none';
-//   pauseBtn.innerHTML = 'Pause';
-//   _makeControlBtnsEnabled();
-//
-//   if (wasGameStartedBefore === true) {
-//     isPaused = false;
-//     gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
-//   }
-// }
-
-
 document.onkeydown = function (event) {
-  // event listener on event when we press some key on keyboard
+
   if (!isPaused) {
     if (event.key === 'ArrowUp') {
       rotateTetro();

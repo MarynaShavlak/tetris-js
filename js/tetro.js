@@ -1,11 +1,20 @@
-import {figures, tetroColors} from "./gameConfig.js";
-import {gameTimerID, isPaused, linesInFinishedGame, playerScore, playField } from "./index.js";
+import {figures, TetrisGame, tetroColors} from "./gameConfig.js";
+import {
+    calculatePointLeftForNextLevel,
+    calculateScore,
+    gameTimerID,
+    isPaused,
+
+    moveToNextLevel,
+    playerScore,
+} from "./index.js";
+import {linesElement} from "./elements.js";
 
 const tetrisField = document.getElementById('tetris-field');
 
 
-let activeTetro = _getNewTetro();
-let nextTetro = _getNewTetro();
+export let activeTetro = _getNewTetro();
+export let nextTetro = _getNewTetro();
 
 
 export function moveTetroDown() {
@@ -35,9 +44,9 @@ export function updateGameState() {
 export function drawFieldNewState() {
     let field = '';
 
-    for (let y = 0; y < playField.length; y++) {
-        for (let x = 0; x < playField[y].length; x++) {
-            switch (playField[y][x]) {
+    for (let y = 0; y < TetrisGame.playField.length; y++) {
+        for (let x = 0; x < TetrisGame.playField[y].length; x++) {
+            switch (TetrisGame.playField[y][x]) {
                 case 1:
                     field += '<div class="moving-cell"></div>';
                     break;
@@ -59,7 +68,7 @@ function addActiveTetro() {
     for (let y = 0; y < activeTetro.shape.length; y++) {
         for (let x = 0; x < activeTetro.shape[y].length; x++) {
             if (activeTetro.shape[y][x] === 1) {
-                playField[activeTetro.y + y][activeTetro.x + x] =
+                TetrisGame.playField[activeTetro.y + y][activeTetro.x + x] =
                     activeTetro.shape[y][x];
             }
         }
@@ -83,7 +92,7 @@ function showWhatTetroWillBeNext() {
 }
 
 export function dropTetro() {
-    for (let y = activeTetro.y; y < playField.length; y++) {
+    for (let y = activeTetro.y; y < TetrisGame.playField.length; y++) {
         activeTetro.y += 1;
         if (_hasCollisions()) {
             activeTetro.y -= 1;
@@ -105,10 +114,10 @@ export function rotateTetro() {
 
 function fixTetro() {
     //  we transform our element with moving cells into elemnt with fixed cells
-    for (let y = 0; y < playField.length; y++) {
-        for (let x = 0; x < playField[y].length; x++) {
-            if (playField[y][x] === 1) {
-                playField[y][x] = 2;
+    for (let y = 0; y < TetrisGame.playField.length; y++) {
+        for (let x = 0; x < TetrisGame.playField[y].length; x++) {
+            if (TetrisGame.playField[y][x] === 1) {
+                TetrisGame.playField[y][x] = 2;
             }
         }
     }
@@ -119,20 +128,20 @@ function deleteFullLine() {
     let canDeleteLine = true;
     let filledLines = [];
 
-    for (let y = 0; y < playField.length; y++) {
-        for (let x = 0; x < playField[y].length; x++) {
-            if (playField[y][x] !== 2) {
+    for (let y = 0; y < TetrisGame.playField.length; y++) {
+        for (let x = 0; x < TetrisGame.playField[y].length; x++) {
+            if (TetrisGame.playField[y][x] !== 2) {
                 canDeleteLine = false; // it is possible  delete the row if at least one its cell is not fixed cell
                 continue;
             }
         }
         if (canDeleteLine) {
-            playField.splice(y, 1); //  we need to delete this one row
-            playField.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+            TetrisGame.playField.splice(y, 1); //  we need to delete this one row
+            TetrisGame.playField.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
             filledLines.push(y);
             allFilledLines.push(filledLines);
             linesElement.value = allFilledLines.length;
-            linesInFinishedGame = linesElement.value;
+            TetrisGame.linesInFinishedGame = linesElement.value;
         }
 
         canDeleteLine = true;
@@ -151,7 +160,7 @@ function _getNewTetro() {
     const newElement = figures[POSSIBLE_FIGURES[RANDOM_FIGURE_NAME]];
     // const newTetroColor = tetroColors[Math.floor(Math.random() * tetroColors.length)];
     return {
-        x: Math.floor((playField[0].length - newElement[0].length) / 2),
+        x: Math.floor((TetrisGame.playField[0].length - newElement[0].length) / 2),
         y: 0,
         shape: newElement,
         color: newTetroColor,
@@ -166,9 +175,9 @@ export function _hasCollisions() {
         for (let x = 0; x < activeTetro.shape[y].length; x++) {
             if (
                 activeTetro.shape[y][x] === 1 &&
-                (playField[activeTetro.y + y] === undefined ||
-                    playField[activeTetro.y + y][activeTetro.x + x] === undefined ||
-                    playField[activeTetro.y + y][activeTetro.x + x] === 2)
+                (TetrisGame.playField[activeTetro.y + y] === undefined ||
+                    TetrisGame.playField[activeTetro.y + y][activeTetro.x + x] === undefined ||
+                    TetrisGame.playField[activeTetro.y + y][activeTetro.x + x] === 2)
             ) {
                 return true;
             }
@@ -178,10 +187,10 @@ export function _hasCollisions() {
 }
 
 function _removePreviousActiveTetroPosition() {
-    for (let y = 0; y < playField.length; y++) {
-        for (let x = 0; x < playField[y].length; x++) {
-            if (playField[y][x] === 1) {
-                playField[y][x] = 0;
+    for (let y = 0; y < TetrisGame.playField.length; y++) {
+        for (let x = 0; x < TetrisGame.playField[y].length; x++) {
+            if (TetrisGame.playField[y][x] === 1) {
+                TetrisGame.playField[y][x] = 0;
             }
         }
     }
@@ -191,7 +200,7 @@ function _removePreviousActiveTetroPosition() {
 export function resetGame() {
     isPaused = true;
     clearTimeout(gameTimerID);
-    playField = [
+    TetrisGame.playField = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
