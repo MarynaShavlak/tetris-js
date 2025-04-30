@@ -27,7 +27,7 @@
     <canvas id="canvas8" width="1200" height="800"></canvas>
     <div class="container">
 
-      <div class="settings hidden">
+      <div class="settings ">
         <ul class="settings__list">
           <li class="settings__item settings__item--username"><button class="settings__btn" id="username-btn">Set Username</button></li>
           <li class="settings__item settings__item--rules" ><button class="settings__btn" id="rules-btn">How to Play</button></li>
@@ -83,19 +83,26 @@
           </div>
         </div>
       </div>
-      <div class="game  " id="game-window">
+      <div class="game hidden" id="game-window">
         <div class="tetris">
           <div class="tetris__field" id="tetris-field"></div>
         </div>
       </div>
 
     </div>
-    <div class="player__score">
+    <div class="results__block player__score hidden">
       <p class="player__section-name">SCORE</p>
       <output id="player-score" value="0">0</output>
     </div>
-    <div class="game__results">
-
+    <div class="game__results ">
+      <div class="results__block player__lines hidden">
+        <p class="player__section-name">LINES</p>
+        <output id="player__filled-lines" value="0">0</output>
+      </div>
+      <div class="results__block player__level hidden">
+        <p class=" player__section-name">Level</p>
+        <output id="player__level" value="1">1</output>
+      </div>
     </div>
   </main>
 

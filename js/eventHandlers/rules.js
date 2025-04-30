@@ -10,6 +10,10 @@ const settingsFooterEl = document.querySelector('.settings__footer');
 
 export const gameEl = document.querySelector('.game');
 export const scoreEl = document.querySelector( '.player__score')
+export const gameResults = document.querySelector('.game__results');
+export const linesBlock = document.querySelector('.player__lines');
+export const levelBlock = document.querySelector('.player__level');
+
 
 export function handleShowRules() {
     usernameEl.classList.add('hidden');
@@ -69,5 +73,14 @@ export function  handleInterfaceToStartGame() {
     settingsEl.classList.add('hidden');
     gameEl.classList.remove('hidden');
     scoreEl.classList.remove('hidden');
+
     drawCircle();
+    setTimeout(() => {
+        levelBlock.classList.remove('hidden');
+
+    }, 2000);
+    setTimeout(() => {
+        linesBlock.classList.remove('hidden');
+
+    }, 5000);
 }

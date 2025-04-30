@@ -13,6 +13,7 @@
     opacity:1;
     pointer-events: auto;
     transition: opacity 0.5s ease;
+    z-index:2222;
 
 }
 .settings.hidden {

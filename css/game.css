@@ -23,8 +23,8 @@ main {
     opacity:0;
     pointer-events:none;
 }
-.player__score {
 
+.results__block {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,6 +33,9 @@ main {
     opacity:1;
     pointer-events: auto;
     transition: opacity 0.5s ease;
+}
+
+.player__score {
     position: absolute;
     bottom: -160px;
 }
@@ -44,10 +47,11 @@ main {
 
 
 .player__section-name {
-    letter-spacing:2px;
+    letter-spacing:4px;
+    text-transform: uppercase;
     color: #5A5A5A;
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 400;
 
 }
 
@@ -67,3 +71,27 @@ main {
     /*border: 1px solid blue;*/
 }
 
+#player__filled-lines, #player__level {
+    font-size: 34px;
+    color: #F3F3F3;
+}
+
+.player__lines {
+    position: absolute;
+    top:110px;
+    left:270px;
+    width:fit-content;
+
+}
+
+.player__level {
+    position: absolute;
+    bottom:105px;
+    right:270px;
+    width:fit-content;
+}
+
+.results__block.hidden {
+    opacity:0;
+    pointer-events: none;
+}

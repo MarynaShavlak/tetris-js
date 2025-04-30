@@ -31,6 +31,7 @@ body {
     /*transform: translate(-50%, -50%);*/
 
 
+
 }
 
 
@@ -91,7 +92,7 @@ body {
 
 }
 
-.player__level,
+
 .player__goal
 .player__lines,
 .player__points-left-for-next-level  {
