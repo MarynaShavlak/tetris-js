@@ -1,5 +1,6 @@
 import {drawCircle} from "../canvas/drawCircle.js";
 
+
 export const settingsEl = document.querySelector('.settings');
 export const usernameEl = document.querySelector('.settings__item--username');
 export const startEl = document.querySelector('.settings__item--start');
@@ -14,6 +15,10 @@ export const gameResults = document.querySelector('.game__results');
 export const linesBlock = document.querySelector('.player__lines');
 export const levelBlock = document.querySelector('.player__level');
 export const playerInfoBlock = document.querySelector('.player__info');
+
+
+
+
 
 export function handleShowRules() {
     usernameEl.classList.add('hidden');
@@ -88,3 +93,7 @@ export function  handleInterfaceToStartGame() {
 
     }, 5000);
 }
+
+
+
+

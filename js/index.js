@@ -2,7 +2,7 @@ import {
   handleBackToMenu,
   handleInterfaceToStartGame,
   handleShowRules,
-  handleShowUsernameInterface
+  handleShowUsernameInterface, levelBlock,  linesBlock,
 } from "./eventHandlers/rules.js";
 
 
@@ -10,9 +10,16 @@ const showRulesBtn = document.getElementById('rules-btn');
 const backBtn = document.getElementById('back-btn');
 const usernameBtn = document.getElementById('username-btn');
 const setPlayerNameBtn = document.getElementById('submit-user-name');
-const allStartBtns = document.querySelectorAll('.settings__btn--start')
+const allStartBtns = document.querySelectorAll('.settings__btn--start');
 
-
+const enteredUserName = document.getElementById('user-entered-name');
+const playerNameElement = document.getElementById('player-name');
+export const levelOutput = levelBlock.querySelector('#player__level');
+export const linesOutput = linesBlock.querySelector('#player__filled-lines');
+const goalOutput = document.getElementById('player-goal');
+const pointsLeftElement = document.getElementById(
+    'player-points-left-for-next-level',
+);
 
 showRulesBtn.addEventListener('click', handleShowRules);
 backBtn.addEventListener('click', handleBackToMenu);
@@ -24,19 +31,51 @@ allStartBtns.forEach((btn)=> btn.addEventListener('click', handleInterfaceToStar
 
 
 
+export function handleSetPlayerName() {
+  console.log('set name')
+  // pauseBtn.innerHTML = 'Pause';
+  levelOutput.value = currentLevel;
+  reachedLevelInFinishedGame = levelOutput.value;
+  linesInFinishedGame = linesOutput.value;
+  goalOutput.value = possibleLevels[currentLevel].goalForNextLevel;
+  pointsLeftElement.value = possibleLevels[currentLevel].goalForNextLevel;
+  // // _makeControlBtnsEnabled();
+  if (enteredUserName.value === '') {
+    playerNameElement.value = 'Player 1';
+  } else {
+    playerNameElement.value = enteredUserName.value;
+  }
+  // player = playerNameElement.value;
+  // userNameWindow.style.display = 'none';
+  // isPaused = false;
+
+
+
+
+  // gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 const gameWindow = document.getElementById('game-window');
 const tetrisField = document.getElementById('tetris-field');
 const nextTetroDisplay = document.getElementById('next-tetro');
-const playerNameElement = document.getElementById('player-name');
+
 const levelElement = document.getElementById('player-level');
 const scoreElement = document.getElementById('player-score');
-const pointsLeftElement = document.getElementById(
-  'player-points-left-for-next-level',
-);
-const goalElement = document.getElementById('player-goal');
+
+
 const linesElement = document.getElementById('player-filled-lines');
 
 //______________________BUTTONS______________________//
@@ -55,7 +94,7 @@ const instructionsExitBtn = document.getElementById('instructions-exit-btn');
 
 //______________WINDOWS FOR COMUNICATION WITH USER______//
 const userNameWindow = document.getElementById('user-name-window');
-const enteredUserName = document.getElementById('user-entered-name');
+
 const instructionsWindow = document.getElementById('instructions');
 const confirmStartNewGameWindow = document.getElementById(
   'confirm-new-game-window',
@@ -71,12 +110,12 @@ const gameOver = document.getElementById('game-over');
 
 // let playField = Array(20).fill(Array(10).fill(0));
 
-let player;
-let reachedLevelInFinishedGame;
-let scoredPointsInFinishedGame;
-let linesInFinishedGame;
+export let player;
+export let reachedLevelInFinishedGame;
+export let scoredPointsInFinishedGame;
+export let linesInFinishedGame;
 
-let playField = [
+export let playField = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -99,14 +138,14 @@ let playField = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-let playerScore = 0;
-let currentLevel = 1;
-let nextGoal;
+export let playerScore = 0;
+export let currentLevel = 1;
+export let nextGoal;
 
-let wasGameStartedBefore = false;
-let isPaused = true;
+export let wasGameStartedBefore = false;
+export let isPaused = true;
 
-let gameTimerID;
+export let gameTimerID;
 let movingCells;
 
 let possibleLevels = {
@@ -139,25 +178,25 @@ let possibleLevels = {
 };
 
 
-export function handleSetPlayerName() {
-  console.log('set name')
-  pauseBtn.innerHTML = 'Pause';
-  levelElement.value = currentLevel;
-  reachedLevelInFinishedGame = levelElement.value;
-  linesInFinishedGame = linesElement.value;
-  goalElement.value = possibleLevels[currentLevel].goalForNextLevel;
-  pointsLeftElement.value = possibleLevels[currentLevel].goalForNextLevel;
-  // _makeControlBtnsEnabled();
-  if (enteredUserName.value === '') {
-    playerNameElement.value = 'Player 1';
-  } else {
-    playerNameElement.value = enteredUserName.value;
-  }
-  player = playerNameElement.value;
-  userNameWindow.style.display = 'none';
-  isPaused = false;
-  // gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
-}
+// export function handleSetPlayerName() {
+//   console.log('set name')
+//   pauseBtn.innerHTML = 'Pause';
+//   levelElement.value = currentLevel;
+//   reachedLevelInFinishedGame = levelElement.value;
+//   linesInFinishedGame = linesElement.value;
+//   goalElement.value = possibleLevels[currentLevel].goalForNextLevel;
+//   pointsLeftElement.value = possibleLevels[currentLevel].goalForNextLevel;
+//   // _makeControlBtnsEnabled();
+//   if (enteredUserName.value === '') {
+//     playerNameElement.value = 'Player 1';
+//   } else {
+//     playerNameElement.value = enteredUserName.value;
+//   }
+//   player = playerNameElement.value;
+//   userNameWindow.style.display = 'none';
+//   isPaused = false;
+//   // gameTimerID = setTimeout(startGame, possibleLevels[currentLevel].speed);
+// }
 
 
 

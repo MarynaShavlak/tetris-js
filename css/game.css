@@ -124,7 +124,8 @@ main {
 }
 
 #player-goal,
-#player-points-left-for-next-level {
+#player-points-left-for-next-level,
+#player-name{
     font-size: 28px;
     color: #1A1A1A;
 }
