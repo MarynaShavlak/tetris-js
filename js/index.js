@@ -20,14 +20,11 @@ import {
   backBtn,
   cancelNewGameBtn,
   confirmNewGameBtn,
-  confirmStartNewGameWindow,
   enteredUserName,
   exitBtn,
-  gameOver,
   levelOutput,
-  linesOutput, nextTetroBlock,
+  linesOutput,
   pauseBtn,
-  playerNameElement,
   setPlayerNameBtn,
   showRulesBtn, starNewGameBtnAfterLose,
   startBtn,
@@ -70,7 +67,7 @@ function setInitialOptions() {
   setInitialUIOptions();
   TetrisGame.reachedLevelInFinishedGame = levelOutput.value;
   TetrisGame.linesInFinishedGame = linesOutput.value;
-  TetrisGame.isPaused = false;
+  unpauseGame();
 }
 
 export function handleSetPlayerName() {
@@ -102,10 +99,8 @@ function continueGame() {
 function onCancelNewGameBtnClick() {
   toggleConfirmStartNewGameWindow();
   makeControlBtnsEnabled();
-  pauseBtn.value = 'pause';
   setPauseButtonToPause();
-  TetrisGame.isPaused = false;
-  TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
+  resumeGame();
 }
 
 function onConfirmNewGameBtnClick() {
@@ -116,10 +111,7 @@ function onConfirmNewGameBtnClick() {
   resetGame();
   makeControlBtnsEnabled();
   setInitialOptions();
-
-  TetrisGame.isPaused = false;
-  TetrisGame.wasGameStartedBefore = true;
-
+  resumeAndMarkGameStarted()
   startGame();
 }
 
@@ -127,8 +119,7 @@ function onPauseBtnClick() {
   if (TetrisGame.wasGameStartedBefore === true) {
     if (TetrisGame.isPaused === false) {
       setPauseButtonToContinue();
-      clearTimeout(TetrisGame.gameTimerID);
-      TetrisGame.isPaused= true;
+      endGame();
     } else if (TetrisGame.isPaused === true) {
       continueGame();
     }
@@ -162,10 +153,7 @@ function onSureExitBtnClick() {
   resetGame();
   makeControlBtnsEnabled();
   setInitialOptions();
-
-  //new
-  TetrisGame.isPaused = false;
-  TetrisGame.wasGameStartedBefore = false;
+  resumeAndMarkGameStarted()
 }
 
 function startGame() {
@@ -207,11 +195,28 @@ export function resetGame() {
   nextTetro.y = newNextTetro.y;
   nextTetro.shape = newNextTetro.shape;
 
-  // Reset UI
-  setInitialUIOptions();
 
-  // Redraw the empty field
+  setInitialUIOptions();
   drawFieldNewState();
+}
+
+
+function resumeGame() {
+  unpauseGame();
+  startGameTimer()
+}
+
+function startGameTimer() {
+  TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
+}
+
+function unpauseGame() {
+  TetrisGame.isPaused = false;
+}
+
+function resumeAndMarkGameStarted() {
+  unpauseGame();
+  TetrisGame.wasGameStartedBefore = true;
 }
 
 
