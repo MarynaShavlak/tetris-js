@@ -7,13 +7,14 @@ import {
 import { possibleLevels, TetrisGame } from "./gameConfig.js";
 
 import {
-  _getNewTetro,
-  _hasCollisions, activeTetro,  nextTetro,
+  getNewTetro,
+  hasCollisions, activeTetro, nextTetro,
   drawFieldNewState,
   dropTetro,
   moveTetroDown,
   rotateTetro,
-  updateGameState
+  updateGameState,
+  initializePlayField, moveTetroHorizontally
 } from "./tetro.js";
 import {
   allStartBtns,
@@ -38,6 +39,15 @@ import {
   setPauseButtonToContinue, setPauseButtonToPause, showExitModal, showNextTetroBlock,
   updateGameControlButtonText, updateUIForExitGame, updatePlayerNameUI
 } from "./ui/uiUpdates.js";
+import {
+  endGame,
+  pauseGame,
+  resumeAndMarkGameStarted,
+  resumeGame, startGameTimer,
+  stopGameTimer,
+  unpauseGame
+} from "./state/updateState.js";
+import {markGameAsStarted, setFinishedGameInitialStats, setPlayerGameName} from "./state/updateResults.js";
 
 
 showRulesBtn.addEventListener('click', handleShowRules);
@@ -59,25 +69,22 @@ drawFieldNewState();
 function gamePusk() {
   setInitialOptions()
   handleInterfaceToStartGame();
-  // onStartBtnClick();
-
 }
 
 function setInitialOptions() {
   setInitialUIOptions();
-  TetrisGame.reachedLevelInFinishedGame = levelOutput.value;
-  TetrisGame.linesInFinishedGame = linesOutput.value;
+  setFinishedGameInitialStats()
   unpauseGame();
 }
 
 export function handleSetPlayerName() {
   updatePlayerNameUI()
-  TetrisGame.player = enteredUserName.value;
+  setPlayerGameName()
 }
 
 function onStartBtnClick() {
   if (TetrisGame.wasGameStartedBefore === false) {
-    TetrisGame.wasGameStartedBefore = true;
+    markGameAsStarted()
     updateGameControlButtonText();
     startGame();
     showNextTetroBlock();
@@ -85,15 +92,14 @@ function onStartBtnClick() {
   } else {
     toggleConfirmStartNewGameWindow();
     setPauseButtonToContinue()
-    TetrisGame.isPaused = true;
+    pauseGame();
     makeControlBtnsDisabled();
   }
 }
 
 function continueGame() {
   setPauseButtonToPause();
-  TetrisGame.isPaused= false;
-  TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
+  resumeGame();
 }
 
 function onCancelNewGameBtnClick() {
@@ -156,25 +162,21 @@ function onSureExitBtnClick() {
   resumeAndMarkGameStarted()
 }
 
-function startGame() {
-  //new
-  clearTimeout(TetrisGame.gameTimerID);
+export function startGame() {
+  stopGameTimer()
   moveTetroDown();
   if (!TetrisGame.isPaused) {
     updateGameState();
-    TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
+    startGameTimer()
   }
 }
 
 
-export function endGame() {
-  clearTimeout(TetrisGame.gameTimerID);
-  TetrisGame.isPaused = true;
-}
+
 
 export function resetGame() {
   endGame();
-  TetrisGame.playField = Array.from({ length: 20 }, () => Array(10).fill(0));
+  initializePlayField();
   drawFieldNewState();
   // new
   TetrisGame.wasGameStartedBefore = false;
@@ -185,12 +187,12 @@ export function resetGame() {
   TetrisGame.currentLevel = 1;
   TetrisGame.wasGameStartedBefore = false;
 
-  const newActiveTetro = _getNewTetro();
+  const newActiveTetro = getNewTetro();
   activeTetro.x = newActiveTetro.x;
   activeTetro.y = newActiveTetro.y;
   activeTetro.shape = newActiveTetro.shape;
 
-  const newNextTetro = _getNewTetro();
+  const newNextTetro = getNewTetro();
   nextTetro.x = newNextTetro.x;
   nextTetro.y = newNextTetro.y;
   nextTetro.shape = newNextTetro.shape;
@@ -201,46 +203,31 @@ export function resetGame() {
 }
 
 
-function resumeGame() {
-  unpauseGame();
-  startGameTimer()
-}
-
-function startGameTimer() {
-  TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
-}
-
-function unpauseGame() {
-  TetrisGame.isPaused = false;
-}
-
-function resumeAndMarkGameStarted() {
-  unpauseGame();
-  TetrisGame.wasGameStartedBefore = true;
-}
-
-
 document.onkeydown = function (event) {
+  if (TetrisGame.isPaused) return;
 
-  if (!TetrisGame.isPaused) {
-    if (event.key === 'ArrowUp') {
+  switch (event.key) {
+    case 'ArrowUp':
       rotateTetro();
-    } else if (event.key === 'ArrowDown') {
+      break;
+
+    case 'ArrowDown':
       moveTetroDown();
-    } else if (event.key === 'ArrowLeft') {
-      activeTetro.x -= 1;
-      if (_hasCollisions()) {
-        activeTetro.x += 1;
-      }
-    } else if (event.key === 'ArrowRight') {
-      activeTetro.x += 1;
-      if (_hasCollisions()) {
-        activeTetro.x -= 1;
-      }
-    } else if (event.key === ' ') {
+      break;
+
+    case 'ArrowLeft':
+      moveTetroHorizontally(-1);
+      break;
+
+    case 'ArrowRight':
+      moveTetroHorizontally(1);
+      break;
+
+    case ' ':
       dropTetro();
-    }
+      break;
+  }
 
     updateGameState();
-  }
+
 };

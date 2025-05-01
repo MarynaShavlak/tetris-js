@@ -1,30 +1,38 @@
 import {figures, TetrisGame} from "./gameConfig.js";
-import {gameOver, linesOutput, nextTetroDisplay} from "./elements.js";
+import { linesOutput, nextTetroDisplay} from "./elements.js";
 import {calculatePointLeftForNextLevel, calculateScore, moveToNextLevel} from "./calculateResults.js";
-import {endGame, resetGame} from "./index.js";
 import {toggleGameOverWindow} from "./ui/uiUpdates.js";
+import {endGame} from "./state/updateState.js";
 
 
 const tetrisField = document.getElementById('tetris-field');
 
 
-export let activeTetro = _getNewTetro();
-export let nextTetro = _getNewTetro();
+export let activeTetro = getNewTetro();
+export let nextTetro = getNewTetro();
 
+
+export function initializePlayField() {
+    TetrisGame.playField = createPlayField();
+}
+
+function createPlayField() {
+    return Array.from({ length: 20 }, () => Array(10).fill(0));
+}
 
 export function moveTetroDown() {
     activeTetro.y += 1;
-    if (_hasCollisions()) {
+    if (hasCollisions()) {
         activeTetro.y -= 1;
         fixTetro();
         deleteFullLine();
 
         activeTetro = nextTetro;
-        if (_hasCollisions()) {
+        if (hasCollisions()) {
             toggleGameOverWindow()
             endGame();
                     }
-        nextTetro = _getNewTetro();
+        nextTetro = getNewTetro();
     }
 }
 
@@ -59,7 +67,7 @@ export function drawFieldNewState() {
 }
 
 function addActiveTetro() {
-    _removePreviousActiveTetroPosition();
+    removePreviousActiveTetroPosition();
 
     for (let y = 0; y < activeTetro.shape.length; y++) {
         for (let x = 0; x < activeTetro.shape[y].length; x++) {
@@ -79,7 +87,7 @@ function showWhatTetroWillBeNext() {
             if (nextTetro.shape[y][x] === 0) {
                 nextTetroConstruction += '<div class="empty-cell-next"></div>';
             } else {
-                nextTetroConstruction += _renderMovingCell(nextTetro);
+                nextTetroConstruction += renderMovingCell(nextTetro);
             }
         }
         // nextTetroConstruction += '<br/>';
@@ -90,7 +98,7 @@ function showWhatTetroWillBeNext() {
 export function dropTetro() {
     for (let y = activeTetro.y; y < TetrisGame.playField.length; y++) {
         activeTetro.y += 1;
-        if (_hasCollisions()) {
+        if (hasCollisions()) {
             activeTetro.y -= 1;
             break;
         }
@@ -103,7 +111,7 @@ export function rotateTetro() {
     activeTetro.shape = activeTetro.shape[0].map((val, index) =>
         activeTetro.shape.map(row => row[index]).reverse(),
     );
-    if (_hasCollisions()) {
+    if (hasCollisions()) {
         activeTetro.shape = PREVIOUS_ELEMENT_STATE;
     }
 }
@@ -149,7 +157,7 @@ function deleteFullLine() {
     moveToNextLevel(TetrisGame.playerScore);
 }
 
-export function _getNewTetro() {
+export function getNewTetro() {
     const POSSIBLE_FIGURES = 'OISZLJT';
     const RANDOM_FIGURE_NAME = Math.floor(Math.random() * 7);
     const newElement = figures[POSSIBLE_FIGURES[RANDOM_FIGURE_NAME]];
@@ -162,11 +170,11 @@ export function _getNewTetro() {
     };
 }
 
-function _renderMovingCell(nextTetro) {
+function renderMovingCell(nextTetro) {
     return `<div class="moving-cell" style="background-color: ${nextTetro.color}"></div>`;
 }
 
-export function _hasCollisions() {
+export function hasCollisions() {
     for (let y = 0; y < activeTetro.shape.length; y++) {
         for (let x = 0; x < activeTetro.shape[y].length; x++) {
             if (
@@ -182,7 +190,7 @@ export function _hasCollisions() {
     return false;
 }
 
-function _removePreviousActiveTetroPosition() {
+function removePreviousActiveTetroPosition() {
     for (let y = 0; y < TetrisGame.playField.length; y++) {
         for (let x = 0; x < TetrisGame.playField[y].length; x++) {
             if (TetrisGame.playField[y][x] === 1) {
@@ -192,3 +200,11 @@ function _removePreviousActiveTetroPosition() {
     }
 }
 
+
+export function moveTetroHorizontally(direction) {
+    activeTetro.x += direction;
+
+    if (hasCollisions()) {
+        activeTetro.x -= direction;
+    }
+}
