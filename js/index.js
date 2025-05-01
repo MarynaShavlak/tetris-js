@@ -24,22 +24,28 @@ import {
   controlButtonsBlock,
   enteredUserName,
   exitBtn, exitGameModal,
-  gameEl, gameOver,
+  gameBlock, gameOver,
   goalOutput,
   levelBlock, levelOutput,
-  linesBlock, linesElement, nextBlockWrapper, nextTetroDisplay,
+  linesBlock, linesElement, nextTetroBlock, nextTetroDisplay,
   pauseBtn,
   playerInfoBlock,
   playerNameElement,
   pointsLeftElement,
-  scoreEl, scoreOutput,
+  scoreBlock, scoreOutput,
   setPlayerNameBtn,
-  settingsEl,
+  settingsBlock,
   showRulesBtn, starNewGameBtnAfterLose,
   startBtn,
   usernameBtn
 } from "./elements.js";
 import {_makeControlBtnsEnabled, _makeControlBtnsDisabled} from "./gameControlsButtons.js";
+import {
+  hideExitGameModal,
+  resetGameControlButtonText,
+  setPauseButtonToContinue,
+  updateGameControlButtonText, updateUIForExitGame
+} from "./ui/uiUpdates.js";
 
 
 showRulesBtn.addEventListener('click', handleShowRules);
@@ -85,15 +91,14 @@ export function handleSetPlayerName() {
 function onStartBtnClick() {
   if (TetrisGame.wasGameStartedBefore === false) {
     TetrisGame.wasGameStartedBefore = true;
-    startBtn.innerHTML = 'NEW GAME';
-    pauseBtn.innerHTML = 'Pause';
+    updateGameControlButtonText();
     startGame();
-    nextBlockWrapper.classList.remove('hidden');
+    nextTetroBlock.classList.remove('hidden');
     _makeControlBtnsEnabled()
   } else {
     confirmStartNewGameWindow.classList.remove('hidden')
 
-    pauseBtn.innerHTML = 'Continue';
+    setPauseButtonToContinue()
     TetrisGame.isPaused = true;
     _makeControlBtnsDisabled();
   }
@@ -117,24 +122,22 @@ function onCancelNewGameBtnClick() {
 function onConfirmNewGameBtnClick() {
   confirmStartNewGameWindow.classList.add('hidden');
   gameOver.classList.add('hidden');
-  startBtn.innerHTML = 'NEW GAME';
-  pauseBtn.innerHTML = 'Pause';
+  updateGameControlButtonText();
 
   resetGame();
   _makeControlBtnsEnabled();
   setInitialOptions();
 
-  //new
   TetrisGame.isPaused = false;
   TetrisGame.wasGameStartedBefore = true;
-  nextBlockWrapper.classList.remove('hidden');
+  nextTetroBlock.classList.remove('hidden');
   startGame();
 }
 
 function onPauseBtnClick() {
   if (TetrisGame.wasGameStartedBefore === true) {
     if (TetrisGame.isPaused === false) {
-      pauseBtn.innerHTML = 'Continue';
+      setPauseButtonToContinue();
       clearTimeout(TetrisGame.gameTimerID);
       TetrisGame.isPaused= true;
     } else if (TetrisGame.isPaused === true) {
@@ -205,8 +208,7 @@ function onExitBtnClick() {
 }
 
 function onBackToTetrisBtnClick() {
-  exitGameModal.classList.add('hidden')
-  exitGameModal.innerHTML = '';
+  hideExitGameModal();
   continueGame()
   _makeControlBtnsEnabled();
   // if (TetrisGame.wasGameStartedBefore) {
@@ -216,20 +218,10 @@ function onBackToTetrisBtnClick() {
 }
 
 function onSureExitBtnClick() {
-  exitGameModal.classList.add('hidden')
-  exitGameModal.innerHTML = '';
-  settingsEl.classList.remove('hidden');
-  gameEl.classList.add('hidden');
-  scoreEl.classList.add('hidden');
-  levelBlock.classList.add('hidden');
-  playerInfoBlock.classList.add('hidden');
-  linesBlock.classList.add('hidden');
-  controlButtonsBlock.classList.add('hidden');
-  nextBlockWrapper.classList.add('hidden');
-  resetAnimations();
+  hideExitGameModal();
+  updateUIForExitGame();
 
-  startBtn.innerHTML = 'Start';
-  pauseBtn.innerHTML = 'Pause';
+  resetGameControlButtonText();
 
   _makeControlBtnsEnabled();
 

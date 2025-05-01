@@ -1,13 +1,13 @@
 import {drawCircle} from "../canvas/drawCircle.js";
 import {
     controlButtonsBlock,
-    gameEl, instructionsEl,
+    gameBlock, instructionsEl,
     levelBlock,
     linesBlock,
     playerInfoBlock,
     rulesEl,
-    scoreEl,
-    settingsEl, settingsFooterEl, startEl, usernameEditorEl, usernameEl
+    scoreBlock,
+    settingsBlock, settingsFooterEl, startEl, usernameEditorEl, usernameEl
 } from "../elements.js";
 
 export function handleShowRules() {
@@ -64,9 +64,9 @@ export function  handleShowUsernameInterface() {
 }
 
 export function  handleInterfaceToStartGame() {
-    settingsEl.classList.add('hidden');
-    gameEl.classList.remove('hidden');
-    scoreEl.classList.remove('hidden');
+    settingsBlock.classList.add('hidden');
+    gameBlock.classList.remove('hidden');
+    scoreBlock.classList.remove('hidden');
 
     drawCircle();
     setTimeout(() => {

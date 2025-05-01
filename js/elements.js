@@ -1,4 +1,4 @@
-export const settingsEl = document.querySelector('.settings');
+export const settingsBlock = document.querySelector('.settings');
 export const usernameEl = document.querySelector('.settings__item--username');
 export const startEl = document.querySelector('.settings__item--start');
 export const rulesEl = document.querySelector('.settings__item--rules');
@@ -6,8 +6,8 @@ export const instructionsEl = document.querySelector('.instructions');
 export const usernameEditorEl = document.querySelector('.usernameEditor');
 export const settingsFooterEl = document.querySelector('.settings__footer');
 
-export const gameEl = document.querySelector('.game');
-export const scoreEl = document.querySelector( '.player__score')
+export const gameBlock = document.querySelector('.game');
+export const scoreBlock = document.querySelector( '.player__score')
 export const gameResults = document.querySelector('.game__results');
 export const linesBlock = document.querySelector('.player__lines');
 export const levelBlock = document.querySelector('.player__level');
@@ -47,7 +47,7 @@ export const confirmStartNewGameWindow = document.getElementById(
 export const exitGameModal = document.querySelector('.exit-message',);
 
 export const gameOver = document.getElementById('lose-game-window');
-export const nextBlockWrapper = document.querySelector('.next__wrapper');
+export const nextTetroBlock = document.querySelector('.next__wrapper');
 
 
 export const allControlBtns = [startBtn, pauseBtn, exitBtn];
