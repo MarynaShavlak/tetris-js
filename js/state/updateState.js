@@ -1,5 +1,6 @@
 import {possibleLevels, TetrisGame} from "../gameConfig.js";
 import {startGame} from "../index.js";
+import {setPauseButtonToPause} from "../ui/uiUpdates.js";
 
 export function resumeGame() {
     unpauseGame();
@@ -29,4 +30,9 @@ export function resumeAndMarkGameStarted() {
 export function endGame() {
     stopGameTimer()
     pauseGame();
+}
+
+export function continueGame() {
+    setPauseButtonToPause();
+    resumeGame();
 }

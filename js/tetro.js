@@ -208,3 +208,15 @@ export function moveTetroHorizontally(direction) {
         activeTetro.x -= direction;
     }
 }
+
+export function resetActiveAndNextTetros() {
+    const newActiveTetro = getNewTetro();
+    activeTetro.x = newActiveTetro.x;
+    activeTetro.y = newActiveTetro.y;
+    activeTetro.shape = newActiveTetro.shape;
+
+    const newNextTetro = getNewTetro();
+    nextTetro.x = newNextTetro.x;
+    nextTetro.y = newNextTetro.y;
+    nextTetro.shape = newNextTetro.shape;
+}

@@ -14,3 +14,12 @@ export function setPlayerGameName() {
 export function markGameAsStarted() {
     TetrisGame.wasGameStartedBefore = true;
 }
+
+export function resetGameState() {
+    TetrisGame.wasGameStartedBefore = false;
+    TetrisGame.linesInFinishedGame = 0;
+    TetrisGame.reachedLevelInFinishedGame = 0;
+    TetrisGame.scoredPointsInFinishedGame = 0;
+    TetrisGame.playerScore = 0;
+    TetrisGame.currentLevel = 1;
+}

@@ -2,13 +2,13 @@ import {
     confirmStartNewGameWindow,
     controlButtonsBlock, enteredUserName,
     exitGameModal,
-    gameBlock, gameOver, goalOutput,
+    gameBlock, gameOver, goalOutput, instructionsEl,
     levelBlock, levelOutput, linesBlock, linesOutput, nextTetroBlock, nextTetroDisplay,
     pauseBtn,
-    playerInfoBlock, playerNameElement, pointsLeftOutput,
+    playerInfoBlock, playerNameElement, pointsLeftOutput, rulesEl,
     scoreBlock, scoreOutput,
-    settingsBlock,
-    startBtn
+    settingsBlock, settingsFooterEl,
+    startBtn, startEl, usernameEditorEl, usernameEl
 } from "../elements.js";
 import {resetAnimations} from "../canvas/resetAnimations.js";
 import {possibleLevels, TetrisGame} from "../gameConfig.js";
@@ -99,7 +99,77 @@ export function toggleConfirmStartNewGameWindow() {
 export function toggleGameOverWindow() {
     gameOver.classList.toggle('hidden');
 }
+export function hideGameOverWindow() {
+    gameOver.classList.add('hidden');
+}
+
+
 
 export function showNextTetroBlock() {
     nextTetroBlock.classList.remove('hidden');
+}
+
+
+export function hideElementsBeforeAnimation() {
+    usernameEl.classList.add('hidden');
+    startEl.classList.add('hidden');
+    rulesEl.style.order = -1;
+}
+
+export function hideRulesAndStartButton() {
+    rulesEl.classList.add('hidden');
+    startEl.classList.add('hidden');
+    usernameEl.style.order = -1;
+}
+
+export function hideSettingsAndShowGameElements() {
+    settingsBlock.classList.add('hidden');
+    gameBlock.classList.remove('hidden');
+    scoreBlock.classList.remove('hidden');
+}
+
+export function showUsernameAndRules() {
+        usernameEl.classList.remove('hidden');
+        rulesEl.style.order = 0;
+        rulesEl.classList.remove('hidden');
+        usernameEl.style.order = 0;
+        startEl.classList.remove('hidden');
+}
+
+export function hideRulesAndUsernameEditor() {
+        instructionsEl.classList.add('hidden');
+        usernameEditorEl.classList.add('hidden');
+        settingsFooterEl.classList.add('hidden');
+}
+
+export function showRulesAndFooter() {
+    instructionsEl.classList.remove('hidden');
+    settingsFooterEl.classList.remove('hidden');
+}
+
+
+export function showUsernameEditorAndFooter() {
+    usernameEditorEl.classList.remove('hidden');
+    settingsFooterEl.classList.remove('hidden');
+}
+
+
+
+export function showLevelBlockAfterDelay(delay) {
+    setTimeout(() => {
+        levelBlock.classList.remove('hidden');
+    }, delay);
+}
+
+export function showPlayerInfoBlockAfterDelay(delay) {
+    setTimeout(() => {
+        playerInfoBlock.classList.remove('hidden');
+    }, delay);
+}
+
+export function showLinesAndControlButtonsAfterDelay(delay) {
+    setTimeout(() => {
+        linesBlock.classList.remove('hidden');
+        controlButtonsBlock.classList.remove('hidden');
+    }, delay);
 }
