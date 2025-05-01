@@ -56,3 +56,30 @@ export function setInitialUIOptions() {
     playerNameElement.value = enteredUserName.value || "Player 1";
     nextTetroDisplay.innerHTML = '';
 }
+
+export function showExitModal(wasGameStarted) {
+    exitGameModal.innerHTML = wasGameStarted
+        ? `
+        <p>Hey, ${TetrisGame.player}, thank you for your game!</p>
+        <p>You were doing fine!</p>
+        <p>You have reached level ${TetrisGame.reachedLevelInFinishedGame} and scored ${TetrisGame.scoredPointsInFinishedGame} points by filling ${TetrisGame.linesInFinishedGame} lines.</p>
+        <ul class="exit-game__user-btns">
+          <li><button class="btn exit-game action-btn" id="btn-sure-exit">Exit</button></li>
+          <li><button class="btn back-to-tetris action-btn" id="btn-back-to-tetris">Back to Tetris</button></li>
+        </ul>
+      `
+        : `
+        <p class="exit-game__notice">
+          <i class="fa-sharp fa-solid fa-heart-crack"></i>
+          It's a pity you left the game without even giving Tetris a try.
+          <i class="fa-sharp fa-solid fa-heart-crack"></i>
+        </p>
+        <p class="exit-game__prompt">Are you sure you want to proceed?</p>
+        <ul class="exit-game__user-btns">
+          <li><button class="btn exit-game action-btn" id="btn-sure-exit">Exit</button></li>
+          <li><button class="btn back-to-tetris action-btn" id="btn-back-to-tetris">Back to Tetris</button></li>
+        </ul>
+      `;
+    exitGameModal.classList.remove("hidden");
+}
+
