@@ -23,7 +23,7 @@ export const enteredUserName = document.getElementById('user-entered-name');
 export const playerNameElement = document.getElementById('player-name');
 export const levelOutput = levelBlock.querySelector('#player__level');
 
-export const goalOutput = document.getElementById('player-goal');
+
 export const pointsLeftElement = document.getElementById(
     'player-points-left-for-next-level',
 );
@@ -36,8 +36,8 @@ export const exitBtn = document.getElementById('exit-btn');
 export const gameWindow = document.getElementById('game-window');
 export const nextTetroDisplay = document.getElementById('next-tetro');
 
-export const scoreElement = document.getElementById('player-score');
-export const goalElement = document.getElementById('player-goal');
+export const scoreOutput = document.getElementById('player-score');
+export const goalOutput = document.getElementById('player-goal');
 export const linesElement = document.getElementById('player__filled-lines');
 export const confirmNewGameBtn = document.getElementById('confirm-start-new-game');
 export const cancelNewGameBtn = document.getElementById('cancel-start-new-game');
@@ -48,3 +48,7 @@ export const exitGameModal = document.querySelector('.exit-message',);
 
 export const gameOver = document.getElementById('game-over');
 export const nextBlockWrapper = document.querySelector('.next__wrapper');
+
+
+export const allControlBtns = [startBtn, pauseBtn, exitBtn];
+export const enabledFromStartControlBtns = [startBtn, exitBtn];

@@ -4,11 +4,11 @@ import {
   handleShowRules,
   handleShowUsernameInterface,
 } from "./eventHandlers/rules.js";
-import {figures, possibleLevels, TetrisGame, tetroColors} from "./gameConfig.js";
+import { possibleLevels, TetrisGame } from "./gameConfig.js";
 import {resetAnimations} from "./canvas/resetAnimations.js";
 import {
-  _hasCollisions,
-  activeTetro,
+  _getNewTetro,
+  _hasCollisions, activeTetro,  nextTetro,
   drawFieldNewState,
   dropTetro,
   moveTetroDown,
@@ -24,23 +24,23 @@ import {
   controlButtonsBlock,
   enteredUserName,
   exitBtn, exitGameModal,
-  gameEl, goalElement,
+  gameEl,
   goalOutput,
   levelBlock, levelOutput,
-
-  linesBlock, linesElement, nextBlockWrapper,
+  linesBlock, linesElement, nextBlockWrapper, nextTetroDisplay,
   pauseBtn,
   playerInfoBlock,
   playerNameElement,
   pointsLeftElement,
-  scoreEl, scoreElement,
+  scoreEl, scoreOutput,
   setPlayerNameBtn,
   settingsEl,
   showRulesBtn,
   startBtn,
   usernameBtn
 } from "./elements.js";
-import {calculatePointLeftForNextLevel} from "./calculateResults.js";
+import {_makeControlBtnsEnabled, _makeControlBtnsDisabled} from "./gameControlsButtons.js";
+
 
 showRulesBtn.addEventListener('click', handleShowRules);
 backBtn.addEventListener('click', handleBackToMenu);
@@ -52,6 +52,10 @@ startBtn.addEventListener('click', onStartBtnClick);
 pauseBtn.addEventListener('click', onPauseBtnClick);
 exitBtn.addEventListener('click', onExitBtnClick);
 
+confirmNewGameBtn.addEventListener('click', onConfirmNewGameBtnClick)
+cancelNewGameBtn.addEventListener('click', onCancelNewGameBtnClick);
+
+drawFieldNewState();
 
 function gamePusk() {
   setInitialOptions()
@@ -73,34 +77,21 @@ function setInitialOptions() {
 }
 
 export function handleSetPlayerName() {
-  // pauseBtn.innerHTML = 'Pause';
-
-  // // _makeControlBtnsEnabled();
-
-    playerNameElement.value = enteredUserName.value;
-
+  playerNameElement.value = enteredUserName.value;
   TetrisGame.player = playerNameElement.value;
-  // userNameWindow.style.display = 'none';
-
-
-  // TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
 }
-
 
 function onStartBtnClick() {
   if (TetrisGame.wasGameStartedBefore === false) {
     TetrisGame.wasGameStartedBefore = true;
     startBtn.innerHTML = 'NEW GAME';
     pauseBtn.innerHTML = 'Pause';
-    // _askUserName();
-    // submitNameBtn.addEventListener('click', onSubmitPlayerNameBtnClick);
     startGame();
     nextBlockWrapper.classList.remove('hidden');
     _makeControlBtnsEnabled()
   } else {
     confirmStartNewGameWindow.classList.remove('hidden')
-    confirmNewGameBtn.addEventListener('click', onConfirmNewGameBtnClick)
-    cancelNewGameBtn.addEventListener('click', onCancelNewGameBtnClick);
+
     pauseBtn.innerHTML = 'Continue';
     TetrisGame.isPaused = true;
     _makeControlBtnsDisabled();
@@ -124,27 +115,18 @@ function onCancelNewGameBtnClick() {
 
 function onConfirmNewGameBtnClick() {
   confirmStartNewGameWindow.classList.add('hidden');
-  // _makeControlBtnsEnabled();
-  // pauseBtn.value = 'pause';
-  // pauseBtn.innerHTML = 'Pause';
-  // TetrisGame.isPaused = false;
-  // TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
-
-
   startBtn.innerHTML = 'NEW GAME';
   pauseBtn.innerHTML = 'Pause';
-  // _askUserName();
-  // submitNameBtn.addEventListener('click', onSubmitPlayerNameBtnClick);
+
   resetGame();
   _makeControlBtnsEnabled();
-  setTimeout(()=>{
-    console.log('playField', TetrisGame.playField)
-        TetrisGame.isPaused = false;
-        TetrisGame.wasGameStartedBefore = true;
-        startGame();
-      },
-      1000
-      )
+  setInitialOptions();
+
+  //new
+  TetrisGame.isPaused = false;
+  TetrisGame.wasGameStartedBefore = true;
+  nextBlockWrapper.classList.remove('hidden');
+  startGame();
 }
 
 function onPauseBtnClick() {
@@ -241,70 +223,76 @@ function onSureExitBtnClick() {
   playerInfoBlock.classList.add('hidden');
   linesBlock.classList.add('hidden');
   controlButtonsBlock.classList.add('hidden');
+  nextBlockWrapper.classList.add('hidden');
   resetAnimations();
   // tetrisField.innerHTML= '';
   // drawFieldNewState();
   // resetGame();
+  startBtn.innerHTML = 'Start';
+  pauseBtn.innerHTML = 'Pause';
+
+  // resetGame();
+  _makeControlBtnsEnabled();
+
+  resetGame();
+  _makeControlBtnsEnabled();
+  setInitialOptions();
+
+  //new
+  TetrisGame.isPaused = false;
+  TetrisGame.wasGameStartedBefore = false;
 
 
 }
 
-const allControlBtns = [startBtn, pauseBtn, exitBtn];
-const enabledFromStartControlBtns = [startBtn, exitBtn];
-
-function _makeControlBtnsDisabled() {
-  allControlBtns.forEach(btn => {
-    btn.disabled = true;
-  });
-}
-
-function _makeControlBtnsEnabled() {
-  if (TetrisGame.wasGameStartedBefore === true) {
-    allControlBtns.forEach(btn => {
-      btn.disabled = false;
-    });
-  } else {
-    enabledFromStartControlBtns.forEach(btn => {
-      btn.disabled = false;
-    });
-  }
-}
-
-
-drawFieldNewState();
-
-//____________________________________________________________________________________________________________//
 function startGame() {
+  //new
+  clearTimeout(TetrisGame.gameTimerID);
+
   moveTetroDown();
-  console.log('pause', TetrisGame.isPaused)
+
   if (!TetrisGame.isPaused) {
     updateGameState();
     TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
   }
 }
 
-function resetGame() {
-  TetrisGame.isPaused = true;
+export function resetGame() {
+
   clearTimeout(TetrisGame.gameTimerID);
+  TetrisGame.isPaused = true;
   TetrisGame.playField = Array.from({ length: 20 }, () => Array(10).fill(0));
   drawFieldNewState();
-  // gameOver.style.display = 'block';
+  // new
+  TetrisGame.wasGameStartedBefore = false;
+  TetrisGame.linesInFinishedGame = 0;
+  TetrisGame.reachedLevelInFinishedGame = 0;
+  TetrisGame.scoredPointsInFinishedGame = 0;
+  TetrisGame.playerScore = 0;
+  TetrisGame.currentLevel = 1;
+  TetrisGame.wasGameStartedBefore = false;
+
+  const newActiveTetro = _getNewTetro();
+  activeTetro.x = newActiveTetro.x;
+  activeTetro.y = newActiveTetro.y;
+  activeTetro.shape = newActiveTetro.shape;
+
+  const newNextTetro = _getNewTetro();
+  nextTetro.x = newNextTetro.x;
+  nextTetro.y = newNextTetro.y;
+  nextTetro.shape = newNextTetro.shape;
+
+  // Reset UI
+  levelOutput.value = TetrisGame.currentLevel;
+  linesElement.value = TetrisGame.linesInFinishedGame;
+  scoreOutput.value = TetrisGame.playerScore;
+  goalOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
+  pointsLeftElement.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
+  nextTetroDisplay.innerHTML = '';
+
+  // Redraw the empty field
+  drawFieldNewState();
 }
-
-
-
-export function moveToNextLevel(score) {
-  if (score >= possibleLevels[TetrisGame.currentLevel].goalForNextLevel) {
-    TetrisGame.currentLevel += 1;
-    levelOutput.value = TetrisGame.currentLevel;
-    TetrisGame.reachedLevelInFinishedGame = levelOutput.value;
-    TetrisGame.nextGoal = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
-    goalElement.value = TetrisGame.nextGoal;
-    calculatePointLeftForNextLevel(score);
-  }
-}
-
-
 
 
 document.onkeydown = function (event) {

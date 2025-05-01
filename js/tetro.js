@@ -1,9 +1,7 @@
-import {figures, TetrisGame, tetroColors} from "./gameConfig.js";
-import {
-      moveToNextLevel,
-} from "./index.js";
+import {figures, TetrisGame} from "./gameConfig.js";
 import {linesElement, nextTetroDisplay} from "./elements.js";
-import {calculatePointLeftForNextLevel, calculateScore} from "./calculateResults.js";
+import {calculatePointLeftForNextLevel, calculateScore, moveToNextLevel} from "./calculateResults.js";
+import {resetGame} from "./index.js";
 
 const tetrisField = document.getElementById('tetris-field');
 
@@ -37,6 +35,7 @@ export function updateGameState() {
 }
 
 export function drawFieldNewState() {
+
     let field = '';
 
     for (let y = 0; y < TetrisGame.playField.length; y++) {
@@ -118,6 +117,7 @@ function fixTetro() {
     }
 }
 let allFilledLines = [];
+
 function deleteFullLine() {
     // we need to check if all the cells of tetris rows are  fixed cells
     let canDeleteLine = true;
@@ -147,18 +147,16 @@ function deleteFullLine() {
     moveToNextLevel(TetrisGame.playerScore);
 }
 
-function _getNewTetro() {
-    let newTetroColor =
-        tetroColors[Math.floor(Math.random() * tetroColors.length)];
+export function _getNewTetro() {
     const POSSIBLE_FIGURES = 'OISZLJT';
     const RANDOM_FIGURE_NAME = Math.floor(Math.random() * 7);
     const newElement = figures[POSSIBLE_FIGURES[RANDOM_FIGURE_NAME]];
-    // const newTetroColor = tetroColors[Math.floor(Math.random() * tetroColors.length)];
+
     return {
         x: Math.floor((TetrisGame.playField[0].length - newElement[0].length) / 2),
         y: 0,
         shape: newElement,
-        color: newTetroColor,
+
     };
 }
 
@@ -192,31 +190,3 @@ function _removePreviousActiveTetroPosition() {
     }
 }
 
-export function resetGame() {
-    TetrisGame.isPaused = true;
-    clearTimeout(TetrisGame.gameTimerID);
-    TetrisGame.playField = [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    ];
-    drawFieldNewState();
-
-}

@@ -1,3 +1,5 @@
+
+
 export const  possibleLevels = {
     1: {
         pointsPerOneFilledLine: 40,
@@ -78,20 +80,6 @@ export const figures = {
     ],
 };
 
-export const tetroColors = [
-    'red',
-    'blue',
-    'aqua',
-    'fuchsia',
-    'orange',
-    'greenyellow',
-    'indigo',
-    'darkgreen',
-    'yellow',
-    'deeppin',
-];
-
-
 export const TetrisGame = {
     playField: Array.from({ length: 20 }, () => Array(10).fill(0)),
     linesInFinishedGame: 0,
@@ -104,4 +92,5 @@ export const TetrisGame = {
     wasGameStartedBefore: false,
     isPaused: true,
     gameTimerID: null,
+
 }
