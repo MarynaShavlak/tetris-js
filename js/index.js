@@ -73,15 +73,9 @@ function gamePusk() {
 
 function setInitialOptions() {
   setInitialUIOptions();
-  // levelOutput.value = TetrisGame.currentLevel;
   TetrisGame.reachedLevelInFinishedGame = levelOutput.value;
   TetrisGame.linesInFinishedGame = linesOutput.value;
-  // goalOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
-  // pointsLeftOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
   TetrisGame.isPaused = false;
-  // if (enteredUserName.value === '') {
-  //   playerNameElement.value = 'Player 1';
-  // }
 }
 
 export function handleSetPlayerName() {
@@ -145,7 +139,7 @@ function onPauseBtnClick() {
       continueGame();
 
     }
-    // TetrisGame.isPaused = !TetrisGame.isPaused;
+
   }
 }
 
@@ -212,20 +206,12 @@ function onBackToTetrisBtnClick() {
   hideExitGameModal();
   continueGame()
   _makeControlBtnsEnabled();
-  // if (TetrisGame.wasGameStartedBefore) {
-  //   pauseBtn.innerHTML = 'Pause';
-  // }
-
 }
 
 function onSureExitBtnClick() {
   hideExitGameModal();
   updateUIForExitGame();
-
   resetGameControlButtonText();
-
-  _makeControlBtnsEnabled();
-
   resetGame();
   _makeControlBtnsEnabled();
   setInitialOptions();
@@ -233,16 +219,12 @@ function onSureExitBtnClick() {
   //new
   TetrisGame.isPaused = false;
   TetrisGame.wasGameStartedBefore = false;
-
-
 }
 
 function startGame() {
   //new
   clearTimeout(TetrisGame.gameTimerID);
-
   moveTetroDown();
-
   if (!TetrisGame.isPaused) {
     updateGameState();
     TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
@@ -255,9 +237,8 @@ export function endGame() {
   clearTimeout(TetrisGame.gameTimerID);
   TetrisGame.isPaused = true;
 }
+
 export function resetGame() {
-  // clearTimeout(TetrisGame.gameTimerID);
-  // TetrisGame.isPaused = true;
   endGame();
   TetrisGame.playField = Array.from({ length: 20 }, () => Array(10).fill(0));
   drawFieldNewState();
@@ -281,12 +262,8 @@ export function resetGame() {
   nextTetro.shape = newNextTetro.shape;
 
   // Reset UI
-  levelOutput.value = TetrisGame.currentLevel;
-  linesOutput.value = TetrisGame.linesInFinishedGame;
-  scoreOutput.value = TetrisGame.playerScore;
-  goalOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
-  pointsLeftOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
-  nextTetroDisplay.innerHTML = '';
+  setInitialUIOptions();
+
 
   // Redraw the empty field
   drawFieldNewState();

@@ -2,10 +2,10 @@ import {
     controlButtonsBlock, enteredUserName,
     exitGameModal,
     gameBlock, goalOutput,
-    levelBlock, levelOutput, linesBlock, nextTetroBlock,
+    levelBlock, levelOutput, linesBlock, linesOutput, nextTetroBlock, nextTetroDisplay,
     pauseBtn,
     playerInfoBlock, playerNameElement, pointsLeftOutput,
-    scoreBlock,
+    scoreBlock, scoreOutput,
     settingsBlock,
     startBtn
 } from "../elements.js";
@@ -49,7 +49,10 @@ export function updateUIForExitGame() {
 
 export function setInitialUIOptions() {
     levelOutput.value = TetrisGame.currentLevel;
+    linesOutput.value = TetrisGame.linesInFinishedGame;
+    scoreOutput.value = TetrisGame.playerScore;
     goalOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
     pointsLeftOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
     playerNameElement.value = enteredUserName.value || "Player 1";
+    nextTetroDisplay.innerHTML = '';
 }
