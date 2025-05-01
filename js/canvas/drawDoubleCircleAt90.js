@@ -1,4 +1,4 @@
-import {canvas, canvas2, ctx, ctx2} from "./config.js";
+import {canvas, canvas2,  ctx2} from "./config.js";
 import {centerX, centerY, radius,
 
 } from "./drawCircle.js";

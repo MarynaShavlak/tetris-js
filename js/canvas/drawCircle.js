@@ -1,19 +1,4 @@
-import {
-    canvas,
-    canvas2,
-    canvas3,
-    canvas4, canvas5,
-    canvas6, canvas7,
-    canvas8,
-    ctx,
-    ctx2,
-    ctx3,
-    ctx4,
-    ctx5,
-    ctx6,
-    ctx7,
-    ctx8
-} from "./config.js";
+import { canvas,  ctx} from "./config.js";
 import {drawDoubleCircleAt90} from "./drawDoubleCircleAt90.js";
 import {drawSecondCirclePart} from "./drawSecondCirclePart.js";
 
@@ -58,7 +43,7 @@ export function drawCircle() {
     } else if (circleState.animationDirection === -1) {
         if (circleState.endAngle > circleState.startAngle / 6) {
             circleState.endAngle -= 0.02;
-            // dotAngle = startAngle + dotStep;
+
            requestAnimationFrame(drawCircle);
         } else {
             requestAnimationFrame(drawSecondCirclePart)
