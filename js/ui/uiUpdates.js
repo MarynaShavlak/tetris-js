@@ -1,7 +1,8 @@
 import {
+    confirmStartNewGameWindow,
     controlButtonsBlock, enteredUserName,
     exitGameModal,
-    gameBlock, goalOutput,
+    gameBlock, gameOver, goalOutput,
     levelBlock, levelOutput, linesBlock, linesOutput, nextTetroBlock, nextTetroDisplay,
     pauseBtn,
     playerInfoBlock, playerNameElement, pointsLeftOutput,
@@ -28,6 +29,10 @@ export function setPauseButtonToContinue() {
     pauseBtn.innerHTML = "Continue";
 }
 
+export function setPauseButtonToPause() {
+    pauseBtn.innerHTML = "Pause";
+}
+
 
 export function hideExitGameModal() {
     exitGameModal.classList.add("hidden");
@@ -47,13 +52,17 @@ export function updateUIForExitGame() {
     resetAnimations();
 }
 
+export function updatePlayerNameUI() {
+    playerNameElement.value = enteredUserName.value || "Player 1";
+}
+
 export function setInitialUIOptions() {
     levelOutput.value = TetrisGame.currentLevel;
     linesOutput.value = TetrisGame.linesInFinishedGame;
     scoreOutput.value = TetrisGame.playerScore;
     goalOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
     pointsLeftOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
-    playerNameElement.value = enteredUserName.value || "Player 1";
+    updatePlayerNameUI();
     nextTetroDisplay.innerHTML = '';
 }
 
@@ -83,3 +92,14 @@ export function showExitModal(wasGameStarted) {
     exitGameModal.classList.remove("hidden");
 }
 
+export function toggleConfirmStartNewGameWindow() {
+    confirmStartNewGameWindow.classList.toggle('hidden');
+}
+
+export function toggleGameOverWindow() {
+    gameOver.classList.toggle('hidden');
+}
+
+export function showNextTetroBlock() {
+    nextTetroBlock.classList.remove('hidden');
+}

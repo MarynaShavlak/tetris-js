@@ -2,6 +2,7 @@ import {figures, TetrisGame} from "./gameConfig.js";
 import {gameOver, linesOutput, nextTetroDisplay} from "./elements.js";
 import {calculatePointLeftForNextLevel, calculateScore, moveToNextLevel} from "./calculateResults.js";
 import {endGame, resetGame} from "./index.js";
+import {toggleGameOverWindow} from "./ui/uiUpdates.js";
 
 
 const tetrisField = document.getElementById('tetris-field');
@@ -20,10 +21,9 @@ export function moveTetroDown() {
 
         activeTetro = nextTetro;
         if (_hasCollisions()) {
-            gameOver.classList.remove('hidden');
+            toggleGameOverWindow()
             endGame();
-            console.log('Game is over!');
-        }
+                    }
         nextTetro = _getNewTetro();
     }
 }

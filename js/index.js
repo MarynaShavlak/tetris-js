@@ -5,7 +5,7 @@ import {
   handleShowUsernameInterface,
 } from "./eventHandlers/rules.js";
 import { possibleLevels, TetrisGame } from "./gameConfig.js";
-import {resetAnimations} from "./canvas/resetAnimations.js";
+
 import {
   _getNewTetro,
   _hasCollisions, activeTetro,  nextTetro,
@@ -21,30 +21,25 @@ import {
   cancelNewGameBtn,
   confirmNewGameBtn,
   confirmStartNewGameWindow,
-  controlButtonsBlock,
   enteredUserName,
-  exitBtn, exitGameModal,
-  gameBlock, gameOver,
-  goalOutput,
-  levelBlock, levelOutput,
-  linesBlock, linesOutput, nextTetroBlock, nextTetroDisplay,
+  exitBtn,
+  gameOver,
+  levelOutput,
+  linesOutput, nextTetroBlock,
   pauseBtn,
-  playerInfoBlock,
   playerNameElement,
-  pointsLeftOutput,
-  scoreBlock, scoreOutput,
   setPlayerNameBtn,
-  settingsBlock,
   showRulesBtn, starNewGameBtnAfterLose,
   startBtn,
   usernameBtn
 } from "./elements.js";
-import {_makeControlBtnsEnabled, _makeControlBtnsDisabled} from "./gameControlsButtons.js";
+import {makeControlBtnsEnabled, makeControlBtnsDisabled} from "./gameControlsButtons.js";
 import {
-  hideExitGameModal,
+  toggleConfirmStartNewGameWindow,
+  hideExitGameModal, toggleGameOverWindow,
   resetGameControlButtonText, setInitialUIOptions,
-  setPauseButtonToContinue, showExitModal,
-  updateGameControlButtonText, updateUIForExitGame
+  setPauseButtonToContinue, setPauseButtonToPause, showExitModal, showNextTetroBlock,
+  updateGameControlButtonText, updateUIForExitGame, updatePlayerNameUI
 } from "./ui/uiUpdates.js";
 
 
@@ -79,8 +74,8 @@ function setInitialOptions() {
 }
 
 export function handleSetPlayerName() {
-  playerNameElement.value = enteredUserName.value;
-  TetrisGame.player = playerNameElement.value;
+  updatePlayerNameUI()
+  TetrisGame.player = enteredUserName.value;
 }
 
 function onStartBtnClick() {
@@ -88,44 +83,43 @@ function onStartBtnClick() {
     TetrisGame.wasGameStartedBefore = true;
     updateGameControlButtonText();
     startGame();
-    nextTetroBlock.classList.remove('hidden');
-    _makeControlBtnsEnabled()
+    showNextTetroBlock();
+    makeControlBtnsEnabled()
   } else {
-    confirmStartNewGameWindow.classList.remove('hidden')
-
+    toggleConfirmStartNewGameWindow();
     setPauseButtonToContinue()
     TetrisGame.isPaused = true;
-    _makeControlBtnsDisabled();
+    makeControlBtnsDisabled();
   }
 }
 
 function continueGame() {
-  pauseBtn.innerHTML = 'Pause';
+  setPauseButtonToPause();
   TetrisGame.isPaused= false;
   TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
 }
 
 function onCancelNewGameBtnClick() {
-  confirmStartNewGameWindow.classList.add('hidden');
-  _makeControlBtnsEnabled();
+  toggleConfirmStartNewGameWindow();
+  makeControlBtnsEnabled();
   pauseBtn.value = 'pause';
-  pauseBtn.innerHTML = 'Pause';
+  setPauseButtonToPause();
   TetrisGame.isPaused = false;
   TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
 }
 
 function onConfirmNewGameBtnClick() {
-  confirmStartNewGameWindow.classList.add('hidden');
-  gameOver.classList.add('hidden');
+  toggleConfirmStartNewGameWindow();
+  toggleGameOverWindow();
+  showNextTetroBlock();
   updateGameControlButtonText();
-
   resetGame();
-  _makeControlBtnsEnabled();
+  makeControlBtnsEnabled();
   setInitialOptions();
 
   TetrisGame.isPaused = false;
   TetrisGame.wasGameStartedBefore = true;
-  nextTetroBlock.classList.remove('hidden');
+
   startGame();
 }
 
@@ -137,9 +131,7 @@ function onPauseBtnClick() {
       TetrisGame.isPaused= true;
     } else if (TetrisGame.isPaused === true) {
       continueGame();
-
     }
-
   }
 }
 
@@ -147,7 +139,7 @@ function onExitBtnClick() {
   showExitModal(TetrisGame.wasGameStartedBefore);
   if(TetrisGame.wasGameStartedBefore) {
     onPauseBtnClick();
-    _makeControlBtnsDisabled();
+    makeControlBtnsDisabled();
   }
   const backToTetrisBtn = document.getElementById('btn-back-to-tetris');
   backToTetrisBtn.addEventListener('click', onBackToTetrisBtnClick);
@@ -157,12 +149,10 @@ function onExitBtnClick() {
 
 function onBackToTetrisBtnClick() {
   hideExitGameModal();
-  _makeControlBtnsEnabled();
+  makeControlBtnsEnabled();
   if(TetrisGame.wasGameStartedBefore) {
     continueGame()
   }
-
-
 }
 
 function onSureExitBtnClick() {
@@ -170,7 +160,7 @@ function onSureExitBtnClick() {
   updateUIForExitGame();
   resetGameControlButtonText();
   resetGame();
-  _makeControlBtnsEnabled();
+  makeControlBtnsEnabled();
   setInitialOptions();
 
   //new
@@ -187,7 +177,6 @@ function startGame() {
     TetrisGame.gameTimerID = setTimeout(startGame, possibleLevels[TetrisGame.currentLevel].speed);
   }
 }
-
 
 
 export function endGame() {
