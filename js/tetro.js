@@ -1,5 +1,5 @@
 import {figures, TetrisGame} from "./gameConfig.js";
-import {gameOver, linesElement, nextTetroDisplay} from "./elements.js";
+import {gameOver, linesOutput, nextTetroDisplay} from "./elements.js";
 import {calculatePointLeftForNextLevel, calculateScore, moveToNextLevel} from "./calculateResults.js";
 import {endGame, resetGame} from "./index.js";
 
@@ -137,8 +137,8 @@ function deleteFullLine() {
             TetrisGame.playField.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
             filledLines.push(y);
             allFilledLines.push(filledLines);
-            linesElement.value = allFilledLines.length;
-            TetrisGame.linesInFinishedGame = linesElement.value;
+            linesOutput.value = allFilledLines.length;
+            TetrisGame.linesInFinishedGame = linesOutput.value;
         }
 
         canDeleteLine = true;

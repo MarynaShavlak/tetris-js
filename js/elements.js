@@ -21,12 +21,10 @@ export const setPlayerNameBtn = document.getElementById('submit-user-name');
 export const allStartBtns = document.querySelectorAll('.settings__btn--start');
 export const enteredUserName = document.getElementById('user-entered-name');
 export const playerNameElement = document.getElementById('player-name');
-export const levelOutput = levelBlock.querySelector('#player__level');
 
 
-export const pointsLeftElement = document.getElementById(
-    'player-points-left-for-next-level',
-);
+
+
 
 export const startBtn = document.getElementById('start-btn');
 export const pauseBtn = document.getElementById('pause-btn');
@@ -36,9 +34,15 @@ export const exitBtn = document.getElementById('exit-btn');
 export const gameWindow = document.getElementById('game-window');
 export const nextTetroDisplay = document.getElementById('next-tetro');
 
-export const scoreOutput = document.getElementById('player-score');
-export const goalOutput = document.getElementById('player-goal');
-export const linesElement = document.getElementById('player__filled-lines');
+export const levelOutput = levelBlock.querySelector('#player-level-output');
+export const scoreOutput = document.getElementById('player-score-output');
+export const goalOutput = document.getElementById('player-goal-output');
+export const linesOutput = document.getElementById('player-lines-output');
+export const pointsLeftOutput = document.getElementById(
+    'player-points-left-for-next-level',
+);
+
+
 export const confirmNewGameBtn = document.getElementById('confirm-start-new-game');
 export const cancelNewGameBtn = document.getElementById('cancel-start-new-game');
 export const confirmStartNewGameWindow = document.getElementById(

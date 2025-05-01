@@ -55,7 +55,7 @@ main {
 
 }
 
-#player-score {
+#player-score-output {
     color: #1A1A1A;
     font-size: 34px;
 }
@@ -75,7 +75,7 @@ main {
 
 
 
-#player__filled-lines, #player__level {
+#player-lines-output, #player-level-output {
     font-size: 34px;
     color: #F3F3F3;
 }
@@ -129,7 +129,7 @@ main {
     gap:10px;
 }
 
-#player-goal,
+#player-goal-output,
 #player-points-left-for-next-level,
 #player-name{
     font-size: 28px;

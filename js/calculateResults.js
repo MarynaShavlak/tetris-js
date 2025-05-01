@@ -1,5 +1,5 @@
 import {possibleLevels, TetrisGame} from "./gameConfig.js";
-import {goalOutput, levelOutput, pointsLeftElement, scoreOutput} from "./elements.js";
+import {goalOutput, levelOutput, pointsLeftOutput, scoreOutput} from "./elements.js";
 
 export function calculateScore(lines) {
     switch (lines.length) {
@@ -22,7 +22,7 @@ export function calculateScore(lines) {
 
 export function calculatePointLeftForNextLevel(score) {
     let pointsLeft = possibleLevels[TetrisGame.currentLevel].goalForNextLevel - score;
-    pointsLeftElement.value = pointsLeft;
+    pointsLeftOutput.value = pointsLeft;
 }
 
 export function moveToNextLevel(score) {

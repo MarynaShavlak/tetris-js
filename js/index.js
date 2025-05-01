@@ -27,11 +27,11 @@ import {
   gameBlock, gameOver,
   goalOutput,
   levelBlock, levelOutput,
-  linesBlock, linesElement, nextTetroBlock, nextTetroDisplay,
+  linesBlock, linesOutput, nextTetroBlock, nextTetroDisplay,
   pauseBtn,
   playerInfoBlock,
   playerNameElement,
-  pointsLeftElement,
+  pointsLeftOutput,
   scoreBlock, scoreOutput,
   setPlayerNameBtn,
   settingsBlock,
@@ -42,7 +42,7 @@ import {
 import {_makeControlBtnsEnabled, _makeControlBtnsDisabled} from "./gameControlsButtons.js";
 import {
   hideExitGameModal,
-  resetGameControlButtonText,
+  resetGameControlButtonText, setInitialUIOptions,
   setPauseButtonToContinue,
   updateGameControlButtonText, updateUIForExitGame
 } from "./ui/uiUpdates.js";
@@ -72,15 +72,16 @@ function gamePusk() {
 }
 
 function setInitialOptions() {
-  levelOutput.value = TetrisGame.currentLevel;
+  setInitialUIOptions();
+  // levelOutput.value = TetrisGame.currentLevel;
   TetrisGame.reachedLevelInFinishedGame = levelOutput.value;
-  TetrisGame.linesInFinishedGame = linesElement.value;
-  goalOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
-  pointsLeftElement.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
+  TetrisGame.linesInFinishedGame = linesOutput.value;
+  // goalOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
+  // pointsLeftOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
   TetrisGame.isPaused = false;
-  if (enteredUserName.value === '') {
-    playerNameElement.value = 'Player 1';
-  }
+  // if (enteredUserName.value === '') {
+  //   playerNameElement.value = 'Player 1';
+  // }
 }
 
 export function handleSetPlayerName() {
@@ -281,10 +282,10 @@ export function resetGame() {
 
   // Reset UI
   levelOutput.value = TetrisGame.currentLevel;
-  linesElement.value = TetrisGame.linesInFinishedGame;
+  linesOutput.value = TetrisGame.linesInFinishedGame;
   scoreOutput.value = TetrisGame.playerScore;
   goalOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
-  pointsLeftElement.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
+  pointsLeftOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
   nextTetroDisplay.innerHTML = '';
 
   // Redraw the empty field

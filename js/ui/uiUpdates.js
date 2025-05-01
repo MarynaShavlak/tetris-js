@@ -1,15 +1,16 @@
 import {
-    controlButtonsBlock,
+    controlButtonsBlock, enteredUserName,
     exitGameModal,
-    gameBlock,
-    levelBlock, linesBlock, nextTetroBlock,
+    gameBlock, goalOutput,
+    levelBlock, levelOutput, linesBlock, nextTetroBlock,
     pauseBtn,
-    playerInfoBlock,
+    playerInfoBlock, playerNameElement, pointsLeftOutput,
     scoreBlock,
     settingsBlock,
     startBtn
 } from "../elements.js";
 import {resetAnimations} from "../canvas/resetAnimations.js";
+import {possibleLevels, TetrisGame} from "../gameConfig.js";
 
 export function updateGameControlButtonText() {
     startBtn.innerHTML = "NEW GAME";
@@ -44,4 +45,11 @@ export function updateUIForExitGame() {
     controlButtonsBlock.classList.add('hidden');
     nextTetroBlock.classList.add('hidden');
     resetAnimations();
+}
+
+export function setInitialUIOptions() {
+    levelOutput.value = TetrisGame.currentLevel;
+    goalOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
+    pointsLeftOutput.value = possibleLevels[TetrisGame.currentLevel].goalForNextLevel;
+    playerNameElement.value = enteredUserName.value || "Player 1";
 }
