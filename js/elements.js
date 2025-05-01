@@ -47,3 +47,4 @@ export const confirmStartNewGameWindow = document.getElementById(
 export const exitGameModal = document.querySelector('.exit-message',);
 
 export const gameOver = document.getElementById('game-over');
+export const nextBlockWrapper = document.querySelector('.next__wrapper');

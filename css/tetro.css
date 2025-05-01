@@ -1,0 +1,41 @@
+.tetris {
+    align-content: center;
+    justify-self: center;
+}
+
+.tetris__field {
+    width: 310px;
+    height: 610px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+    box-sizing: border-box;
+    grid-gap:0;
+    font-size: 0px;
+    align-content: center;
+}
+
+.empty-cell {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    box-shadow:0 0 0 1px #98948B;
+}
+
+.empty-cell-next {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+}
+
+.moving-cell {
+    width: 30px;
+    height: 30px;
+    background-image: url('../images/tetromino.jpg');
+    display: inline-block;
+}
+
+.fixed-cell {
+    background-image: url('../images/tetromino.jpg');
+    display: inline-block
+}

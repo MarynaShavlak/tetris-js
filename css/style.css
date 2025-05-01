@@ -3,13 +3,12 @@
 @import './game.css';
 @import './newGameModal.css';
 @import './exitGameModal.css';
+@import './tetro.css';
 
 body {
     font-family: "Lilita One", sans-serif;
     margin: 0;
-    background: #FC4120;
-    background-image: url('../images/background.jpg');
-    background-repeat: no-repeat;
+    background: #FC4120 url('../images/background.jpg') no-repeat;
     background-size: cover;
     height: 100vh;
     /*padding-top: 20px;*/
@@ -20,209 +19,13 @@ body {
 
 
 .container{
-    /*position: relative;*/
-    /*width:1200px;*/
-    /*height:1000px;*/
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /*position: absolute;*/
-    /*top: 50%;*/
-    /*left: 50%;*/
-    /*transform: translate(-50%, -50%);*/
-
-
-
 }
 
 
-
-
-
-
- /*another*/
-
-
-
-
-.tetris {
-    grid-row: span 3;
-    margin: 20px 0px;
-}
-
-
-
-/*.player__info {*/
-/*    border: 1px solid black;*/
-/*    border-radius: 20px;*/
-/*    display: grid;*/
-/*    grid-template-rows: 1fr 1fr;*/
-/*    align-content: center;*/
-/*    gap: 10px;*/
-/*    padding: 10px;*/
-/*    text-align: center;*/
-
-/*}*/
-
-
-
-/*.player__name {*/
-/*    display: grid;*/
-/*    justify-content: center;*/
-/*    align-content: center;*/
-/*    font-size: 40px;*/
-/*        font-weight: bold;*/
-/*}*/
-
-
-/*.player__results {*/
-/*    border: 1px solid black;*/
-/*    border-radius: 20px;*/
-/*    grid-row: span 6;*/
-/*    display: grid;*/
-/*    grid-template-rows: repeat(5, 1fr);*/
-/*    gap: 20px;*/
-/*    padding: 10px;*/
-/*    text-align: center;*/
-
-/*}*/
-
-
-/*.player__goal*/
-/*.player__lines,*/
-/*.player__points-left-for-next-level  {*/
-/*    display: grid;*/
-/*    grid-template-columns: 2fr 1fr;*/
-/*    align-content: center;*/
-/*    text-align: center;*/
-/*    justify-content: center;*/
-
-/*}*/
-
-/*.player__result {*/
-/*    font-size: 40px;*/
-/*    font-weight: bold;*/
-
-/*}*/
-
-.tetris {
-    align-content: center;
-    justify-self: center;
-}
-
-
-.tetris__field {
-    width: 310px;
-    height: 610px;
-    /*border: 1px solid #98948B;*/
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(20, 1fr);
-    box-sizing: border-box;
-    grid-gap:0;
-    font-size: 0px;
-    align-content: center;
-
-
-
-}
-
-.next {
-    border-radius: 20px;
-    display: grid;
-    gap: 30px;
-    margin: 20px 20px 0px 0px;
-    align-content: center;
-    text-align: center;
-
-}
-
-.next__tetro {
-    width: 160px;
-    height: 160px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    gap: 0px;
-    font-size: 0px;
-    align-content: center;
-    justify-self: center;
-
-}
-
-.empty-cell {
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-    box-shadow:0 0 0 1px #98948B;
-
-}
-
-
-
-
-.moving-cell {
-    width: 30px;
-    height: 30px;
-    background-image: url('../images/tetromino.jpg');
-    /*border: 1px solid black;*/
-    display: inline-block;
-
-}
-
-.fixed-cell {
-    background-image: url('../images/tetromino.jpg');
-    /*border: 1px solid black;*/
-    display: inline-block
-}
-
-
-.user-name-window {
-    background-color: rgb(0, 208, 255);
-    width: 560px;
-    height: 400px;
-    font-size: 40px;
-    font-weight: bold;
-    border: 1px solid black;
-    border-radius: 20px;
-    display: none;
-    gap: 30px;
-    align-content: center;
-    grid-template-rows: 1fr 3fr;
-
-    position: absolute;
-    top: 350px;
-    left: 700px;
-    text-align: center;
-    padding: 30px 50px;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-.instructions__exit-btn {
-    text-align: end;
-    font-size: 40px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.instructions__exit-btn:hover {
-    color: #680C19;
-}
-
-/*.rules-block__rule {*/
-/*  */
-/*}*/
 
 /* #game-over {
     font-size: 100px;

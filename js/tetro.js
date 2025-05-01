@@ -2,7 +2,7 @@ import {figures, TetrisGame, tetroColors} from "./gameConfig.js";
 import {
       moveToNextLevel,
 } from "./index.js";
-import {linesElement} from "./elements.js";
+import {linesElement, nextTetroDisplay} from "./elements.js";
 import {calculatePointLeftForNextLevel, calculateScore} from "./calculateResults.js";
 
 const tetrisField = document.getElementById('tetris-field');
@@ -76,14 +76,14 @@ function showWhatTetroWillBeNext() {
     for (let y = 0; y < nextTetro.shape.length; y++) {
         for (let x = 0; x < nextTetro.shape[y].length; x++) {
             if (nextTetro.shape[y][x] === 0) {
-                nextTetroConstruction += '<div class="empty-cell"></div>';
+                nextTetroConstruction += '<div class="empty-cell-next"></div>';
             } else {
                 nextTetroConstruction += _renderMovingCell(nextTetro);
             }
         }
         // nextTetroConstruction += '<br/>';
     }
-    // nextTetroDisplay.innerHTML = nextTetroConstruction;
+    nextTetroDisplay.innerHTML = nextTetroConstruction;
 }
 
 export function dropTetro() {

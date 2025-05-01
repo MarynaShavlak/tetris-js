@@ -37,7 +37,7 @@ main {
 
 .player__score {
     position: absolute;
-    bottom: -160px;
+    bottom: -200px;
 }
 
 .player__score.hidden {
@@ -80,12 +80,14 @@ main {
     color: #F3F3F3;
 }
 
+
+
+
 .player__lines {
     position: absolute;
     top:110px;
     left:270px;
     width:fit-content;
-
 }
 
 .player__level {
@@ -208,4 +210,45 @@ main {
 #start-btn:focus{
     outline:none;
     border:none
+}
+
+.next__wrapper {
+    width:1200px;
+    height:800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity:1;
+    pointer-events: auto;
+    transition: opacity 0.5s ease;
+}
+
+.next__wrapper.hidden {
+    opacity:0;
+    pointer-events: none;
+}
+
+
+.next {
+    position: absolute;
+    top:330px;
+    left:160px;
+    width:fit-content;
+    display: grid;
+    row-gap: 20px;
+    align-content: center;
+    text-align: center;
+}
+
+.next__tetro {
+    width: 120px;
+    height: 120px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0px;
+    font-size: 0px;
+    align-content: center;
+    justify-self: center;
 }

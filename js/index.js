@@ -28,7 +28,7 @@ import {
   goalOutput,
   levelBlock, levelOutput,
 
-  linesBlock, linesElement,
+  linesBlock, linesElement, nextBlockWrapper,
   pauseBtn,
   playerInfoBlock,
   playerNameElement,
@@ -95,6 +95,7 @@ function onStartBtnClick() {
     // _askUserName();
     // submitNameBtn.addEventListener('click', onSubmitPlayerNameBtnClick);
     startGame();
+    nextBlockWrapper.classList.remove('hidden');
     _makeControlBtnsEnabled()
   } else {
     confirmStartNewGameWindow.classList.remove('hidden')
