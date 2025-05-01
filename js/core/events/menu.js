@@ -1,4 +1,4 @@
-import {drawCircle} from "../canvas/drawCircle.js";
+import {drawCircle} from "../../canvas/drawCircle.js";
 
 import {
     hideElementsBeforeAnimation,
@@ -11,7 +11,7 @@ import {
     showLevelBlockAfterDelay,
     showPlayerInfoBlockAfterDelay,
     showLinesAndControlButtonsAfterDelay
-} from "../ui/uiUpdates.js";
+} from "../../ui/uiUpdates.js";
 
 export function handleShowRules() {
     hideElementsBeforeAnimation()

@@ -1,5 +1,5 @@
-import {TetrisGame} from "../gameConfig.js";
-import {enteredUserName, levelOutput, linesOutput} from "../elements.js";
+import {TetrisGame} from "../../config/gameConfig.js";
+import {enteredUserName, levelOutput, linesOutput} from "../../ui/elements.js";
 
 export function setFinishedGameInitialStats() {
     TetrisGame.reachedLevelInFinishedGame = levelOutput.value;

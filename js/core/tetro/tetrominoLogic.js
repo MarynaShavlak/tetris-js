@@ -1,8 +1,8 @@
-import {figures, TetrisGame} from "./gameConfig.js";
-import { linesOutput, nextTetroDisplay} from "./elements.js";
-import {calculatePointLeftForNextLevel, calculateScore, moveToNextLevel} from "./calculateResults.js";
-import {toggleGameOverWindow} from "./ui/uiUpdates.js";
-import {endGame} from "./state/updateState.js";
+import {figures, TetrisGame} from "../../config/gameConfig.js";
+import { linesOutput, nextTetroDisplay} from "../../ui/elements.js";
+import {calculatePointLeftForNextLevel, calculateScore, moveToNextLevel} from "../results/calculateResults.js";
+import {toggleGameOverWindow} from "../../ui/uiUpdates.js";
+import {endGame} from "../state/updateState.js";
 
 
 const tetrisField = document.getElementById('tetris-field');

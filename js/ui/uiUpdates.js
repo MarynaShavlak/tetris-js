@@ -9,9 +9,9 @@ import {
     scoreBlock, scoreOutput,
     settingsBlock, settingsFooterEl,
     startBtn, startEl, usernameEditorEl, usernameEl
-} from "../elements.js";
+} from "./elements.js";
 import {resetAnimations} from "../canvas/resetAnimations.js";
-import {possibleLevels, TetrisGame} from "../gameConfig.js";
+import {possibleLevels, TetrisGame} from "../config/gameConfig.js";
 
 export function updateGameControlButtonText() {
     startBtn.innerHTML = "NEW GAME";

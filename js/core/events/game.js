@@ -3,14 +3,21 @@ import {
     hideExitGameModal, hideGameOverWindow, resetGameControlButtonText,
     setInitialUIOptions, setPauseButtonToContinue, showExitModal,
     showNextTetroBlock,
-    toggleConfirmStartNewGameWindow, toggleGameOverWindow,
+    toggleConfirmStartNewGameWindow,
     updateGameControlButtonText, updateUIForExitGame
-} from "../ui/uiUpdates.js";
+} from "../../ui/uiUpdates.js";
 import {markGameAsStarted, setFinishedGameInitialStats} from "../state/updateResults.js";
-import {continueGame, endGame, pauseGame, resumeAndMarkGameStarted, unpauseGame} from "../state/updateState.js";
-import {TetrisGame} from "../gameConfig.js";
-import {makeControlBtnsDisabled, makeControlBtnsEnabled} from "../gameControlsButtons.js";
-import {resetGame, startGame} from "../index.js";
+import {
+    continueGame,
+    endGame,
+    pauseGame, resetGame,
+    resumeAndMarkGameStarted,
+    runGameCycle,
+    unpauseGame
+} from "../state/updateState.js";
+import {TetrisGame} from "../../config/gameConfig.js";
+import {makeControlBtnsDisabled, makeControlBtnsEnabled} from "../../ui/gameControlsButtons.js";
+
 
 export function initializeGame() {
     setInitialOptions()
@@ -27,7 +34,7 @@ export function handleStartGameSession() {
     if (TetrisGame.wasGameStartedBefore === false) {
         markGameAsStarted()
         updateGameControlButtonText();
-        startGame();
+        runGameCycle();
         showNextTetroBlock();
         makeControlBtnsEnabled()
     } else {
@@ -75,7 +82,7 @@ export function handleStartNewGameSession(isAfterLose = false) {
     makeControlBtnsEnabled();
     setInitialOptions();
     resumeAndMarkGameStarted();
-    startGame();
+    runGameCycle();
 }
 
 export function handleBackToGame() {

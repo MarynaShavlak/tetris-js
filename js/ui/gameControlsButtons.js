@@ -1,5 +1,5 @@
 import {allControlBtns, enabledFromStartControlBtns} from "./elements.js";
-import {TetrisGame} from "./gameConfig.js";
+import {TetrisGame} from "../config/gameConfig.js";
 
 export function makeControlBtnsDisabled() {
     allControlBtns.forEach(btn => {

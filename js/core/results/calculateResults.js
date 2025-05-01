@@ -1,5 +1,7 @@
-import {possibleLevels, TetrisGame} from "./gameConfig.js";
-import {goalOutput, levelOutput, pointsLeftOutput, scoreOutput} from "./elements.js";
+import {possibleLevels, TetrisGame} from "../../config/gameConfig.js";
+import {goalOutput, levelOutput, pointsLeftOutput, scoreOutput} from "../../ui/elements.js";
+import {updatePlayerNameUI} from "../../ui/uiUpdates.js";
+import {setPlayerGameName} from "../state/updateResults.js";
 
 export function calculateScore(lines) {
     switch (lines.length) {
@@ -34,4 +36,10 @@ export function moveToNextLevel(score) {
         goalOutput.value = TetrisGame.nextGoal;
         calculatePointLeftForNextLevel(score);
     }
+}
+
+
+export function handleSetPlayerName() {
+    updatePlayerNameUI()
+    setPlayerGameName()
 }
