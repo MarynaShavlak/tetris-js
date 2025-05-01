@@ -46,9 +46,11 @@ export const confirmStartNewGameWindow = document.getElementById(
 );
 export const exitGameModal = document.querySelector('.exit-message',);
 
-export const gameOver = document.getElementById('game-over');
+export const gameOver = document.getElementById('lose-game-window');
 export const nextBlockWrapper = document.querySelector('.next__wrapper');
 
 
 export const allControlBtns = [startBtn, pauseBtn, exitBtn];
 export const enabledFromStartControlBtns = [startBtn, exitBtn];
+
+export const starNewGameBtnAfterLose = document.getElementById('start-new-game-after-lose');

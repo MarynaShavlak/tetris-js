@@ -151,9 +151,6 @@
       </ul>
     </div>
   </main>
-
-
-
     <div class="confirm-new-game-window hidden" id="confirm-new-game-window">
       <div class="confirm-new-game-window__message">
         <p>Starting a new game will delete all your previous progress.</p>
@@ -179,7 +176,19 @@
       </ul>
     </div>
     <div class="exit-message hidden" ></div>
-
+  <div class="lose-game-window hidden" id="lose-game-window">
+    <div class="lose-game-window__message">
+      <p>Game Over! </p>
+      <p>You've lost.</p>
+      <p>Better luck next time!</p>
+    </div>
+    <button
+            class="action-btn lose-btn"
+            id="start-new-game-after-lose"
+    >
+      Start New Game
+    </button>
+  </div>
     <script src="js/index.js" type="module"></script>
   <script src="js/canvas/canvas.js" type="module"></script>
   </body>

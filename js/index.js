@@ -24,7 +24,7 @@ import {
   controlButtonsBlock,
   enteredUserName,
   exitBtn, exitGameModal,
-  gameEl,
+  gameEl, gameOver,
   goalOutput,
   levelBlock, levelOutput,
   linesBlock, linesElement, nextBlockWrapper, nextTetroDisplay,
@@ -35,7 +35,7 @@ import {
   scoreEl, scoreOutput,
   setPlayerNameBtn,
   settingsEl,
-  showRulesBtn,
+  showRulesBtn, starNewGameBtnAfterLose,
   startBtn,
   usernameBtn
 } from "./elements.js";
@@ -54,6 +54,7 @@ exitBtn.addEventListener('click', onExitBtnClick);
 
 confirmNewGameBtn.addEventListener('click', onConfirmNewGameBtnClick)
 cancelNewGameBtn.addEventListener('click', onCancelNewGameBtnClick);
+starNewGameBtnAfterLose.addEventListener('click', onConfirmNewGameBtnClick)
 
 drawFieldNewState();
 
@@ -115,6 +116,7 @@ function onCancelNewGameBtnClick() {
 
 function onConfirmNewGameBtnClick() {
   confirmStartNewGameWindow.classList.add('hidden');
+  gameOver.classList.add('hidden');
   startBtn.innerHTML = 'NEW GAME';
   pauseBtn.innerHTML = 'Pause';
 
@@ -225,13 +227,10 @@ function onSureExitBtnClick() {
   controlButtonsBlock.classList.add('hidden');
   nextBlockWrapper.classList.add('hidden');
   resetAnimations();
-  // tetrisField.innerHTML= '';
-  // drawFieldNewState();
-  // resetGame();
+
   startBtn.innerHTML = 'Start';
   pauseBtn.innerHTML = 'Pause';
 
-  // resetGame();
   _makeControlBtnsEnabled();
 
   resetGame();
@@ -257,10 +256,16 @@ function startGame() {
   }
 }
 
-export function resetGame() {
 
+
+export function endGame() {
   clearTimeout(TetrisGame.gameTimerID);
   TetrisGame.isPaused = true;
+}
+export function resetGame() {
+  // clearTimeout(TetrisGame.gameTimerID);
+  // TetrisGame.isPaused = true;
+  endGame();
   TetrisGame.playField = Array.from({ length: 20 }, () => Array(10).fill(0));
   drawFieldNewState();
   // new

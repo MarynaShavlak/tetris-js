@@ -1,4 +1,4 @@
-.confirm-new-game-window {
+.confirm-new-game-window, .lose-game-window {
     display:flex;
     flex-direction:column;
     gap:20px;
@@ -23,7 +23,7 @@
     padding-top: 50px;
 }
 
-.confirm-new-game-window.hidden {
+.confirm-new-game-window.hidden, .lose-game-window.hidden {
     opacity: 0;
     pointer-events: none;
 }
@@ -52,4 +52,8 @@
 
     background-clip: text;
     color: transparent;
+}
+.lose-btn {
+    width: fit-content;
+    align-self: center;
 }
