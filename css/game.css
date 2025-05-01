@@ -129,6 +129,12 @@ main {
     gap:10px;
 }
 
+.player__goal,
+.player__points-left-for-next-level{
+    flex-direction: column;
+}
+
+
 #player-goal-output,
 #player-points-left-for-next-level,
 #player-name{
@@ -235,11 +241,24 @@ main {
     top:330px;
     left:160px;
     width:fit-content;
-    display: grid;
-    row-gap: 20px;
-    align-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
     text-align: center;
 }
+
+
+.goal__wrapper {
+    position: absolute;
+    top:320px;
+    right:120px;
+    width:190px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+   }
+
 
 .next__tetro {
     width: 120px;
